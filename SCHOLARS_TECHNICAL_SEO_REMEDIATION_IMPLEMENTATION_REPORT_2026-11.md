@@ -1,10 +1,11 @@
 # Scholars Technical SEO Remediation Implementation Report
 
 **Implementation date:** 2026-11-06  
+**Report update:** 2026-11-06 — pull request created
 **Source repository:** https://github.com/ImperioKDB/Scholars  
 **Implementation branch:** `seo/remediation-2026-11`  
 **Commit:** `828df42` — `feat: implement approved technical SEO remediation`  
-**Pull request link:** https://github.com/ImperioKDB/Scholars/pull/new/seo/remediation-2026-11  
+**Pull request:** [#27 — feat: implement approved technical SEO remediation](https://github.com/ImperioKDB/Scholars/pull/27)
 **Production deployment:** Not performed, per the approval gate.
 
 ## 1. Executive summary
@@ -14,6 +15,8 @@ The approved technical SEO improvements were implemented on a dedicated branch a
 The sitemap now reads verified public records in 500-row batches instead of silently stopping at 1,000 rows. It includes verified public detail URLs, including closed pages that remain useful, uses canonical host construction, validates database errors through a logged failure path, and excludes protected application routes by construction. Scholarship and opportunity collection pages now use deterministic, crawlable pagination. The public reviews page uses the same bounded pagination approach. Detail-page breadcrumbs now link to the relevant public collections, and the homepage/footer now expose canonical collection links rather than directing public discovery to the protected `/discover` route.
 
 No Supabase migration, record mutation, status change, RLS change, storage change, authentication change, Vercel configuration change, or production deployment was performed.
+
+The implementation branch was reviewed for remote availability at `828df42`, and pull request [#27](https://github.com/ImperioKDB/Scholars/pull/27) was created against `main`. The pull request is open and reported as mergeable. It has not been merged, and no Vercel deployment was triggered.
 
 ## 2. Files modified
 
@@ -191,7 +194,7 @@ Do not deploy automatically from this task. Review the branch and merge it throu
 Recommended sequence:
 
 1. Review branch `seo/remediation-2026-11` and commit `828df42`.
-2. Open and review the pull request at https://github.com/ImperioKDB/Scholars/pull/new/seo/remediation-2026-11.
+2. Open and review pull request [#27](https://github.com/ImperioKDB/Scholars/pull/27).
 3. Confirm the Vercel preview build has the expected Supabase public environment variables and preferred app URL.
 4. Run the post-deployment verification checklist below against the preview first.
 5. Merge only after preview verification and explicit approval.
