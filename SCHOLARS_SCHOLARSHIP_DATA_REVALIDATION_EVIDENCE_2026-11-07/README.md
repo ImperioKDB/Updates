@@ -1,9 +1,9 @@
-# Scholarship revalidation source notes — interim evidence bundle
+# Scholarship revalidation source notes — complete evidence bundle
 
 **Audit snapshot date:** 2026-11-07
-**Status:** Partial. Fourteen of seventeen independent record reviews are represented here. The workflow is paused; three reviews remain queued and the reducer has not run.
+**Status:** Complete evidence bundle. Seventeen of seventeen independent record reviews are represented here. The notes are source evidence for the final report; they are not production changes.
 
-These notes capture public-source findings for the Scholars Phase 1 data revalidation. They are **not** a final audit, not approved changes, and not evidence that any database correction has been applied. A continuation session must check every source claim against the final workflow output, reconcile all notes with a fresh read-only database snapshot if the date has advanced, resolve conflicts/uncertainties, and produce the complete 11-section report before drawing final counts.
+These notes capture public-source findings for the Scholars Phase 1 data revalidation. They distinguish provider provenance, reachability, application availability, published facts, and unresolved uncertainty. They do not certify that any database correction has been applied.
 
 | Record | Note |
 |---|---|
@@ -21,13 +21,8 @@ These notes capture public-source findings for the Scholars Phase 1 data revalid
 | ASUU Scholarship Scheme for Indigent Students | [asuu.md](./asuu.md) |
 | Bode Amao Foundation Scholarship | [bode-amao.md](./bode-amao.md) |
 | Ejiro M Ukiri International Scholarship Fund | [ejiro.md](./ejiro.md) |
-
-## Still queued in the paused workflow
-
-- Light and Bells Health Foundation Scholarship 2026
-- Decagon Undergraduate Honors Program
-- NDDC Local Post-Graduate (Master's Degree) Scholarship 2026/2027
-
-The paused workflow is `ee30f0d0dab1`. Continue that job; do not launch a duplicate 17-record workflow. Once the remaining notes are completed, update this manifest and synthesize all 17 results before writing the final audit report.
+| Light and Bells Health Foundation Scholarship 2026 | [light-and-bells.md](./light-and-bells.md) |
+| Decagon Undergraduate Honors Program | [decagon.md](./decagon.md) |
+| NDDC Local Post-Graduate (Master’s Degree) Scholarship 2026/2027 | [nddc.md](./nddc.md) |
 
 No production Supabase record, Scholars code, configuration, or deployment was changed during this research.
