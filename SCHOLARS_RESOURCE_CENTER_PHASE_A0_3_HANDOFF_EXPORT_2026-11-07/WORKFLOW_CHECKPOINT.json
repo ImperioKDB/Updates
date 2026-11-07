@@ -1,0 +1,39 @@
+{
+  "workflow_job_id": "b8f165bcf4cf",
+  "status": "paused",
+  "as_of": "2026-11-07T16:02:48+01:00",
+  "no_child_running": true,
+  "requested_agent_calls": 131,
+  "effective_agent_call_limit": 144,
+  "spawned_subtasks": 130,
+  "completed_migration_reviews": 67,
+  "completed_migration_child_ids": [
+    "a0-a43",
+    "a45-a67"
+  ],
+  "failed_migration_review": {
+    "child_id": "b8f165bcf4cf_a44",
+    "filename": "0035_add_retention_events.sql"
+  },
+  "queued_migration_children": "a68-a128",
+  "queued_application_audit_child_id": "b8f165bcf4cf_a129",
+  "synthesis_started": false,
+  "source_commit": "41573f5ec2985851ba118e8b39a47f9c54532302",
+  "source_origin_main_at_inspection": "cf3682ce35912df7b9b9352193630fc404427c7c",
+  "resource_center_files_actual": [
+    "supabase/migrations/20261107130000_security_boundary_remediation.sql",
+    "supabase/migrations/20261107130100_resource_center_schema.sql"
+  ],
+  "resource_center_filenames_in_task_spec": [
+    "20261107115338_security_boundary_remediation.sql",
+    "20261107115403_resource_center_schema.sql"
+  ],
+  "constraints": [
+    "Read-only assessment",
+    "No hosted/production Supabase access",
+    "No stack startup",
+    "No SQL execution or migration application",
+    "No seed execution",
+    "No Scholars changes/push/deployment"
+  ]
+}

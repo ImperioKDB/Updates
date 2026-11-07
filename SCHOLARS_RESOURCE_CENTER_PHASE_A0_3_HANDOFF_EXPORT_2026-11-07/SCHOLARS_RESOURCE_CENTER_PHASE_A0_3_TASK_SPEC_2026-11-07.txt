@@ -1,0 +1,253 @@
+SCHOLARS RESOURCE CENTER — PHASE A0.3: READ-ONLY MIGRATION HISTORY AND SCHEMA RECONSTRUCTION ASSESSMENT
+
+1. Objective
+
+Conduct a comprehensive, read-only investigation of the Scholars Supabase migration history to determine whether a safe, complete, synthetic local migration baseline can be reconstructed for subsequent Resource Center security testing.
+
+This phase follows:
+
+- "SCHOLARS_RESOURCE_CENTER_PHASE_A0_1_NATIVE_RUNTIME_FEASIBILITY_REPORT_2026-11-07.md"
+- "SCHOLARS_RESOURCE_CENTER_PHASE_A0_2_NATIVE_STACK_VALIDATION_REPORT_2026-11-07.md"
+- "SCHOLARS_RESOURCE_CENTER_PHASE_A0_2_MANUS_SESSION_HANDOFF_2026-11-07.md"
+
+The A0.2 handoff is authoritative regarding the migration safety gate. Do not bypass it.
+
+Expected Scholars source commit:
+"41573f5ec2985851ba118e8b39a47f9c54532302"
+
+Repositories:
+
+- Source: "ImperioKDB/Scholars"
+- Reports: "ImperioKDB/Updates"
+
+2. Authorization boundary
+
+This is a READ-ONLY assessment.
+
+You are authorized to inspect:
+
+- All SQL migration files.
+- Migration naming, ordering and timestamps.
+- SQL functions, triggers, policies, grants and views.
+- Schema dependencies and cross-migration references.
+- Seed files and their contents for classification.
+- Supabase configuration files and migration metadata, if present.
+- Relevant application source files that call database functions or depend on database objects.
+- Existing Resource Center migrations and their dependencies.
+
+You are NOT authorized to:
+
+- Connect to production Supabase.
+- Connect to or modify the "serena" project.
+- Create a hosted Supabase project.
+- Run "supabase link" or hosted database commands.
+- Apply any migration, locally or remotely.
+- Start another native Supabase stack.
+- Execute seed files.
+- Create, modify or delete database objects.
+- Modify tracked Scholars files.
+- Modify existing migrations.
+- Create a migration bundle or patch as an implementation.
+- Commit, push, merge or deploy.
+- Change application code or environment configuration.
+
+Do not use production schema access to fill missing information.
+
+3. Required investigation
+
+A. Complete migration inventory
+
+Inspect all SQL migrations in the Scholars repository.
+
+Produce an inventory containing:
+
+- Exact filename.
+- Migration timestamp or numeric prefix.
+- File purpose.
+- Whether it creates, alters or removes schema objects.
+- Whether it contains data inserts or updates.
+- Whether it depends on earlier migrations.
+- Whether it references external services or environment variables.
+- Whether it is safe for a synthetic local baseline.
+- Any ambiguity or unresolved dependency.
+
+Identify:
+
+- Duplicate migration prefixes.
+- Duplicate timestamps.
+- Out-of-order migrations.
+- Missing sequence entries.
+- Superseded migrations.
+- Migrations that assume existing production objects.
+- Migrations that cannot run on a fresh database.
+
+Do not assume filename order alone establishes the authoritative execution order.
+
+B. Identify the authoritative schema baseline
+
+Investigate the status of "0001_init.sql" and all subsequent migrations.
+
+Determine whether the repository contains a reliable fresh-install schema history.
+
+If not, explain precisely why.
+
+Identify the earliest migration sequence that could theoretically produce the intended current schema, and list all missing prerequisites.
+
+Do not silently treat a migration marked superseded as authoritative.
+
+C. Dependency graph
+
+Build a dependency graph for the migration history.
+
+At minimum, identify dependencies involving:
+
+- Tables.
+- Enums and custom types.
+- Extensions.
+- Functions and procedures.
+- Triggers.
+- Views and materialized views.
+- RLS policies.
+- Grants and default privileges.
+- Auth schema and "auth.uid()".
+- Admin authorization helpers.
+- Service-role functions.
+- Foreign keys and referenced tables.
+
+Identify dependencies of these Resource Center migrations specifically:
+
+- "20261107115338_security_boundary_remediation.sql"
+- "20261107115403_resource_center_schema.sql"
+
+For each dependency, identify the migration or other source that establishes it.
+
+D. Seed migration classification
+
+Inspect all 32 seed-named migration files.
+
+Classify each as:
+
+1. Schema-only or configuration-only.
+2. Synthetic/test data.
+3. Real scholarship or opportunity data.
+4. Mixed schema and real data.
+5. External side effects or uncertain behavior.
+
+Identify files containing:
+
+- Real scholarship records.
+- Real application URLs.
+- Contact information.
+- Application instructions.
+- Research notes.
+- External network calls.
+- Data updates that assume existing production records.
+
+Do not execute any seed migration.
+
+Determine whether any seed migration also creates schema objects required by later migrations. If so, identify the schema dependency separately from its real-data inserts.
+
+E. Application dependency cross-check
+
+Inspect the application code for database dependencies relevant to the Resource Center and its authorization boundary.
+
+Identify:
+
+- Admin helper functions.
+- "profiles" relationships.
+- "is_admin()" implementation and dependencies.
+- MFA/AAL2 checks.
+- Service-role client assumptions.
+- Functions invoked by application routes or workers.
+- Tables and types required by the Resource Center migrations.
+
+Do not infer that a function or table is unnecessary merely because it is not referenced by the Resource Center routes.
+
+F. Resource Center migration readiness
+
+Determine whether the two Resource Center migrations can be applied safely to a clean local Supabase environment after a complete synthetic baseline is established.
+
+Report:
+
+- Required prior objects.
+- Required roles.
+- Required extensions.
+- Required functions.
+- Required policies.
+- Required grants.
+- Any dependency on production-only state.
+- Any SQL statement that assumes existing data.
+- Any migration operation that could be destructive.
+- Any unresolved ownership or default-privilege assumption.
+
+Do not apply the migrations.
+
+G. Local baseline reconstruction feasibility
+
+Evaluate three possible approaches:
+
+1. Existing migration history can safely reconstruct the schema.
+2. A separate reviewed schema reconstruction is required.
+3. The repository does not contain enough authoritative information to reconstruct the schema safely without a sanitized schema-only export or additional owner decisions.
+
+For each viable approach, explain:
+
+- What source material is required.
+- What must be excluded.
+- What must be preserved.
+- How synthetic identities and data would be introduced.
+- How the resulting baseline would be validated.
+- What production-specific differences would remain.
+
+Do not create the baseline in this phase.
+
+4. Required final deliverables
+
+Publish the following report in "ImperioKDB/Updates":
+
+"SCHOLARS_RESOURCE_CENTER_PHASE_A0_3_MIGRATION_AND_SCHEMA_RECONSTRUCTION_ASSESSMENT_2026-11-07.md"
+
+The report must include:
+
+1. Executive verdict.
+2. Repository commit and branch inspected.
+3. Complete migration inventory.
+4. Duplicate/out-of-order/superseded migration findings.
+5. Dependency graph.
+6. Seed migration classification.
+7. Resource Center migration dependency analysis.
+8. Application/database dependency cross-check.
+9. Reconstruction feasibility assessment.
+10. Recommended safe path.
+11. Explicit unresolved questions and owner decisions.
+12. Evidence and file references for every material finding.
+
+Use the following verdict categories:
+
+- READY — authoritative, safe baseline exists.
+- CONDITIONALLY READY — baseline can be constructed after clearly identified prerequisites.
+- BLOCKED — insufficient authoritative information to reconstruct safely.
+
+Do not label the baseline READY merely because individual migrations appear syntactically valid.
+
+5. Final verification
+
+Before publishing:
+
+- Confirm no Scholars source file was modified.
+- Confirm no migration was applied.
+- Confirm no Supabase stack was started.
+- Confirm no production or hosted Supabase project was accessed.
+- Confirm no "serena" project was accessed.
+- Confirm no seed migration was executed.
+- Confirm no commit, push, merge or deployment occurred in Scholars.
+
+Only the report may be added to the Updates repository.
+
+6. Stop condition
+
+Stop after publishing the assessment.
+
+Do not implement a schema baseline, generate migration patches, start a test stack, apply migrations, or begin Resource Center security remediation.
+
+Wait for explicit authorization for the next phase.
