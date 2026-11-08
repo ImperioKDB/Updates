@@ -141,3 +141,22 @@ The key boundary is important: these observations are about HTMLhost’s public 
 [4]: https://htmlhost.co/templates/creative-playground-landing "Creative Playground Landing template"
 [5]: https://htmlhost.co/templates/kinetica-motion-typography "Kinetica Motion Typography template"
 [6]: https://htmlhost.co/robots.txt "HTMLhost robots policy"
+
+
+## Phase 1A addendum — platform versus template runtime
+
+### VERIFIED — public preview states are inspectable rendered documents
+
+Five public templates were opened through their `Live preview` controls at desktop, tablet, and mobile viewport sizes. Each preview exposed actual rendered content in inline sandboxed iframe documents. The preview URL remained on the template page with `#preview`; no standalone published-site URL was exposed.
+
+### VERIFIED — the platform shell is separate from preview content
+
+The public platform pages use the HTMLhost shell: Next.js-style static chunks, host navigation, host-level Figtree typography, near-black body colors, and preview-wrapper controls. The embedded preview documents have template-specific HTML/CSS/JavaScript, fonts, assets, forms, responsive rules, and animation mechanisms. Host shell assets must not be attributed to the template runtime.
+
+### UNKNOWN — published generated websites
+
+No customer-published HTMLhost subdomain site was verified. The generated website runtime, deployment headers, CSP, asset transformation, framework usage, and production performance remain UNKNOWN. Preview `srcdoc` is not evidence that published sites use the same delivery mechanism.
+
+### Evidence artifacts
+
+The Phase 1A capture produced 21 viewport records and 81 PNG screenshots. See `/home/ubuntu/rea-phase1a/capture-index.json`, `/home/ubuntu/rea-phase1a/screenshots/`, and `PHASE_1A_PUBLIC_CORPUS_BASELINE.md`.

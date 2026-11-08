@@ -204,3 +204,14 @@ After review approval, execute **Phase 1A: Public corpus baseline**. Inspect the
 [4]: https://htmlhost.co/editor "HTMLhost AI HTML Editor"
 [5]: https://htmlhost.co/templates/kinetica-motion-typography "Kinetica Motion Typography template"
 [6]: https://htmlhost.co/templates/creative-playground-landing "Creative Playground Landing template"
+
+
+## Phase 1A completion record
+
+Phase 1A was approved and executed with an explicit platform/template/generated-site boundary. The public corpus included the homepage, editor, Creative Playground Landing, Kinetica Motion Typography, Futuristic Dark Landing, Full-Stack Designer Portfolio, and Business Web Studio.
+
+All seven targets were captured at 1440×900, 768×1024, and 390×844 with Chromium/Playwright. Five template `Live preview` states were opened. The run produced 21 JSON records and 81 PNG screenshots. The capture script, index, and screenshot directory are retained outside this report.
+
+The strongest result is architectural separation: the HTMLhost platform shell exposes Next.js/Vercel delivery signals and host UI, while public template previews render as heterogeneous inline sandboxed `srcdoc` documents with template-specific HTML/CSS/JavaScript. No published customer-generated website was verified. Phase 1A is complete and paused for review as required.
+
+See `PHASE_1A_PUBLIC_CORPUS_BASELINE.md` for the comparative matrix and evidence classification.
