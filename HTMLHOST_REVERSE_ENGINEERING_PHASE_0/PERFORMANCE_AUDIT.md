@@ -25,3 +25,21 @@ No reliable quantitative performance conclusion can be drawn for any template. M
 ## Next safe performance investigation
 
 After review, run a bounded repeated-load test against the public preview pages with resource timing export and optional Lighthouse in a clean profile. Report conditions, repetitions, and uncertainty; keep host shell and iframe resources separate.
+
+
+## Phase 1B controlled diagnostic addendum — 2026-11-08
+
+A saved Playwright harness produced 13 headless Chromium records: five public sandboxed template previews at 1440×900 under both `no-preference` and `reduce`, plus three 390×844 no-preference captures. All primary iframe bodies became visible; the values remain single-run diagnostics, not a performance ranking. The complete matrix, run conditions, and limitations are in `PHASE_1B_PERFORMANCE_BENCHMARK.md`.
+
+### Direct observations
+
+- Recorded elapsed time to iframe body visibility ranged from 5.635 to 9.826 seconds; this includes host navigation, explicit stabilization waits, and iframe readiness, so it is not template-only load time.
+- Captured iframe CLS entries ranged from 0 to 0.18 and LCP candidates from 156 to 1120 ms. The harness warns about observer timing; these are not field or validated Core Web Vitals.
+- Resource Timing known transfer bytes ranged from zero/opaque records to 237,607 bytes. Cross-origin/TAO-restricted resources may be omitted; zero known bytes do not mean zero traffic.
+- Image counters were snapshots shortly after body visibility and frequently reported zero loaded elements despite source/DOM images; they do not establish eventual load failure. Portfolio's reduced-motion run included one `/auth` request aborted (`net::ERR_ABORTED`) with no page error or HTTP error; its cause is UNKNOWN.
+- RAF callback samples varied significantly, especially the Futuristic Dark canvas samples. These are callback cadence observations, not compositor/GPU frame rates or perceived smoothness.
+- Creative Playground's 390 px iframe reported 1041 px scroll width, indicating overflow that warrants follow-up.
+
+### Tool and benchmark limits
+
+Lighthouse was not installed in the environment and no Lighthouse lab run, repeated-run statistics, field vitals, real-device test, browser performance trace, or CPU/GPU profile was collected. Published generated-site behavior remains UNKNOWN. The Phase 1A next safe investigation—bounded public preview performance measurement—was partially performed, but requires repeated loads and a trace/Lighthouse follow-up before any quality conclusion.

@@ -25,3 +25,38 @@ Do not call a library “used” merely because a marketing page names it. Confi
 ## Current unknowns
 
 The public corpus does not establish published generated-site HTML, headers, CSP, asset URLs, runtime dependencies, post-generation modifications, or quantitative performance. Those questions require a verified public customer site or separately authorized test publication.
+
+
+## Phase 1B runtime principles — VERIFIED within sampled public previews
+
+### Motion is template-specific
+
+Do not assume a common animation stack. The sampled previews combined simple CSS loops, stateful animation objects, a declared canvas/RAF path, preloader motion, and a long marquee/FAQ transition. Public source declarations of GSAP, Swiper, Howler, or other packages do not verify that those libraries loaded or authored observed behavior. The visible canvas does not prove the WebGL branch ran; zero Web Animations API entries do not rule out a JavaScript RAF loop.
+
+### Synchronize interaction state and accessibility state
+
+Kinetica's tested pause/resume control changed its visible state, accessible name, and `aria-pressed` value along with the sampled animation states. Business Web Studio's FAQ used a button/controlled region and `aria-expanded` false→true→false. An independent reconstruction should keep the DOM state authoritative and let CSS supply the transition. For sliders, implement deterministic next/previous state and test it; the Portfolio test records disagree on one Next outcome.
+
+### Make reduced motion a per-effect requirement
+
+The sampled desktop behavior varied: Creative Playground had zero sampled animation objects; Kinetica had 21 paused; Futuristic Dark showed identical screenshots but unknown canvas input/render behavior; Portfolio still had two running preloader animations; Business Web Studio had zero baseline animation objects. Implement and test reduced-motion behavior for each animation family and interactive state rather than assuming one media rule proves full support.
+
+### Direct manipulation needs a complete input path
+
+One Creative Playground shape drag was directly observed. Source declared further pointer/keyboard behavior, but those paths were not all exercised. A general reconstruction should support pointer capture, bounded motion, keyboard-equivalent movement, clear focus, and an optional status. The Futuristic Dark focused follow-up saw pointer events on page ancestors, not the canvas, so canvas-specific delivery remains UNKNOWN.
+
+## Phase 1B performance and responsive principles
+
+The saved matrix covers one headless Chromium run per cell; it is not a comparative performance benchmark. Treat reported CLS/LCP as provisional single-run entries, Resource Timing bytes as incomplete known bytes, image counters as early snapshots, elapsed-to-body-visible as host-plus-wait time, and RAF callback intervals as non-FPS. No Lighthouse, field Web Vitals, CPU/GPU trace, real-device test, or repeated-run statistical sample was available. Published-site performance remains UNKNOWN.
+
+At 390 px, Creative Playground's preview iframe reported 1041 px document scroll width. Add overflow checks to mobile validation and do not reproduce the overflow as an intentional design feature. Kinetica and Futuristic Dark phone captures remained at 390 px document width; those observations do not validate all intermediate breakpoints.
+
+## Current evidence gaps carried forward
+
+- **UNKNOWN:** Published generated-site markup, runtime, responsive behavior, resource delivery, and field performance.
+- **UNKNOWN:** Runtime use of declared optional libraries and the exact execution paths behind several animations.
+- **UNKNOWN:** Reliable frame pacing, GPU/CPU cost, real-device touch latency, complete bytes including TAO-restricted resources, and repeated-run variability.
+- **UNKNOWN:** Futuristic Dark's WebGL versus fallback path and canvas-targeted input response; Portfolio testimonial sequence; Business Web Studio's FAQ final geometry/timing discrepancy.
+- **UNKNOWN:** Unexercised forms, menu/theme state, counters, keyboard paths, and reduced-motion interactive states.
+
+See `PHASE_1B_MOTION_DEEP_AUDIT.md`, `PHASE_1B_PERFORMANCE_BENCHMARK.md`, `ANIMATION_TECHNIQUE_COMPARISON.md`, and `FRONTEND_MOTION_ENGINEERING_GUIDE.md` for evidence and implementation-neutral detail.

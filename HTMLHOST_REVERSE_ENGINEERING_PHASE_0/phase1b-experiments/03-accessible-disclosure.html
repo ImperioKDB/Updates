@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Experiment 03 — Accessible disclosure</title>
+  <style>
+    :root { color-scheme:light; --paper:#f1eee5; --ink:#1c211e; --muted:#68716a; --line:#d9d7cc; --accent:#dcf08d; --white:#fffefb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(100% - 40px, 900px); margin:0 auto; }
+    header { display:flex; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--line); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+    header span:last-child { color:var(--muted); }
+    .intro { padding:72px 0 36px; }
+    .eyebrow { margin:0 0 14px; color:#56652e; font-size:.76rem; font-weight:750; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { max-width:760px; margin:0; font-size:clamp(2.8rem,7vw,5.6rem); line-height:.94; letter-spacing:-.07em; }
+    .intro p:last-child { max-width:600px; margin:22px 0 0; color:var(--muted); }
+    .faq { display:grid; gap:12px; padding:12px 0 42px; }
+    .item { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--white); }
+    .question { width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:22px 24px; border:0; background:transparent; color:inherit; text-align:left; font:inherit; font-size:1.1rem; font-weight:700; cursor:pointer; }
+    .question:focus-visible { outline:3px solid #50632f; outline-offset:-4px; border-radius:18px; }
+    .icon { position:relative; flex:0 0 30px; width:30px; height:30px; border:1px solid var(--line); border-radius:50%; background:var(--accent); }
+    .icon::before,.icon::after { content:""; position:absolute; top:50%; left:50%; width:12px; height:2px; border-radius:2px; background:var(--ink); transform:translate(-50%,-50%); transition:transform 220ms ease-out; }
+    .icon::after { transform:translate(-50%,-50%) rotate(90deg); }
+    .item.is-open .icon::after { transform:translate(-50%,-50%) rotate(0deg); }
+    .panel { display:grid; grid-template-rows:1fr; opacity:1; transition:grid-template-rows 420ms cubic-bezier(.22,1,.36,1), opacity 180ms ease-out; }
+    .panel-inner { min-height:0; overflow:hidden; }
+    .panel p { max-width:720px; margin:0; padding:0 24px 24px; color:var(--muted); }
+    .js .item:not(.is-open) .panel { grid-template-rows:0fr; opacity:0; }
+    .js:not(.ready) .panel { transition:none !important; }
+    .js .item:not(.is-open) .panel-inner { overflow:hidden; }
+    .note { margin:24px 0 40px; padding:17px 19px; border-left:3px solid #839c45; background:#e7eadc; color:#414b3c; font-size:.9rem; }
+    footer { padding:26px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.83rem; }
+    @media (max-width:560px) { main { width:min(100% - 28px,900px); } .intro { padding:60px 0 28px; } .question { padding:18px 17px; font-size:1rem; } .panel p { padding:0 17px 19px; } }
+    @media (prefers-reduced-motion:reduce) { .panel,.icon::before,.icon::after { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><strong>Motion study / 03</strong><span>Disclosure state</span></header>
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow">State · semantics · exit</p>
+      <h1 id="title">Open an answer. Keep the relationship explicit.</h1>
+      <p>Choose a question to reveal its associated region. Only one answer stays open, and the button’s expanded state always tracks the panel.</p>
+    </section>
+    <section class="faq" aria-label="Questions about motion">
+      <article class="item is-open">
+        <h2 style="margin:0"><button class="question" id="q1" type="button" aria-controls="a1" aria-expanded="true"><span>Why animate a disclosure at all?</span><span class="icon" aria-hidden="true"></span></button></h2>
+        <div class="panel" id="a1" role="region" aria-labelledby="q1" aria-hidden="false"><div class="panel-inner"><p>A short, restrained opening can clarify which answer belongs to a question. The text itself remains in normal document flow, so the surrounding layout can grow without overlays.</p></div></div>
+      </article>
+      <article class="item">
+        <h2 style="margin:0"><button class="question" id="q2" type="button" aria-controls="a2" aria-expanded="true"><span>How is the content kept accessible?</span><span class="icon" aria-hidden="true"></span></button></h2>
+        <div class="panel" id="a2" role="region" aria-labelledby="q2" aria-hidden="false"><div class="panel-inner"><p>Each native button points to a named region, updates aria-expanded, and becomes keyboard-operable by default. Closed panels are removed from assistive-technology and keyboard navigation with aria-hidden and inert.</p></div></div>
+      </article>
+      <article class="item">
+        <h2 style="margin:0"><button class="question" id="q3" type="button" aria-controls="a3" aria-expanded="true"><span>What changes for reduced motion?</span><span class="icon" aria-hidden="true"></span></button></h2>
+        <div class="panel" id="a3" role="region" aria-labelledby="q3" aria-hidden="false"><div class="panel-inner"><p>The same state change happens immediately. The transition is presentation only; it is never required to understand the content or operate the control.</p></div></div>
+      </article>
+    </section>
+    <p class="note" role="note">Implementation note: the panel uses a 0fr → 1fr CSS grid-row transition. No height measurement, external library, or animation of the text itself is required.</p>
+    <footer>Standalone experiment · one-open-at-a-time accordion with visible focus and reduced-motion behavior</footer>
+  </main>
+  <script>
+    (() => {
+      const items=[...document.querySelectorAll('.item')];
+      function setOpen(item,open) {
+        const button=item.querySelector('.question');
+        const panel=document.getElementById(button.getAttribute('aria-controls'));
+        item.classList.toggle('is-open',open);
+        button.setAttribute('aria-expanded',String(open));
+        panel.setAttribute('aria-hidden',String(!open));
+        panel.inert=!open;
+      }
+      items.forEach((item,index)=>setOpen(item,index===0));
+      requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.add('ready')));
+      for (const item of items) {
+        item.querySelector('.question').addEventListener('click',()=>{
+          const shouldOpen=!item.classList.contains('is-open');
+          items.forEach(other=>setOpen(other,other===item&&shouldOpen));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

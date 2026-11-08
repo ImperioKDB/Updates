@@ -27,3 +27,14 @@ The public wrapper controls the preview frame, desktop/phone presentation, ifram
 ### UNKNOWN
 
 Intermediate breakpoint behavior between the three captured widths, real-device touch behavior, accessibility focus transitions, and published-site responsive output remain incomplete or unknown.
+
+
+## Phase 1B runtime addendum — 390 px preview evidence
+
+Three public previews were directly captured at 390×844 in a no-preference headless Chromium context; these are iframe document measurements, not published-site results.
+
+- **Creative Playground — VERIFIED issue:** reported iframe document `scrollWidth=1041` while the viewport was 390 px wide. Investigate which child content produces the overflow; do not infer it is intended horizontal scrolling.
+- **Kinetica — VERIFIED:** document width remained 390 px and height was 9642 px at the sampled phone size; 23 animation objects were inventoried (six running/17 paused). Intermediate breakpoint behavior remains unverified by this single mobile capture.
+- **Futuristic Dark — VERIFIED:** document width was 390 px and canvas region filled the visible iframe. Source-declared canvas input was not proven to target the canvas; the focused pointer test saw window-level events on non-canvas ancestors.
+
+The runtime matrix did not capture the Portfolio or Business preview at phone size, and does not establish real touch-device behavior, all intermediate breakpoints, focus traversal, or published-site responsiveness. See `PHASE_1B_MOTION_DEEP_AUDIT.md` and `PHASE_1B_PERFORMANCE_BENCHMARK.md` for related limitations.

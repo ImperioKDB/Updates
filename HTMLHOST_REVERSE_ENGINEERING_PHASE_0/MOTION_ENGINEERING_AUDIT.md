@@ -25,3 +25,22 @@ No quantitative FPS, long-task, animation timing, CPU/GPU, or real-device smooth
 ## Next safe motion investigation
 
 After review, replay one reversible interaction per template—menu, accordion, carousel, pointer effect, or reduced-motion toggle—while collecting before/after DOM attributes, computed styles, and screenshots. Keep the generated-site column separate.
+
+
+## Phase 1B runtime addendum — 2026-11-08
+
+Phase 1B directly sampled public, sandboxed preview runtime state at 1440×900 under both motion preferences, plus 390×844 on Creative Playground, Kinetica, and Futuristic Dark. The observations below supplement, but do not upgrade, Phase 1A source declarations. Detailed records are in `PHASE_1B_MOTION_DEEP_AUDIT.md` and `phase1b-evidence/`.
+
+### VERIFIED runtime findings
+
+- **Creative Playground:** two sampled no-preference loops ran (24 s linear marquee and 6 s orbit); one orange-shape pointer drag moved its recorded position. At desktop reduce, zero animation objects were sampled versus two running in no-preference. The 390 px capture reported iframe document width 1041 px and viewport width 390 px.
+- **Kinetica:** 21 desktop animation objects (4 running/17 paused), 23 mobile objects (6 running/17 paused). Its tested pause/resume button synchronized visible text, accessible name, `aria-pressed`, and sampled animation states. Reduce paused all 21 desktop objects.
+- **Futuristic Dark:** canvas visible, zero Web Animations API objects, and source-declared RAF/WebGL/fallback behavior. RAF callback samples do not establish FPS. The dedicated reduced-motion pointer test saw no pointer events and identical before/idle/after images; focused follow-up saw window events targeting header/nav/div/main, not the canvas. Canvas-specific event delivery and visible response remain UNKNOWN.
+- **Full-Stack Portfolio:** spinner and icon animations remained running in the reduced-motion capture. Focused follow-up sampled a 300 ms testimonial transition and slide change, but the primary Next capture reports no change; deterministic Next behavior remains unresolved.
+- **Business Web Studio:** one 40 s linear services-label track ran at baseline; the FAQ used a 500 ms grid-row transition and `aria-expanded` false→true→false. The close sample differed (4.2 px versus 0 px) between the primary and focused captures; final geometry/timing is not fully settled. Desktop reduce sampled zero baseline animations.
+
+### Evidence limits
+
+Source-level library declarations do not prove runtime use or attribution. `document.getAnimations()` does not enumerate every JS animation loop; RAF callbacks are not compositor FPS. These are sampled preview states, not published-site observations or complete reduced-motion certifications. Portfolio's disputed slide result and Business's differing FAQ close measurements remain explicitly unresolved.
+
+See `ANIMATION_TECHNIQUE_COMPARISON.md` and `FRONTEND_MOTION_ENGINEERING_GUIDE.md` for independent engineering implications, and `INTERACTION_EXPERIMENTS.md` for three original technique demonstrations.

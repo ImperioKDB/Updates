@@ -47,3 +47,15 @@ These are research abstractions. They are not claims that HTMLhost uses these ex
 ## UNKNOWN
 
 A single shared template design system, shared component library, published-site token inheritance, and post-generation normalization are not proven. Template metadata and inline source show recurring concepts, but not a common implementation repository.
+
+
+## Phase 1B runtime-tested interaction primitives
+
+The following are reusable **patterns**, not evidence of a shared HTMLhost component library:
+
+- **Accessible motion toggle — VERIFIED in Kinetica preview:** visible state, accessible name, and `aria-pressed` changed together; the sampled animation inventory paused and resumed. Abstract state tokens such as `motion-running` and `motion-paused` may help a reconstruction, but are not HTMLhost token names.
+- **Semantic FAQ disclosure — VERIFIED in Business preview:** button, `aria-controls`, and `aria-expanded` tracked panel open/close. The open panel was about 109.6 px; a sampled 500 ms grid-row transition was observed. One close measurement differed by capture timing and remains under review.
+- **Bounded direct manipulation — VERIFIED once in Creative preview:** an orange shape moved under pointer drag. Keyboard/bounds/feedback details were source declarations and were not exhaustively validated.
+- **Reduced-motion variant — VERIFIED as template-specific:** sampled states differed across all five previews. Treat it as a per-component variant and test the page-level and interactive states separately, not as a universal shared implementation.
+
+Three original implementations of scroll reveal, pointer drag, and disclosure state are linked in `INTERACTION_EXPERIMENTS.md`; they demonstrate generic techniques, not source recreation.

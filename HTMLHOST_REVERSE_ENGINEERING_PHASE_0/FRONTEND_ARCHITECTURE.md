@@ -33,3 +33,10 @@ No verified customer-published HTMLhost subdomain site was accessed in Phase 1A.
 ## Architectural boundary rule
 
 Host-page chunks/fonts/styles and preview iframe source must be logged separately in future work. A library named in template metadata must not be attributed to the platform shell, and a host Next.js signal must not be attributed to the generated website.
+
+
+## Phase 1B runtime boundary update
+
+Phase 1B instrumented the public preview iframe documents and retained separate host-preview readiness waits. It did not reveal a new shared template framework or change the Phase 1A architecture conclusion: the host shell and each sandboxed inline `srcdoc` preview remain separate evidence layers, and published generated-site architecture remains UNKNOWN.
+
+The runtime probes confirmed observable template-specific animation state, CSS transition state, DOM control state, and one pointer-drag outcome. They do not establish runtime library attribution, the WebGL-versus-fallback branch, or the published output pipeline. Resource Timing and LCP/CLS measurements were collected from the preview context with explicit limitations; they must not be attributed to the host shell or published site. See `PHASE_1B_MOTION_DEEP_AUDIT.md` and `PHASE_1B_PERFORMANCE_BENCHMARK.md`.

@@ -215,3 +215,12 @@ All seven targets were captured at 1440×900, 768×1024, and 390×844 with Chrom
 The strongest result is architectural separation: the HTMLhost platform shell exposes Next.js/Vercel delivery signals and host UI, while public template previews render as heterogeneous inline sandboxed `srcdoc` documents with template-specific HTML/CSS/JavaScript. No published customer-generated website was verified. Phase 1A is complete and paused for review as required.
 
 See `PHASE_1A_PUBLIC_CORPUS_BASELINE.md` for the comparative matrix and evidence classification.
+
+
+## Phase 1B completion record — 2026-11-08
+
+**Status:** Phase 1B complete; stop for review before initiating another research phase. The approved scope covered bounded runtime motion, reversible interactions, and a single-run diagnostic performance matrix across five public template previews. It did not include authenticated editor actions, site publication, private endpoints, or published customer-site claims.
+
+The work produced 13 headless Chromium records, one bounded REA observation-only capture of Creative Playground, five independent template evidence reviews with cross-template synthesis, and three original standalone motion demonstrations. The specific evidence boundary and limitations are recorded in `PHASE_1B_MOTION_DEEP_AUDIT.md`, `PHASE_1B_PERFORMANCE_BENCHMARK.md`, `ANIMATION_TECHNIQUE_COMPARISON.md`, `FRONTEND_MOTION_ENGINEERING_GUIDE.md`, and `INTERACTION_EXPERIMENTS.md`. Runtime and interaction scripts and raw evidence remain under this phase directory.
+
+The phase leaves several targeted unknowns: Portfolio's inconsistent testimonial Next result, Futuristic Dark's canvas-specific pointer/render path, Business Web Studio's FAQ close measurement, incomplete resource totals, and a lack of repeated/real-device performance evidence. No published generated site was verified. A later phase should be separately scoped and should not infer customer-site behavior from these public preview results.

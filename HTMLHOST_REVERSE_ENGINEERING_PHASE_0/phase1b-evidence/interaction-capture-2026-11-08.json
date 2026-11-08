@@ -1,0 +1,1203 @@
+{
+  "capture_date": "2026-11-08",
+  "tool": "Python Playwright with Chromium 156.0.8078.73",
+  "conditions": {
+    "headless": true,
+    "viewport": "1440×900 CSS px",
+    "reduced_motion": "no-preference except the Futuristic Dark canvas test, which uses reduce",
+    "wait": "DOMContentLoaded + preview iframe stabilization + 1s before interaction",
+    "actions": "one reversible action per template, except pause/resume and FAQ open/close; no submissions or external navigation"
+  },
+  "records": [
+    {
+      "template": "creative-playground",
+      "route": "https://htmlhost.co/templates/creative-playground-landing",
+      "interaction": "drag",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reduced_motion": "no-preference",
+      "result": "completed pointer drag of 72×46 CSS px; no form or navigation action",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "target_before": {
+        "tag": "DIV",
+        "text": "",
+        "id": null,
+        "className": "shape shape-orange",
+        "ariaLabel": "Drag the orange blob",
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 257.77789306640625,
+          "y": 712.1528930664062,
+          "width": 210.44418334960938,
+          "height": 210.44415283203125
+        },
+        "transform": "matrix(1.0015, 0.000615277, -0.000615277, 1.0015, 0, 0)",
+        "opacity": "1",
+        "transitionProperty": "filter",
+        "transitionDuration": "0.2s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "target_after": {
+        "tag": "DIV",
+        "text": "",
+        "id": null,
+        "className": "shape shape-orange",
+        "ariaLabel": "Drag the orange blob",
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 293.90625,
+          "y": 735.28125,
+          "width": 210,
+          "height": 210
+        },
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "opacity": "1",
+        "transitionProperty": "none",
+        "transitionDuration": "0s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "elapsed_seconds": 0.621,
+      "page_errors": []
+    },
+    {
+      "template": "kinetica-motion",
+      "route": "https://htmlhost.co/templates/kinetica-motion-typography",
+      "interaction": "motion-toggle",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reduced_motion": "no-preference",
+      "result": "completed pause and resume toggle",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "animations_before": [
+        {
+          "playState": "running",
+          "currentTime": 666.6639999999071,
+          "duration": 14000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "swiper-wrapper"
+        },
+        {
+          "playState": "running",
+          "currentTime": 666.6639999999071,
+          "duration": 14000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "swiper-wrapper"
+        },
+        {
+          "playState": "running",
+          "currentTime": 966.6519999998919,
+          "duration": 750,
+          "easing": "linear",
+          "targetTag": "I",
+          "targetClass": ""
+        },
+        {
+          "playState": "running",
+          "currentTime": 966.6519999998919,
+          "duration": 750,
+          "easing": "linear",
+          "targetTag": "I",
+          "targetClass": ""
+        },
+        {
+          "playState": "running",
+          "currentTime": 966.6519999998919,
+          "duration": 750,
+          "easing": "linear",
+          "targetTag": "I",
+          "targetClass": ""
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 5000,
+          "easing": "linear",
+          "targetTag": "SPAN",
+          "targetClass": "cursor-tag loop"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 26000,
+          "easing": "linear",
+          "targetTag": "g",
+          "targetClass": "[object SVGAnimatedString]"
+        },
+        {
+          "playState": "running",
+          "currentTime": 966.6519999998919,
+          "duration": 6000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "gallery-photo loop"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 12000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "widget-hand loop"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 9000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "blob loop"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 9000,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "blob two loop"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text stack"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text serif"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text "
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text stroke stack"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text serif"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text serif"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text tilt stack"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text stack"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text "
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text serif"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text stroke stack"
+        },
+        {
+          "playState": "paused",
+          "currentTime": 0,
+          "duration": 2400,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "sample-text serif"
+        }
+      ],
+      "control_before": {
+        "tag": "BUTTON",
+        "text": "MOTION ON",
+        "id": "motion-toggle",
+        "className": "motion-toggle",
+        "ariaLabel": "Pause page motion",
+        "ariaExpanded": null,
+        "ariaPressed": "false",
+        "ariaControls": null,
+        "rect": {
+          "x": 1260.578125,
+          "y": 958.84375,
+          "width": 79.421875,
+          "height": 15
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "pause_state": {
+        "control": {
+          "tag": "BUTTON",
+          "text": "MOTION PAUSED",
+          "id": "motion-toggle",
+          "className": "motion-toggle",
+          "ariaLabel": "Resume page motion",
+          "ariaExpanded": null,
+          "ariaPressed": "true",
+          "ariaControls": null,
+          "rect": {
+            "x": 1235.09375,
+            "y": 462.84375,
+            "width": 104.90625,
+            "height": 15
+          },
+          "transform": "none",
+          "opacity": "1",
+          "transitionProperty": "all",
+          "transitionDuration": "0s",
+          "animationName": "none",
+          "animationDuration": "0s",
+          "tabIndex": 0
+        },
+        "animations": [
+          {
+            "playState": "paused",
+            "currentTime": 1066.651999999892,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "paused",
+            "currentTime": 1066.651999999892,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "paused",
+            "currentTime": 1066.651999999892,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 5000,
+            "easing": "linear",
+            "targetTag": "SPAN",
+            "targetClass": "cursor-tag loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 26000,
+            "easing": "linear",
+            "targetTag": "g",
+            "targetClass": "[object SVGAnimatedString]"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 1066.651999999892,
+            "duration": 6000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "gallery-photo loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 12000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "widget-hand loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 9000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "blob loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 9000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "blob two loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text "
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stroke stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text tilt stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text "
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stroke stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          }
+        ]
+      },
+      "resume_state": {
+        "control": {
+          "tag": "BUTTON",
+          "text": "MOTION ON",
+          "id": "motion-toggle",
+          "className": "motion-toggle",
+          "ariaLabel": "Pause page motion",
+          "ariaExpanded": null,
+          "ariaPressed": "false",
+          "ariaControls": null,
+          "rect": {
+            "x": 1260.578125,
+            "y": 462.84375,
+            "width": 79.421875,
+            "height": 15
+          },
+          "transform": "none",
+          "opacity": "1",
+          "transitionProperty": "all",
+          "transitionDuration": "0s",
+          "animationName": "none",
+          "animationDuration": "0s",
+          "tabIndex": 0
+        },
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 1450.031999999887,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "running",
+            "currentTime": 1450.031999999887,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "running",
+            "currentTime": 1450.031999999887,
+            "duration": 750,
+            "easing": "linear",
+            "targetTag": "I",
+            "targetClass": ""
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 5000,
+            "easing": "linear",
+            "targetTag": "SPAN",
+            "targetClass": "cursor-tag loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 26000,
+            "easing": "linear",
+            "targetTag": "g",
+            "targetClass": "[object SVGAnimatedString]"
+          },
+          {
+            "playState": "running",
+            "currentTime": 1450.031999999887,
+            "duration": 6000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "gallery-photo loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 12000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "widget-hand loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 9000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "blob loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 9000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "blob two loop"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text "
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stroke stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text tilt stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text "
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text stroke stack"
+          },
+          {
+            "playState": "paused",
+            "currentTime": 0,
+            "duration": 2400,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "sample-text serif"
+          }
+        ]
+      },
+      "elapsed_seconds": 0.968,
+      "page_errors": []
+    },
+    {
+      "template": "futuristic-dark",
+      "route": "https://htmlhost.co/templates/futuristic-dark-landing",
+      "interaction": "canvas-pointer",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reduced_motion": "reduce",
+      "result": "completed reduced-motion pointer test with timed idle and post-pointer screenshots",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "canvas_before": {
+        "tag": "CANVAS",
+        "text": "",
+        "id": "glow-canvas",
+        "className": "",
+        "ariaLabel": null,
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": -1
+      },
+      "active_animations_before": [],
+      "canvas_after": {
+        "tag": "CANVAS",
+        "text": "",
+        "id": "glow-canvas",
+        "className": "",
+        "ariaLabel": null,
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": -1
+      },
+      "active_animations_after": [],
+      "pointer_event_observation": {
+        "count": 0,
+        "last": null
+      },
+      "screenshots": {
+        "representative_reduced_motion_static": "phase1b-evidence/futuristic-dark-reduced-motion-static.png",
+        "sha256": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+        "identical_samples": [
+          "before",
+          "idle",
+          "after_pointer"
+        ],
+        "note": "All three original reduced-motion screenshots were byte-identical; duplicate files consolidated in screenshot-manifest.json."
+      },
+      "elapsed_seconds": 2.147,
+      "page_errors": []
+    },
+    {
+      "template": "full-stack-portfolio",
+      "route": "https://htmlhost.co/templates/full-stack-designer-portfolio",
+      "interaction": "testimonial-next",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reduced_motion": "no-preference",
+      "result": "completed one next-testimonial activation",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "slides_before": [
+        {
+          "class": "testimonial-slide active",
+          "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also smart. He worked magic ",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        }
+      ],
+      "control_before": {
+        "tag": "BUTTON",
+        "text": "→",
+        "id": "slider-next",
+        "className": "slider-btn next",
+        "ariaLabel": "Next testimonial",
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 780.796875,
+          "y": 2640.375,
+          "width": 52,
+          "height": 52
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0.3s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "animations_before": [
+        {
+          "playState": "running",
+          "currentTime": 1333.2120000000448,
+          "duration": 800,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "preloader-spinner"
+        },
+        {
+          "playState": "running",
+          "currentTime": 1333.2120000000448,
+          "duration": 1200,
+          "easing": "linear",
+          "targetTag": "IMG",
+          "targetClass": "preloader-icon"
+        },
+        {
+          "playState": "running",
+          "currentTime": 1249.8819999998848,
+          "duration": 1500,
+          "easing": "linear",
+          "targetTag": "IMG",
+          "targetClass": "hero-avatar-border draw-animation"
+        }
+      ],
+      "slides_after": [
+        {
+          "class": "testimonial-slide active",
+          "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also smart. He worked magic ",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        }
+      ],
+      "control_after": {
+        "tag": "BUTTON",
+        "text": "→",
+        "id": "slider-next",
+        "className": "slider-btn next",
+        "ariaLabel": "Next testimonial",
+        "ariaExpanded": null,
+        "ariaPressed": null,
+        "ariaControls": null,
+        "rect": {
+          "x": 780.796875,
+          "y": 394.375,
+          "width": 52,
+          "height": 52
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0.3s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "animations_after": [
+        {
+          "playState": "running",
+          "currentTime": 666.7000000000005,
+          "duration": 800,
+          "easing": "cubic-bezier(0.4, 0, 0.2, 1)",
+          "targetTag": "SPAN",
+          "targetClass": "word"
+        },
+        {
+          "playState": "running",
+          "currentTime": 11499.612000000045,
+          "duration": 800,
+          "easing": "linear",
+          "targetTag": "DIV",
+          "targetClass": "preloader-spinner"
+        },
+        {
+          "playState": "running",
+          "currentTime": 11499.612000000045,
+          "duration": 1200,
+          "easing": "linear",
+          "targetTag": "IMG",
+          "targetClass": "preloader-icon"
+        }
+      ],
+      "elapsed_seconds": 10.249,
+      "page_errors": []
+    },
+    {
+      "template": "business-web-studio",
+      "route": "https://htmlhost.co/templates/business-web-studio",
+      "interaction": "faq-toggle",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reduced_motion": "no-preference",
+      "result": "completed FAQ open and close",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "control_before": {
+        "tag": "BUTTON",
+        "text": "How long does a website take?",
+        "id": "fb1",
+        "className": "acc-btn",
+        "ariaLabel": null,
+        "ariaExpanded": "false",
+        "ariaPressed": null,
+        "ariaControls": "f1",
+        "rect": {
+          "x": 647.828125,
+          "y": 7712.515625,
+          "width": 692.171875,
+          "height": 90
+        },
+        "transform": "none",
+        "opacity": "1",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "tabIndex": 0
+      },
+      "controlled_panel_before": {
+        "className": "acc-panel",
+        "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+        "height": 0,
+        "maxHeight": "none",
+        "opacity": "1",
+        "transitionProperty": "grid-template-rows",
+        "transitionDuration": "0.5s",
+        "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+      },
+      "open_state": {
+        "control": {
+          "tag": "BUTTON",
+          "text": "How long does a website take?",
+          "id": "fb1",
+          "className": "acc-btn",
+          "ariaLabel": null,
+          "ariaExpanded": "true",
+          "ariaPressed": null,
+          "ariaControls": "f1",
+          "rect": {
+            "x": 647.828125,
+            "y": 347.3636779785156,
+            "width": 692.171875,
+            "height": 90
+          },
+          "transform": "none",
+          "opacity": "1",
+          "transitionProperty": "all",
+          "transitionDuration": "0s",
+          "animationName": "none",
+          "animationDuration": "0s",
+          "tabIndex": 0
+        },
+        "panel": {
+          "className": "acc-panel open",
+          "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+          "height": 108.92184448242188,
+          "maxHeight": "none",
+          "opacity": "1",
+          "transitionProperty": "grid-template-rows",
+          "transitionDuration": "0.5s",
+          "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+        },
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "FIGURE",
+            "targetClass": "q rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "P",
+            "targetClass": "eyebrow rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "P",
+            "targetClass": "eyebrow rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "H2",
+            "targetClass": "display rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "H2",
+            "targetClass": "display rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "DIV",
+            "targetClass": "acc rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 366.75099999993387,
+            "duration": 900,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "DIV",
+            "targetClass": "acc rv in"
+          },
+          {
+            "playState": "running",
+            "currentTime": 350.08499999994734,
+            "duration": 400,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "SPAN",
+            "targetClass": "pm"
+          },
+          {
+            "playState": "running",
+            "currentTime": 350.08499999994734,
+            "duration": 500,
+            "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "targetTag": "DIV",
+            "targetClass": "acc-panel open"
+          },
+          {
+            "playState": "running",
+            "currentTime": 1283.3809999998748,
+            "duration": 40000,
+            "easing": "linear",
+            "targetTag": "DIV",
+            "targetClass": "track"
+          }
+        ]
+      },
+      "closed_state": {
+        "control": {
+          "tag": "BUTTON",
+          "text": "How long does a website take?",
+          "id": "fb1",
+          "className": "acc-btn",
+          "ariaLabel": null,
+          "ariaExpanded": "false",
+          "ariaPressed": null,
+          "ariaControls": "f1",
+          "rect": {
+            "x": 647.828125,
+            "y": 750.515625,
+            "width": 692.171875,
+            "height": 90
+          },
+          "transform": "none",
+          "opacity": "1",
+          "transitionProperty": "all",
+          "transitionDuration": "0s",
+          "animationName": "none",
+          "animationDuration": "0s",
+          "tabIndex": 0
+        },
+        "panel": {
+          "className": "acc-panel",
+          "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+          "height": 4.21875,
+          "maxHeight": "none",
+          "opacity": "1",
+          "transitionProperty": "grid-template-rows",
+          "transitionDuration": "0.5s",
+          "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+        }
+      },
+      "elapsed_seconds": 1.616,
+      "page_errors": []
+    }
+  ],
+  "limitations": [
+    "The behaviors are observed in public sandboxed template previews, not published generated sites.",
+    "A DOM state change or screenshot difference is not a direct measurement of compositor FPS or GPU cost.",
+    "No formal performance trace, Lighthouse run, or real-device test is included in this interaction pass."
+  ]
+}
