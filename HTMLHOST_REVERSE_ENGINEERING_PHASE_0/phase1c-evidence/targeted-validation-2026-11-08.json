@@ -1,0 +1,4964 @@
+{
+  "capture_date": "2026-11-08",
+  "tool": "Python Playwright with /usr/bin/chromium",
+  "chromium": "156.0.8078.73",
+  "scope": "Public sandboxed preview iframes only; no published customer site",
+  "conditions": {
+    "viewport": "1440x900",
+    "fresh_context_per_motion_cell": true,
+    "portfolio_repetitions": 5,
+    "business_repetitions": 5,
+    "settle_wait_ms": 800,
+    "classification": "Raw observation; interpretation belongs in report"
+  },
+  "portfolio": [
+    {
+      "target": "full-stack-portfolio",
+      "url": "https://htmlhost.co/templates/full-stack-designer-portfolio#preview",
+      "motion": "no-preference",
+      "started_at": "2026-11-08T20:39:36.558050+00:00",
+      "repetitions": [
+        {
+          "repetition": 1,
+          "before_timestamp_ms": 9045.399999999965,
+          "clicked_at": "2026-11-08T20:39:45.656592+00:00",
+          "after_timestamp": "2026-11-08T20:39:57.520404+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 2,
+          "before_timestamp_ms": 4545.5,
+          "clicked_at": "2026-11-08T20:40:02.205607+00:00",
+          "after_timestamp": "2026-11-08T20:40:10.920039+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 3,
+          "before_timestamp_ms": 5561.5,
+          "clicked_at": "2026-11-08T20:40:16.528672+00:00",
+          "after_timestamp": "2026-11-08T20:40:23.629718+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 4,
+          "before_timestamp_ms": 7799.599999999977,
+          "clicked_at": "2026-11-08T20:40:31.860041+00:00",
+          "after_timestamp": "2026-11-08T20:40:38.351129+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 5,
+          "before_timestamp_ms": 6000.200000000012,
+          "clicked_at": "2026-11-08T20:40:44.652119+00:00",
+          "after_timestamp": "2026-11-08T20:40:51.288518+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        }
+      ],
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "finished_at": "2026-11-08T20:40:51.288546+00:00"
+    },
+    {
+      "target": "full-stack-portfolio",
+      "url": "https://htmlhost.co/templates/full-stack-designer-portfolio#preview",
+      "motion": "reduce",
+      "started_at": "2026-11-08T20:40:51.484572+00:00",
+      "repetitions": [
+        {
+          "repetition": 1,
+          "before_timestamp_ms": 7837.700000000012,
+          "clicked_at": "2026-11-08T20:40:59.365306+00:00",
+          "after_timestamp": "2026-11-08T20:41:10.881659+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 2,
+          "before_timestamp_ms": 4568.400000000023,
+          "clicked_at": "2026-11-08T20:41:15.649793+00:00",
+          "after_timestamp": "2026-11-08T20:41:22.750428+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 126.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 3,
+          "before_timestamp_ms": 4195.200000000012,
+          "clicked_at": "2026-11-08T20:41:27.273629+00:00",
+          "after_timestamp": "2026-11-08T20:41:33.772855+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 4,
+          "before_timestamp_ms": 4026.7000000000116,
+          "clicked_at": "2026-11-08T20:41:37.870583+00:00",
+          "after_timestamp": "2026-11-08T20:41:44.358242+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        },
+        {
+          "repetition": 5,
+          "before_timestamp_ms": 4149.200000000012,
+          "clicked_at": "2026-11-08T20:41:48.604708+00:00",
+          "after_timestamp": "2026-11-08T20:41:57.480953+00:00",
+          "button_before": {
+            "tag": "BUTTON",
+            "id": "slider-next",
+            "className": "slider-btn next",
+            "text": "→",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": "Next testimonial",
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 780.796875,
+              "y": 2640.375,
+              "width": 52,
+              "height": 52
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0.3s",
+            "transitionTimingFunction": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "during_0_9s": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "after_settled": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 1,
+              "id": null,
+              "className": "testimonial-slide",
+              "text": "",
+              "opacity": "0",
+              "transform": "matrix(1, 0, 0, 1, 20, 0)",
+              "display": "block",
+              "rect": {
+                "x": 660.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            },
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_before": [
+            {
+              "index": 0,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 2372.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ],
+          "active_after": [
+            {
+              "index": 2,
+              "id": null,
+              "className": "testimonial-slide active",
+              "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+              "opacity": "1",
+              "transform": "matrix(1, 0, 0, 1, 0, 0)",
+              "display": "block",
+              "rect": {
+                "x": 640.796875,
+                "y": 521.375,
+                "width": 655.1875,
+                "height": 236
+              }
+            }
+          ]
+        }
+      ],
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/clipboard",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/clipboard",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/clipboard",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "finished_at": "2026-11-08T20:41:57.480980+00:00"
+    }
+  ],
+  "futuristic_dark": [
+    {
+      "target": "futuristic-dark",
+      "url": "https://htmlhost.co/templates/futuristic-dark-landing#preview",
+      "motion": "no-preference",
+      "started_at": "2026-11-08T20:41:57.662248+00:00",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "canvas_before": {
+        "tag": "CANVAS",
+        "id": "glow-canvas",
+        "className": "",
+        "text": "",
+        "ariaExpanded": null,
+        "ariaControls": null,
+        "ariaPressed": null,
+        "ariaLabel": null,
+        "role": null,
+        "tabIndex": -1,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "opacity": "1",
+        "transform": "none",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "transitionTimingFunction": "ease",
+        "gridTemplateRows": "none",
+        "visibility": "visible",
+        "display": "block"
+      },
+      "contexts": {
+        "width": 1440,
+        "height": 841,
+        "webgl2": false,
+        "webgl": true,
+        "webgl_renderer": "WebKit WebGL",
+        "experimental-webgl": true,
+        "experimental-webgl_renderer": "WebKit WebGL",
+        "2d": false
+      },
+      "raf_probe": {
+        "callbacks": 9,
+        "duration_ms": 1060.2000000000698
+      },
+      "event_probe": {
+        "armed": true
+      },
+      "event_log": {
+        "count": 0,
+        "events": []
+      },
+      "canvas_after": {
+        "tag": "CANVAS",
+        "id": "glow-canvas",
+        "className": "",
+        "text": "",
+        "ariaExpanded": null,
+        "ariaControls": null,
+        "ariaPressed": null,
+        "ariaLabel": null,
+        "role": null,
+        "tabIndex": -1,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "opacity": "1",
+        "transform": "none",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "transitionTimingFunction": "ease",
+        "gridTemplateRows": "none",
+        "visibility": "visible",
+        "display": "block"
+      },
+      "screenshots": {
+        "before": "HTMLHOST_REVERSE_ENGINEERING_PHASE_0/phase1c-evidence/futuristic-dark-no-preference-before.png",
+        "after_pointer": "HTMLHOST_REVERSE_ENGINEERING_PHASE_0/phase1c-evidence/futuristic-dark-no-preference-after-pointer.png",
+        "sha256": {
+          "futuristic-dark-no-preference-before.png": "546e7bbf8522feaff433c64dbe1a5f4a74ebb78c2682d2b86dda3344402eb800",
+          "futuristic-dark-no-preference-after-pointer.png": "abadf7411b9e224e2f8d346f108b67d222bbf5e255283e1a7cf440c17b895a9c"
+        }
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/clipboard",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "finished_at": "2026-11-08T20:42:21.334415+00:00"
+    },
+    {
+      "target": "futuristic-dark",
+      "url": "https://htmlhost.co/templates/futuristic-dark-landing#preview",
+      "motion": "reduce",
+      "started_at": "2026-11-08T20:42:21.591750+00:00",
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "canvas_before": {
+        "tag": "CANVAS",
+        "id": "glow-canvas",
+        "className": "",
+        "text": "",
+        "ariaExpanded": null,
+        "ariaControls": null,
+        "ariaPressed": null,
+        "ariaLabel": null,
+        "role": null,
+        "tabIndex": -1,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "opacity": "1",
+        "transform": "none",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "transitionTimingFunction": "ease",
+        "gridTemplateRows": "none",
+        "visibility": "visible",
+        "display": "block"
+      },
+      "contexts": {
+        "width": 1440,
+        "height": 841,
+        "webgl2": false,
+        "webgl": true,
+        "webgl_renderer": "WebKit WebGL",
+        "experimental-webgl": true,
+        "experimental-webgl_renderer": "WebKit WebGL",
+        "2d": false
+      },
+      "raf_probe": {
+        "callbacks": 62,
+        "duration_ms": 1012.2000000000698
+      },
+      "event_probe": {
+        "armed": true
+      },
+      "event_log": {
+        "count": 40,
+        "events": [
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 90,
+            "y": 18.8125
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 90,
+            "y": 18.8125
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 90,
+            "y": 18
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 90,
+            "y": 18
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 120,
+            "y": 44.765625
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 120,
+            "y": 44.765625
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 120,
+            "y": 44
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 120,
+            "y": 44
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "HEADER",
+            "current": null,
+            "x": 150,
+            "y": 70.703125
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "HEADER",
+            "current": "BODY",
+            "x": 150,
+            "y": 70.703125
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "HEADER",
+            "current": null,
+            "x": 150,
+            "y": 70
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "HEADER",
+            "current": "BODY",
+            "x": 150,
+            "y": 70
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "HEADER",
+            "current": null,
+            "x": 180,
+            "y": 96.640625
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "HEADER",
+            "current": "BODY",
+            "x": 180,
+            "y": 96.640625
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "HEADER",
+            "current": null,
+            "x": 180,
+            "y": 96
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "HEADER",
+            "current": "BODY",
+            "x": 180,
+            "y": 96
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 210,
+            "y": 122.578125
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 210,
+            "y": 122.578125
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 210,
+            "y": 122
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 210,
+            "y": 122
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 240,
+            "y": 148.53125
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 240,
+            "y": 148.53125
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 240,
+            "y": 148
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 240,
+            "y": 148
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 270,
+            "y": 174.46875
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 270,
+            "y": 174.46875
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 270,
+            "y": 174
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 270,
+            "y": 174
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": null,
+            "x": 300,
+            "y": 200.40625
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 300,
+            "y": 200.40625
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": null,
+            "x": 300,
+            "y": 200
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "DIV",
+            "current": "BODY",
+            "x": 300,
+            "y": 200
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "H1",
+            "current": null,
+            "x": 330,
+            "y": 226.34375
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "H1",
+            "current": "BODY",
+            "x": 330,
+            "y": 226.34375
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "H1",
+            "current": null,
+            "x": 330,
+            "y": 226
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "H1",
+            "current": "BODY",
+            "x": 330,
+            "y": 226
+          },
+          {
+            "where": "window",
+            "eventType": "pointermove",
+            "target": "H1",
+            "current": null,
+            "x": 360,
+            "y": 252.296875
+          },
+          {
+            "where": "body",
+            "eventType": "pointermove",
+            "target": "H1",
+            "current": "BODY",
+            "x": 360,
+            "y": 252.296875
+          },
+          {
+            "where": "window",
+            "eventType": "mousemove",
+            "target": "H1",
+            "current": null,
+            "x": 360,
+            "y": 252
+          },
+          {
+            "where": "body",
+            "eventType": "mousemove",
+            "target": "H1",
+            "current": "BODY",
+            "x": 360,
+            "y": 252
+          }
+        ]
+      },
+      "canvas_after": {
+        "tag": "CANVAS",
+        "id": "glow-canvas",
+        "className": "",
+        "text": "",
+        "ariaExpanded": null,
+        "ariaControls": null,
+        "ariaPressed": null,
+        "ariaLabel": null,
+        "role": null,
+        "tabIndex": -1,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 841
+        },
+        "opacity": "1",
+        "transform": "none",
+        "transitionProperty": "all",
+        "transitionDuration": "0s",
+        "transitionTimingFunction": "ease",
+        "gridTemplateRows": "none",
+        "visibility": "visible",
+        "display": "block"
+      },
+      "screenshots": {
+        "before": "HTMLHOST_REVERSE_ENGINEERING_PHASE_0/phase1c-evidence/futuristic-dark-reduce-before.png",
+        "after_pointer": "HTMLHOST_REVERSE_ENGINEERING_PHASE_0/phase1c-evidence/futuristic-dark-reduce-after-pointer.png",
+        "sha256": {
+          "futuristic-dark-reduce-before.png": "79c48a50ca5bdf12a1d324b02ea73dc08641245655eb30844868197a034594ed",
+          "futuristic-dark-reduce-after-pointer.png": "79c48a50ca5bdf12a1d324b02ea73dc08641245655eb30844868197a034594ed"
+        }
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [],
+      "finished_at": "2026-11-08T20:42:31.797094+00:00"
+    }
+  ],
+  "business": [
+    {
+      "target": "business-web-studio",
+      "url": "https://htmlhost.co/templates/business-web-studio#preview",
+      "motion": "no-preference",
+      "started_at": "2026-11-08T20:42:31.981748+00:00",
+      "repetitions": [
+        {
+          "repetition": 1,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 7712.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 7802.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 7710.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 7802.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 1091.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 878.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 1007.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 431.74920654296875,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:41.402823+00:00"
+        },
+        {
+          "repetition": 2,
+          "method": "click",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 341.74920654296875,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 431.7047424316406,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:44.141504+00:00"
+        },
+        {
+          "repetition": 3,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 750.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:45.878846+00:00"
+        },
+        {
+          "repetition": 4,
+          "method": "click",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 750.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:47.818433+00:00"
+        },
+        {
+          "repetition": 5,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 750.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "0s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 750.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "0s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 840.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "0.5s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 840.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "0.5s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:49.541930+00:00"
+        }
+      ],
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "association": {
+        "button_aria_controls": "f1",
+        "panel_id": "f1",
+        "panel_role": "region",
+        "button_tag": "BUTTON"
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "finished_at": "2026-11-08T20:42:49.558179+00:00"
+    },
+    {
+      "target": "business-web-studio",
+      "url": "https://htmlhost.co/templates/business-web-studio#preview",
+      "motion": "reduce",
+      "started_at": "2026-11-08T20:42:49.753368+00:00",
+      "repetitions": [
+        {
+          "repetition": 1,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 7678.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 7768.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:42:59.104711+00:00"
+        },
+        {
+          "repetition": 2,
+          "method": "click",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 375.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:43:00.866908+00:00"
+        },
+        {
+          "repetition": 3,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 375.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:43:02.582479+00:00"
+        },
+        {
+          "repetition": 4,
+          "method": "click",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 375.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:43:04.333610+00:00"
+        },
+        {
+          "repetition": 5,
+          "method": "keyboard",
+          "before": {
+            "tag": "BUTTON",
+            "id": "fb1",
+            "className": "acc-btn",
+            "text": "How long does a website take?",
+            "ariaExpanded": "false",
+            "ariaControls": "f1",
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": null,
+            "tabIndex": 0,
+            "rect": {
+              "x": 647.828125,
+              "y": 375.515625,
+              "width": 692.171875,
+              "height": 90
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "all",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "ease",
+            "gridTemplateRows": "none",
+            "visibility": "visible",
+            "display": "flex"
+          },
+          "panel_before": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "open_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "true",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel open",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 109.5625
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "109.562px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "open_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel open",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 109.5625
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "109.562px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "close_immediate": {
+            "button": {
+              "tag": "BUTTON",
+              "id": "fb1",
+              "className": "acc-btn",
+              "text": "How long does a website take?",
+              "ariaExpanded": "false",
+              "ariaControls": "f1",
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": null,
+              "tabIndex": 0,
+              "rect": {
+                "x": 647.828125,
+                "y": 375.515625,
+                "width": 692.171875,
+                "height": 90
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "all",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "ease",
+              "gridTemplateRows": "none",
+              "visibility": "visible",
+              "display": "flex"
+            },
+            "panel": {
+              "tag": "DIV",
+              "id": "f1",
+              "className": "acc-panel",
+              "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+              "ariaExpanded": null,
+              "ariaControls": null,
+              "ariaPressed": null,
+              "ariaLabel": null,
+              "role": "region",
+              "tabIndex": -1,
+              "rect": {
+                "x": 647.828125,
+                "y": 465.515625,
+                "width": 692.171875,
+                "height": 0
+              },
+              "opacity": "1",
+              "transform": "none",
+              "transitionProperty": "grid-template-rows",
+              "transitionDuration": "1e-06s",
+              "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+              "gridTemplateRows": "0px",
+              "visibility": "visible",
+              "display": "grid"
+            }
+          },
+          "close_settled": {
+            "tag": "DIV",
+            "id": "f1",
+            "className": "acc-panel",
+            "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+            "ariaExpanded": null,
+            "ariaControls": null,
+            "ariaPressed": null,
+            "ariaLabel": null,
+            "role": "region",
+            "tabIndex": -1,
+            "rect": {
+              "x": 647.828125,
+              "y": 465.515625,
+              "width": 692.171875,
+              "height": 0
+            },
+            "opacity": "1",
+            "transform": "none",
+            "transitionProperty": "grid-template-rows",
+            "transitionDuration": "1e-06s",
+            "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+            "gridTemplateRows": "0px",
+            "visibility": "visible",
+            "display": "grid"
+          },
+          "timestamp": "2026-11-08T20:43:06.043819+00:00"
+        }
+      ],
+      "http_status": 200,
+      "iframe": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "association": {
+        "button_aria_controls": "f1",
+        "panel_id": "f1",
+        "panel_role": "region",
+        "button_tag": "BUTTON"
+      },
+      "result": "completed",
+      "page_errors": [],
+      "request_failures": [
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://htmlhost.co/auth",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "finished_at": "2026-11-08T20:43:06.058924+00:00"
+    }
+  ]
+}

@@ -97,3 +97,8 @@ See `CONTINUATION_EXPORT_MANIFEST.md` for the exact archive path, checksum, coun
 ## New-session continuation prompt
 
 > Continue the HTMLhost Reverse Engineering Lab from the latest `main` in `ImperioKDB/Updates`. Read `HTMLHOST_REVERSE_ENGINEERING_PHASE_0/NEXT_SESSION_HANDOFF.md` and the project instructions first. Phase 1B is complete; do not repeat the Phase 1A corpus or full Phase 1B matrix. Conduct only the bounded public-preview closure checks listed in “Recommended next work” for the Portfolio testimonial, Business FAQ close state, and Futuristic Dark canvas event/render path. Preserve raw evidence, append dated results with VERIFIED/INFERRED/UNKNOWN labels, update the master/audit documents without deleting earlier findings, do not access private/authenticated resources or modify Scholars, and stop for review when the targeted checks are complete. The user has asked for handoff/export to be pushed; use normal repository-safe Git practices and verify the final remote head.
+
+
+## Phase 1C completion note — 2026-11-08
+
+The bounded closure pass is complete. The Portfolio, Futuristic Dark, and Business FAQ results are documented in `PHASE_1C_TARGETED_VALIDATION.md`; route-level Lighthouse diagnostics are documented in `PHASE_1C_PERFORMANCE_TRACE_REPORT.md`. The independent frontend guidance is consolidated in `HTMLHOST_FRONTEND_ENGINEERING_SPECIFICATION.md`, and the final maturity decision is in `HTMLHOST_RESEARCH_FINAL_SYNTHESIS.md`. No published generated site was verified, no Scholars repository was modified, and the next task may apply the implementation principles only as independent frontend work.

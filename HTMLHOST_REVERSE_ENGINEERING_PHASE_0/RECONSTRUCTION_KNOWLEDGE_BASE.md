@@ -60,3 +60,24 @@ At 390 px, Creative Playground's preview iframe reported 1041 px document scroll
 - **UNKNOWN:** Unexercised forms, menu/theme state, counters, keyboard paths, and reduced-motion interactive states.
 
 See `PHASE_1B_MOTION_DEEP_AUDIT.md`, `PHASE_1B_PERFORMANCE_BENCHMARK.md`, `ANIMATION_TECHNIQUE_COMPARISON.md`, and `FRONTEND_MOTION_ENGINEERING_GUIDE.md` for evidence and implementation-neutral detail.
+
+
+## Phase 1C targeted-validation addendum
+
+### Deterministic interaction state — VERIFIED recommendation
+
+The Portfolio follow-up produced 1/5 no-preference and 1/5 reduced-motion first activations that remained on slide 0, with the other four repetitions reaching slide 2. The internal cause is UNKNOWN. An independent reconstruction should not copy this ambiguity: keep the active index authoritative, process a valid activation once, and test the first activation from a fresh context after any automatic timers have been considered.
+
+### Canvas renderer and input boundary — VERIFIED / UNKNOWN
+
+Futuristic Dark's canvas returned a WebGL context in the tested Chromium environment, while WebGL2 and 2D returned false. This verifies context creation in one environment, not production GPU acceleration or a universal renderer. The canvas pointer probe recorded no canvas-targeted event; reduced-motion ancestor events reached window/body with non-canvas targets, and reduced screenshots were identical. Canvas input delivery and visible pointer response therefore remain UNKNOWN.
+
+### Accessible disclosure closure — VERIFIED
+
+Business Web Studio's FAQ used a native button with `aria-controls="f1"` controlling a `role="region"` with `id="f1"`. Ten repetitions using both keyboard and click activation produced false→true→false `aria-expanded` transitions without page errors. The settled panel was approximately 109.56 px open and zero closed. Immediate normal-motion close measurements can represent in-transition geometry; validate after the declared duration plus a margin.
+
+### Performance evidence boundary — VERIFIED limitation
+
+Phase 1C added Lighthouse route diagnostics but not an isolated iframe or published-site benchmark. The homepage scored 0.80 and the Futuristic template route 0.79 in single runs. Keep shell, preview, and published-site measurements separate. RAF callback counts remain callback samples rather than FPS.
+
+See `PHASE_1C_TARGETED_VALIDATION.md`, `PHASE_1C_PERFORMANCE_TRACE_REPORT.md`, and `HTMLHOST_FRONTEND_ENGINEERING_SPECIFICATION.md` for the detailed evidence and independent implementation guidance.

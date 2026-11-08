@@ -91,3 +91,24 @@ Three dependency-free, original demonstrations are included under `phase1b-exper
 - `03-accessible-disclosure.html` — stateful button/panel relationship with `aria-expanded`, `aria-controls`, `inert`, grid-row transition, and reduced-motion behavior.
 
 They demonstrate general techniques, not HTMLhost code. Each passed a local smoke test in the system Chromium. Test results and implementation rationale are in `INTERACTION_EXPERIMENTS.md`.
+
+
+## Phase 1C closure addendum — 2026-11-08
+
+### Re-test first activations, not only settled steady state
+
+The Full-Stack Designer Portfolio follow-up repeated the first testimonial activation from a fresh load five times under each motion preference. One repetition in each setting remained on slide 0 and four reached slide 2. The cause is UNKNOWN. This is a validation warning: a carousel can look correct after repeated use while its first activation is timing-dependent. Make the active index deterministic and test a fresh-load activation before accepting the interaction.
+
+### Verify the intended canvas target
+
+Futuristic Dark returned a WebGL context in the tested browser, but the canvas pointer listener saw no event. Reduced-motion pointer movement generated ancestor-level events and identical before/after canvas hashes; normal-motion hashes changed over time without proving pointer response. A canvas implementation should explicitly test the intended target, coordinate mapping, fallback, visibility pause, and reduced-motion branch. WebGL context success alone is not enough.
+
+### Measure disclosure endpoints after the transition
+
+Business Web Studio's FAQ consistently exposed a semantic button/region relationship and settled at 109.56 px open and zero closed across keyboard and click repetitions. In normal motion, an immediate close sample still had open geometry because the 500 ms transition had not settled. Assertions should capture both the immediate semantic state and the final geometry after a settling wait.
+
+### Performance evidence update
+
+A bounded Lighthouse run is now available for the public homepage and Futuristic template route. Scores were 0.80 and 0.79 respectively, with 2.1 s FCP/LCP, 410–430 ms TBT, and low single-run CLS. These are route-level shell-plus-preview diagnostics, not a performance ranking, published-site result, field metric, or iframe-isolated measurement. RAF callback counts continue to be reported only as callback observations, never as FPS.
+
+The complete targeted record and final implementation-neutral specification are in `PHASE_1C_TARGETED_VALIDATION.md`, `PHASE_1C_PERFORMANCE_TRACE_REPORT.md`, and `HTMLHOST_FRONTEND_ENGINEERING_SPECIFICATION.md`.

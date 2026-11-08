@@ -57,3 +57,18 @@ One responsive issue is directly recorded: Creative Playground at a 390 px viewp
 - `phase1b-evidence/` — runtime/interaction records, bounded REA output, and retained screenshot/hash manifest.
 
 The Phase 1A architecture boundary remains intact: host shell, public preview document, and published generated website are separate evidence layers. Continue to leave the generated-site layer UNKNOWN unless a specific public published site is verified.
+
+
+## Phase 1C closure addendum — 2026-11-08
+
+Phase 1C performed the smallest targeted follow-up against the three unresolved public-preview behaviors rather than repeating the broad corpus or Phase 1B matrix. The raw record is `phase1c-evidence/targeted-validation-2026-11-08.json`; the detailed interpretation is in `PHASE_1C_TARGETED_VALIDATION.md`.
+
+**VERIFIED:** Full-Stack Designer Portfolio's first `Next testimonial` activation was inconsistent across fresh-load repetitions: 1/5 stayed on slide 0 and 4/5 reached slide 2 under both normal and reduced motion. The cause remains **UNKNOWN**; this behavior should not be reproduced as an intended interaction.
+
+**VERIFIED:** Futuristic Dark returned a WebGL context in the tested Chromium environment. No canvas-targeted pointer event was recorded. Reduced-motion before/after screenshots were byte-identical; normal-motion screenshots differed over time, but the difference was not attributed to pointer input. Renderer production behavior and input handling remain **UNKNOWN**.
+
+**VERIFIED:** Business Web Studio's FAQ maintained a native-button/controlled-region relationship, worked through repeated keyboard and click activation, and settled at about 109.56 px open and 0 px closed. Immediate normal-motion close geometry could still be open during the 500 ms transition; settled geometry was zero. Reduced motion removed the transition endpoint. This resolves the prior discrepancy as a timing-sensitive observation without overstating the cause.
+
+**VERIFIED but limited:** Lighthouse 13.6.0 route diagnostics reported 0.80 for the public homepage and 0.79 for the Futuristic template route, with 2.1 s FCP/LCP, 410–430 ms TBT, and 0.001–0.007 CLS. These combine shell and preview work where applicable and are not published-site benchmarks, field data, rankings, or real-device results.
+
+The final synthesis and independent engineering specification are in `HTMLHOST_RESEARCH_FINAL_SYNTHESIS.md` and `HTMLHOST_FRONTEND_ENGINEERING_SPECIFICATION.md`. The project is mature enough to transfer implementation principles to a separate frontend, but no Scholars implementation was started and no published generated-site conclusion is authorized.
