@@ -44,3 +44,49 @@ Use the committed Phase 1A capture index and screenshots as the baseline. Verify
 ## Recovery limits
 
 The repository proves the committed state, not the existence or non-existence of external session-only artifacts. This report records no new HTMLhost runtime or performance finding; it is a handoff and recovery checkpoint only.
+
+
+## Phase 1C recovery addendum — 2026-11-08
+
+**Status:** Recovery gate complete; targeted validation may begin from the current `main` checkout.
+
+### Repository state
+
+- **VERIFIED:** Repository `https://github.com/ImperioKDB/Updates` was freshly recovered into `/home/ubuntu/Updates` using the available GitHub CLI path.
+- **VERIFIED:** Current branch is `main`, tracking `origin/main`; the working tree was clean at recovery.
+- **VERIFIED:** `HEAD` is `a8ab7baff48badeed9b2a50d44f073b7bd7aaaf7` (`Add Phase 1B motion and performance research`, 2026-11-08 16:59:03 UTC), matching the authoritative continuation checkpoint.
+- **VERIFIED:** The cited Phase 0 commit `79ece8a34900a534a4195b5edd27c509fda1a43f` and Phase 1A commit `5e958c3203373bf682dba158fc96de7fd0c2cbd5` are present in history.
+- **VERIFIED:** No Phase 1C-named report or capture artifact exists in the current repository history or working tree. The existing `SESSION_HANDOFF_AND_RECOVERY_REPORT.md` is preserved as historical context; this addendum supersedes its old statement that Phase 1B had not started.
+
+### Completed work that can be reused
+
+- **VERIFIED:** Phase 0 reconnaissance and Phase 1A public corpus baseline, including 21 viewport records and 81 screenshots for the platform surface and five public template previews.
+- **VERIFIED:** Phase 1B motion/interaction/performance work, including 13 runtime captures, focused interaction records, the bounded REA Creative Playground result, three retained Futuristic Dark screenshots, manifests, scripts, and three independent technique experiments.
+- **VERIFIED:** The key reports reviewed for this recovery are `MASTER_RESEARCH_REPORT.md`, `RECONSTRUCTION_KNOWLEDGE_BASE.md`, `PHASE_1B_MOTION_DEEP_AUDIT.md`, `PHASE_1B_PERFORMANCE_BENCHMARK.md`, `ANIMATION_TECHNIQUE_COMPARISON.md`, `FRONTEND_MOTION_ENGINEERING_GUIDE.md`, `INTERACTION_EXPERIMENTS.md`, `NEXT_SESSION_HANDOFF.md`, and `CONTINUATION_EXPORT_MANIFEST.md`.
+- **VERIFIED:** The evidence boundary remains intact: HTMLhost platform shell, sandboxed public template preview documents, and published generated websites are separate layers. No published customer-generated site has been verified.
+
+### Unresolved questions carried into Phase 1C
+
+1. Full-Stack Designer Portfolio testimonial `Next` behavior has conflicting prior observations and needs repeated, settled-state validation under normal and reduced motion.
+2. Futuristic Dark's active canvas renderer, WebGL initialization, canvas-targeted pointer delivery, visible pointer response, and reduced-motion loop behavior remain unresolved.
+3. Business Web Studio's FAQ needs repeated open/close checks, explicit ARIA association/keyboard validation, settled geometry, and a reduced-motion interaction check.
+4. Performance evidence remains diagnostic rather than comparative. Reliable compositor/GPU delivery, real-device behavior, field Web Vitals, repeated-run statistics, complete transfer sizes, and published-site performance remain UNKNOWN.
+
+### Available tools
+
+- **VERIFIED:** Git 2.43.0, authenticated GitHub CLI, Python 3.12.3, Node 22.23.4, Chromium 156.0.8078.73 at `/usr/bin/chromium`, and Python Playwright 1.64.1 are available. A Playwright smoke launch succeeded.
+- **VERIFIED:** `npx rea-agents@latest --help` is the supported REA invocation pattern documented in the prior capability report; no standalone `rea` executable is on PATH. REA should be used only for bounded operations with a clear contract.
+- **VERIFIED:** No `lighthouse` executable is installed globally. An `npx --yes --package=lighthouse lighthouse --version` probe resolved Lighthouse 13.6.0 without adding repository files; installation/use remains optional and must be scoped to a meaningful measurement.
+- **VERIFIED:** Existing Phase 1B scripts and JSON evidence are readable and reusable. Do not rerun the full 13-record matrix or the 81-screenshot Phase 1A corpus.
+
+### Smallest viable Phase 1C execution plan
+
+1. Run a focused Portfolio testimonial harness with at least five controlled repetitions per motion preference where the page remains stable; record active-slide identity, DOM classes, opacity/transform, timestamps, and settled state after each activation.
+2. Run a focused Futuristic Dark harness that checks canvas dimensions, `webgl`/`webgl2`/2D context initialization without altering page state, event delivery at the canvas and ancestors, reduced-motion behavior, visibility pause where safely observable, and before/after raster hashes. Do not infer a renderer from canvas existence alone.
+3. Run a focused Business FAQ harness for normal and reduced motion, with repeated keyboard and click open/close actions, `aria-expanded`, `aria-controls`, panel geometry during and after the 500 ms transition, and page-error capture.
+4. Attempt only proportionate performance evidence: a bounded Chrome trace or Lighthouse run if tooling is feasible, keeping platform shell and preview frame evidence separate. If the tooling cannot support a reliable conclusion, document the limitation rather than manufacturing a metric.
+5. Append dated evidence records, then update the five required Phase 1C/synthesis documents and the three named existing reports without deleting prior findings. Commit the completed research checkpoint to `main` and verify the remote head.
+
+### Recovery conclusion
+
+The project is recovered at the correct Phase 1B checkpoint. The repository, prior reports, raw evidence, scripts, screenshots, and independent experiments are available. The next action is the bounded Phase 1C closure work above; no broad recapture, Scholars modification, authentication, publication, private endpoint access, or implementation work is authorized by this research scope.
