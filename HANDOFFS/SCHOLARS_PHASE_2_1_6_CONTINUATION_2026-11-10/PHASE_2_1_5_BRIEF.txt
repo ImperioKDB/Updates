@@ -1,0 +1,484 @@
+SCHOLARS — PHASE 2.1.5
+
+CONTROLLED SCHEMA CAPTURE, COVERAGE ANALYSIS & BASELINE SECURITY REVIEW
+
+You are continuing the database security, migration governance and staging reconstruction workstream for Scholars.
+
+Your task is to execute Phase 2.1.5 strictly within the boundaries below. This is an evidence-gathering and preparation phase. It is NOT authorization to restore staging, modify production, or deploy database changes.
+
+---
+
+1. PROJECT CONTEXT
+
+Repositories
+
+- Application: "ImperioKDB/Scholars"
+- Reports and audit documentation: "ImperioKDB/Updates"
+
+Supabase environments
+
+- Production project: "cmdglabohpttgfofcmqc"
+- Staging project: "aqhktriwaglvvrchxmtd"
+
+Application baseline
+
+- Repository: "ImperioKDB/Scholars"
+- Baseline SHA: "cf3682ce35912df7b9b9352193630fc404427c7c"
+
+Previous phase
+
+- Phase 2.1.4 commit: "3d3da285f1b076fbfebb1fdf1adbaadeb178d71f"
+
+Read all six Phase 2.1.4 reports at that exact commit before beginning. Also retrieve and review the relevant Phase 2.1.2 and 2.1.3 reports, especially the application dependency matrix, migration provenance findings, PostgREST configuration plan and governance blockers.
+
+Do not assume previous findings are still current without checking where necessary.
+
+---
+
+2. PHASE 2.1.5 OBJECTIVE
+
+Produce a controlled, read-only capture and independent security review of the current production database schema.
+
+Compare two extraction approaches:
+
+1. "supabase db dump" — schema-only extraction.
+2. "supabase db schema declarative generate" — declarative schema generation using pg-delta.
+
+The objective is to determine which approach provides the most complete, reproducible and reviewable candidate baseline for staging reconstruction.
+
+This is a new baseline of the current production structure. It must NEVER be represented as a recovered historical migration chain.
+
+The resulting baseline must preserve the application’s required schema behavior while identifying privilege risks, unsupported objects, managed-schema customizations and unresolved configuration questions.
+
+---
+
+3. STRICT AUTHORIZATION BOUNDARIES
+
+Authorized
+
+- Read-only production schema inspection and extraction.
+- Read-only staging configuration inspection.
+- Supabase Management API GET requests using appropriately scoped credentials.
+- Local analysis of schema-only extraction artifacts.
+- Comparison of extraction methods.
+- Inspection of grants, default privileges, RLS policies, functions, triggers, views, indexes, constraints and extensions in captured schema artifacts.
+- Review of application compatibility against the existing dependency matrix.
+- Preparation of a candidate baseline and sanitized audit documentation.
+- Committing the six required reports to "ImperioKDB/Updates".
+
+Explicitly NOT authorized
+
+Do NOT:
+
+- Apply migrations to production or staging.
+- Restore the candidate baseline to staging.
+- Execute DDL against either environment.
+- Change database roles, ownership, ACLs, default privileges or grants.
+- Change RLS policies or force RLS.
+- Change PostgREST settings.
+- Create or modify production database objects.
+- Copy production data into staging.
+- Export student records, personal information or other production table data.
+- Retrieve or expose service-role keys, JWT secrets, passwords, connection strings or other credentials.
+- Commit raw production schema dumps or sensitive configuration artifacts to a public repository.
+- Deploy application changes.
+- Treat an inspection command as permission to make changes.
+
+If a required operation needs broader authorization, stop that operation, document the exact blocker and continue only with safe work that remains possible.
+
+Never use an unrestricted SQL executor for exploratory production queries.
+
+---
+
+4. TASK A — REVALIDATE PHASE 2.1.4 FINDINGS
+
+Before extraction:
+
+1. Read the six Phase 2.1.4 documents at the specified commit.
+2. Read the relevant Phase 2.1.2 and 2.1.3 documents.
+3. Verify the current application baseline and repository state.
+4. Reconfirm the production and staging project references.
+5. Record the current migration ledger count if it can be established through an authorized, read-only method.
+6. Reconfirm whether staging remains without the Scholars application schema.
+7. Identify any new migration files or relevant application changes since the previous audit.
+
+Do not spend time repeating historical Git archaeology already concluded to be low-value unless new evidence has emerged.
+
+---
+
+5. TASK B — POSTGREST CONFIGURATION EVIDENCE
+
+Obtain sanitized configuration evidence independently for production and staging.
+
+The documented Management API endpoint is:
+
+"GET https://api.supabase.com/v1/projects/{ref}/postgrest"
+
+Use the appropriate project reference for each environment.
+
+Required authorization scopes identified in the previous phase:
+
+- "rest:read"
+- Fine-grained "data_api_config_read"
+
+Inspect the returned configuration for fields such as:
+
+- "db_schema"
+- "db_extra_search_path"
+- Any other documented PostgREST configuration relevant to API exposure.
+
+Important:
+
+- Do not assume a NULL result from SQL inspection proves a setting is unset.
+- Do not assume the Management API response contains every setting needed.
+- Do not expose or commit sensitive JWT-related values.
+- Redact sensitive fields before including any evidence in reports.
+- Do not invent missing configuration values.
+- If the endpoint is inaccessible, record the exact permission or authorization blocker.
+
+The previously identified "db-anon-role" and "openapi-mode" questions must remain explicitly unresolved unless verified through a supported, authorized source.
+
+Do not substitute the broader alpha project-configuration endpoint without a separate assessment of its scope and security implications.
+
+---
+
+6. TASK C — CONTROLLED SCHEMA EXTRACTION
+
+Compare the following methods.
+
+Method 1: Schema-only dump
+
+Use the approved Supabase CLI version and a properly authorized read-only connection to perform a schema-only extraction.
+
+Expected command pattern:
+
+"supabase db dump --db-url "$DATABASE_URL" -f schema_dump.sql"
+
+Review the installed CLI version and exact supported options before execution.
+
+The connection must not permit database writes.
+
+The output must be inspected for:
+
+- Application schemas and objects.
+- Tables and columns.
+- Primary and foreign keys.
+- Unique and check constraints.
+- Indexes.
+- Views and materialized views.
+- Functions and procedures.
+- Triggers.
+- RLS policies.
+- Grants and ownership statements.
+- Extensions.
+- Sequences and types.
+- Any statements involving data, credentials or platform-managed schemas.
+
+Do not assume that the phrase "schema-only" guarantees the absence of every sensitive or inappropriate statement.
+
+Inspect the output before retaining or using it.
+
+Method 2: Declarative schema generation
+
+Evaluate:
+
+"supabase db schema declarative generate"
+
+Use pg-delta as documented by the installed CLI.
+
+Evaluate whether the approach can represent:
+
+- Tables and columns.
+- Constraints and indexes.
+- Views and materialized views.
+- Functions.
+- Triggers.
+- RLS policies.
+- Comments.
+- Domains.
+- Roles.
+- Publication membership.
+- Security-invoker view settings.
+- Default grants and privilege overlays.
+- Managed-schema customizations.
+
+Use "--strict-coverage" where supported.
+
+If the installed CLI version does not support a documented option, record that fact rather than silently substituting another command.
+
+Review generated files for unsupported objects and incomplete coverage.
+
+Important pg-delta caveat
+
+pg-delta is experimental/pre-1.0 in the relevant workflow. Do not treat successful execution as proof of complete coverage.
+
+Record:
+
+- CLI version.
+- pg-delta version, if discoverable.
+- Command used.
+- Exit code.
+- Coverage warnings.
+- Unsupported objects.
+- Generated file inventory.
+- File hashes.
+- Any manual adjustments.
+
+Do not modify generated output to hide coverage problems.
+
+---
+
+7. TASK D — EXTRACTION METHOD COMPARISON
+
+Compare the two extraction methods against the actual captured artifacts.
+
+Assess:
+
+Dimension| Required assessment
+Object coverage| Which object classes are captured or missed?
+Privileges| Are grants, ownership and default privileges represented?
+Managed schemas| Can relevant "auth" and "storage" customizations be captured?
+RLS| Are policies represented completely?
+Functions| Are definitions and security properties preserved?
+Triggers| Are application and managed-schema triggers captured?
+Reproducibility| Can the output be regenerated consistently?
+Strictness| Does the method fail on unsupported objects?
+Reviewability| Can a human independently inspect the result?
+Security| Could output contain sensitive statements or information?
+
+Do not choose a method merely because it generates more files.
+
+Explain the practical consequences of each omission.
+
+If the two approaches complement each other, recommend a primary method and a secondary verification method.
+
+---
+
+8. TASK E — BASELINE SECURITY REVIEW
+
+Review the candidate schema for security-sensitive structures.
+
+At minimum, inspect:
+
+A. Tables and privileges
+
+- Browser-role privileges.
+- "anon" and "authenticated" access.
+- TRUNCATE, REFERENCES and TRIGGER privileges.
+- Table ownership.
+- Default privileges.
+- Privilege inheritance from the destination environment.
+
+B. RLS
+
+- Tables with RLS enabled.
+- Tables with RLS disabled.
+- Policies and their commands.
+- "USING" and "WITH CHECK" expressions.
+- Whether RLS is forced.
+- Policy role targeting.
+- Potential permissive-policy combinations.
+
+C. Functions and RPC exposure
+
+- Browser-role EXECUTE grants.
+- "SECURITY DEFINER" functions.
+- Function owners.
+- Search paths.
+- Dynamic SQL.
+- Privileged operations.
+- Functions that should not be publicly executable.
+
+Pay particular attention to previously identified functions, including:
+
+- "is_admin(uuid)"
+- "get_admin_metrics_summary(timestamptz)"
+- "run_achievement_checks(uuid)"
+
+Do not invoke sensitive production RPCs to test their behavior.
+
+D. Views
+
+- Security-invoker versus security-definer behavior.
+- Underlying table access.
+- Browser-role exposure.
+- Whether views unintentionally bypass intended RLS boundaries.
+
+E. Storage and managed schemas
+
+- Bucket definitions.
+- Storage object policies.
+- Custom triggers or functions attached to managed schemas.
+- Any relevant "auth.users" triggers.
+
+Do not copy actual storage objects or production files.
+
+F. Extensions
+
+- Confirm required extensions and versions.
+- Identify extension dependencies.
+- Record platform-managed extensions separately.
+
+Distinguish confirmed risks from unverified possibilities.
+
+Do not describe a grant as an exploitable vulnerability without evidence of an actual reachable attack path.
+
+---
+
+9. TASK F — APPLICATION COMPATIBILITY REVIEW
+
+Compare the captured candidate baseline with the Phase 2.1.2 API object and application dependency matrix.
+
+Verify whether the baseline accounts for application functionality across:
+
+- Authentication and profiles.
+- Scholarship and opportunity browsing.
+- Eligibility matching.
+- Saved opportunities.
+- Applications.
+- Notifications.
+- Admin operations.
+- Discovery.
+- Resource Center.
+- Background jobs and maintenance functions.
+
+For each important object, record:
+
+1. Object name and type.
+2. Application feature that depends on it.
+3. Required privileges.
+4. RLS requirements.
+5. Whether the candidate baseline captures it.
+6. Any unresolved compatibility issue.
+
+Do not recommend blanket revocation of browser-role privileges.
+
+The application has interdependent features, and broad privilege changes could break functionality.
+
+---
+
+10. TASK G — DESTINATION PRIVILEGE AND RESTORATION RISKS
+
+This is analysis only. Do not restore anything.
+
+Review the destination staging environment's default privileges and ownership implications.
+
+Specifically determine:
+
+- Which privileges newly created objects would inherit.
+- Whether default privileges differ between "postgres" and "supabase_admin".
+- Whether restoration under a different executor would produce different access behavior.
+- Whether schema restoration could unintentionally expose objects to browser roles.
+- Whether destination roles and extensions are compatible.
+- Which managed-schema customizations need a separate restoration process.
+
+The previous phase established that destination default privileges can materially affect the security of restored objects.
+
+The candidate baseline must not be considered safe to restore until destination privilege handling is independently reviewed and explicitly approved.
+
+---
+
+11. REQUIRED REPORTS
+
+Create exactly these six primary reports in "ImperioKDB/Updates":
+
+1. "SCHOLARS_PHASE_2_1_5_POSTGREST_CONFIGURATION_EVIDENCE_2026-11-10.md"
+2. "SCHOLARS_PHASE_2_1_5_SCHEMA_EXTRACTION_METHOD_COMPARISON_2026-11-10.md"
+3. "SCHOLARS_PHASE_2_1_5_SCHEMA_CAPTURE_AND_COVERAGE_REPORT_2026-11-10.md"
+4. "SCHOLARS_PHASE_2_1_5_BASELINE_SECURITY_REVIEW_2026-11-10.md"
+5. "SCHOLARS_PHASE_2_1_5_APPLICATION_COMPATIBILITY_AND_PRIVILEGE_ANALYSIS_2026-11-10.md"
+6. "SCHOLARS_PHASE_2_1_5_BASELINE_CANDIDATE_AND_DECISION_REGISTER_2026-11-10.md"
+
+Each report must contain:
+
+- Scope.
+- Methodology.
+- Evidence source.
+- Exact project/environment where relevant.
+- Timestamp.
+- Findings.
+- Limitations.
+- Unresolved questions.
+- Security implications.
+- Clear distinction between confirmed facts and inference.
+
+Include exact CLI versions and artifact hashes where applicable.
+
+Use tables for object inventories and coverage matrices where they improve reviewability.
+
+Do not publish raw production schema dumps, secrets, connection strings, tokens or student data in the public Updates repository.
+
+Only sanitized reports may be committed.
+
+---
+
+12. FINAL DECISION CRITERIA
+
+The final decision must use exactly one of these verdicts:
+
+READY FOR INDEPENDENT BASELINE REVIEW
+
+Use only if:
+
+- Authorized schema capture completed.
+- Extraction method comparison completed.
+- Coverage is sufficiently documented.
+- Security-sensitive objects reviewed.
+- PostgREST evidence obtained or all remaining configuration blockers are explicitly isolated.
+- Candidate artifacts are safely retained and hashed.
+- Application compatibility has been assessed.
+
+This verdict does NOT authorize staging restoration.
+
+READY WITH CONDITIONS
+
+Use if:
+
+- The candidate baseline is substantially prepared.
+- Some non-critical evidence or coverage issues remain.
+- All limitations are documented.
+- No unsafe assumptions are needed to continue independent review.
+
+List every condition.
+
+BLOCKED — AUTHORIZED CAPTURE NOT AVAILABLE
+
+Use if:
+
+- Required read-only access is unavailable.
+- Necessary API permissions are missing.
+- Schema capture cannot be safely performed.
+- Critical extraction coverage cannot be established.
+- Security-sensitive evidence cannot be obtained.
+
+Do not disguise access failures as successful completion.
+
+---
+
+13. FINAL RESPONSE REQUIREMENTS
+
+After completing the work, provide:
+
+1. The final verdict.
+2. The exact six report filenames.
+3. The Updates repository commit SHA.
+4. The chosen extraction method and reasons.
+5. The number and categories of captured objects, if verified.
+6. The important security findings.
+7. Any remaining blockers.
+8. A clear statement confirming that no production or staging objects, privileges, settings or data were modified.
+9. The precise next phase recommended.
+
+Do not recommend staging restoration until an independent reviewer has approved the candidate baseline and a separate authorization has been granted.
+
+---
+
+14. OPERATING PRINCIPLE
+
+This is a security-sensitive database reconstruction project.
+
+Evidence takes priority over assumptions. Reproducibility takes priority over speed. Application compatibility takes priority over blanket hardening. Least privilege must be implemented deliberately, not through indiscriminate revocation.
+
+If a command, API call or tool has ambiguous write capability, do not execute it until its behavior is verified.
+
+Begin with Task A. Proceed sequentially. Stop at authorization boundaries. Do not skip evidence collection or fabricate results.

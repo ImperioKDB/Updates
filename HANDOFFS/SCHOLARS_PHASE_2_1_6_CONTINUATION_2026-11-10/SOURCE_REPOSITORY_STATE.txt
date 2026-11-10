@@ -1,0 +1,31 @@
+SCHOLARS PHASE 2.1.6 HANDOFF PACKAGE — SOURCE STATE
+
+Prepared: 2026-11-10
+Package path: HANDOFFS/SCHOLARS_PHASE_2_1_6_CONTINUATION_2026-11-10/
+
+Reports repository: https://github.com/ImperioKDB/Updates
+Branch: main
+Latest Phase 2.1.6 source commit included: 1c6eb532229c8dea0ee84389d5129f22709ea5cd
+Commit message: docs: add Phase 2.1.6 capture review
+Corrected Phase 2.1.5 report source commit: 09f54e4b64d2f952d32919ce9eeb11e7e3e343b6
+Commit message: docs: refine Phase 2.1.5 schema baseline reports
+
+Application repository: https://github.com/ImperioKDB/Scholars
+Application branch observed: main
+Application current commit observed: 3deba708e146ceb2aa6846c4691d58ace93795b2
+Application baseline compared: cf3682ce35912df7b9b9352193630fc404427c7c
+
+Production Supabase project ref: cmdglabohpttgfofcmqc
+Staging Supabase project ref: aqhktriwaglvvrchxmtd
+
+Package verdict: BLOCKED — AUTHORIZED CAPTURE NOT AVAILABLE
+No production or staging database was modified. No production rows, storage objects, credentials, tokens, or Vault contents are included.
+
+Package contents:
+- CONTINUATION_HANDOFF.md
+- NEXT_SESSION_PROMPT.txt
+- PHASE_2_1_5_BRIEF.txt (original task brief)
+- reports/ (six corrected Phase 2.1.5 reports at 09f54e4 and eight Phase 2.1.6 reports at 1c6eb53)
+- MANIFEST.sha256 (hashes of package files other than the manifest itself)
+
+The separate earlier Phase 2.1.5 package in the repository predates the corrected Phase 2.1.5 reports and Phase 2.1.6 review. Use this package as the current continuation source. Always inspect the latest Updates/main before resuming.
