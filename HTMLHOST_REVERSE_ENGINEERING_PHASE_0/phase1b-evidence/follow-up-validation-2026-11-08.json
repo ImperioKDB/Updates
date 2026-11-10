@@ -1,0 +1,284 @@
+{
+  "capture_date": "2026-11-08",
+  "tool": "Python Playwright 1.64.1 / Chromium 156.0.8078.73",
+  "conditions": {
+    "headless": true,
+    "desktop_viewport": "1440x900",
+    "fresh_browser_context_per_route": true,
+    "preview_state": "public #preview state",
+    "no_forms_or_navigation": true
+  },
+  "records": [
+    {
+      "template": "portfolio",
+      "route": "https://htmlhost.co/templates/full-stack-designer-portfolio",
+      "reduced_motion": "no-preference",
+      "errors": [],
+      "http_status": 200,
+      "primary_frame": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "slides_before": [
+        {
+          "class": "testimonial-slide active",
+          "text": "We have been working with Yuyu since 2017 and I’ll tell you what, he has an incredible talent for blending creativity with strategy. His designs are not just beautiful but also sma",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        }
+      ],
+      "slides_after": [
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        },
+        {
+          "class": "testimonial-slide",
+          "text": "",
+          "opacity": "0",
+          "transform": "matrix(1, 0, 0, 1, 20, 0)"
+        },
+        {
+          "class": "testimonial-slide active",
+          "text": "Yuyu is the ultimate designer you want to have on your team. I am always impressed with the depth and level of quality he produces. Dude saves me loads of time on revisions. It’s j",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        }
+      ],
+      "click_events": 1,
+      "button": {
+        "ariaLabel": "Next testimonial",
+        "disabled": false,
+        "transition": "0.3s"
+      },
+      "result": "active-slide state captured before and after one next-button activation"
+    },
+    {
+      "template": "business",
+      "route": "https://htmlhost.co/templates/business-web-studio",
+      "reduced_motion": "no-preference",
+      "errors": [],
+      "http_status": 200,
+      "primary_frame": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "aria_controls": "f1",
+      "before": {
+        "expanded": "false",
+        "panel": {
+          "class": "acc-panel",
+          "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+          "height": 0,
+          "opacity": "1",
+          "transitionProperty": "grid-template-rows",
+          "transitionDuration": "0.5s",
+          "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+        }
+      },
+      "open": {
+        "expanded": "true",
+        "panel": {
+          "class": "acc-panel open",
+          "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+          "height": 109.5625,
+          "opacity": "1",
+          "transitionProperty": "grid-template-rows",
+          "transitionDuration": "0.5s",
+          "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+        }
+      },
+      "closed": {
+        "expanded": "false",
+        "panel": {
+          "class": "acc-panel",
+          "text": "Most company sites take two to five weeks from kickoff to launch. Stores and custom web apps take longer, and we give you a clear schedule before we begin.",
+          "height": 0,
+          "opacity": "1",
+          "transitionProperty": "grid-template-rows",
+          "transitionDuration": "0.5s",
+          "transitionTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)"
+        }
+      },
+      "result": "associated panel content and geometry captured for open/close"
+    },
+    {
+      "template": "canvas",
+      "route": "https://htmlhost.co/templates/futuristic-dark-landing",
+      "reduced_motion": "reduce",
+      "errors": [],
+      "http_status": 200,
+      "primary_frame": {
+        "index": 0,
+        "box": {
+          "x": 0,
+          "y": 59,
+          "width": 1440,
+          "height": 841
+        }
+      },
+      "media_reduce": true,
+      "active_animations": [],
+      "pointer_events": [
+        {
+          "type": "pointermove",
+          "target": "HEADER",
+          "x": 259.1875,
+          "y": 29.328125
+        },
+        {
+          "type": "mousemove",
+          "target": "HEADER",
+          "x": 259,
+          "y": 29
+        },
+        {
+          "type": "pointermove",
+          "target": "NAV",
+          "x": 345.59375,
+          "y": 58.78125
+        },
+        {
+          "type": "mousemove",
+          "target": "NAV",
+          "x": 345,
+          "y": 58
+        },
+        {
+          "type": "pointermove",
+          "target": "HEADER",
+          "x": 432,
+          "y": 88.21875
+        },
+        {
+          "type": "mousemove",
+          "target": "HEADER",
+          "x": 432,
+          "y": 88
+        },
+        {
+          "type": "pointermove",
+          "target": "DIV",
+          "x": 518.390625,
+          "y": 117.671875
+        },
+        {
+          "type": "mousemove",
+          "target": "DIV",
+          "x": 518,
+          "y": 117
+        },
+        {
+          "type": "pointermove",
+          "target": "DIV",
+          "x": 604.796875,
+          "y": 147.109375
+        },
+        {
+          "type": "mousemove",
+          "target": "DIV",
+          "x": 604,
+          "y": 147
+        },
+        {
+          "type": "pointermove",
+          "target": "DIV",
+          "x": 691.1875,
+          "y": 176.5625
+        },
+        {
+          "type": "mousemove",
+          "target": "DIV",
+          "x": 691,
+          "y": 176
+        },
+        {
+          "type": "pointermove",
+          "target": "DIV",
+          "x": 777.59375,
+          "y": 206
+        },
+        {
+          "type": "mousemove",
+          "target": "DIV",
+          "x": 777,
+          "y": 206
+        },
+        {
+          "type": "pointermove",
+          "target": "MAIN",
+          "x": 864,
+          "y": 235.453125
+        },
+        {
+          "type": "mousemove",
+          "target": "MAIN",
+          "x": 864,
+          "y": 235
+        },
+        {
+          "type": "pointermove",
+          "target": "MAIN",
+          "x": 950.390625,
+          "y": 264.890625
+        },
+        {
+          "type": "mousemove",
+          "target": "MAIN",
+          "x": 950,
+          "y": 264
+        },
+        {
+          "type": "pointermove",
+          "target": "MAIN",
+          "x": 1036.796875,
+          "y": 294.34375
+        },
+        {
+          "type": "mousemove",
+          "target": "MAIN",
+          "x": 1036,
+          "y": 294
+        }
+      ],
+      "canvas_box": {
+        "x": 0,
+        "y": 59,
+        "width": 1440,
+        "height": 841
+      },
+      "screenshot_hashes": {
+        "futuristic-dark-pointer-reduce-before.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+        "futuristic-dark-pointer-reduce-idle.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+        "futuristic-dark-pointer-reduce-after.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79"
+      },
+      "result": "three reduced-motion screenshots and window input-event observations captured",
+      "retained_static_screenshot": "phase1b-evidence/futuristic-dark-reduced-motion-static.png",
+      "identical_screenshot_sample_hash": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79"
+    }
+  ]
+}

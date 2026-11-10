@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Experiment 02 — Pointer drag</title>
+  <style>
+    :root { color-scheme:light; --paper:#f4f5f1; --ink:#17211e; --muted:#5f6d67; --line:#d7dfd9; --teal:#9be2cb; --coral:#ff9079; --dark:#18362e; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(100% - 40px, 920px); margin:0 auto; }
+    header { display:flex; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--line); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+    header span:last-child { color:var(--muted); }
+    .intro { padding:70px 0 36px; }
+    .eyebrow { margin:0 0 14px; color:#3d7464; font-size:.76rem; font-weight:750; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(2.8rem,7vw,5.5rem); line-height:.94; letter-spacing:-.07em; }
+    .intro p:last-child { max-width:620px; margin:22px 0 0; color:var(--muted); }
+    .stage { position:relative; min-height:360px; overflow:hidden; border:1px solid var(--line); border-radius:24px; background-color:#fbfcf8; background-image:radial-gradient(#ccd8cf 1px,transparent 1px); background-size:22px 22px; touch-action:pan-y; }
+    .stage::after { content:"bounded interaction area"; position:absolute; right:18px; bottom:14px; color:#88958e; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; pointer-events:none; }
+    .node { position:absolute; z-index:1; top:0; left:0; width:118px; min-height:118px; display:grid; place-items:center; border:0; border-radius:36px 36px 36px 10px; background:var(--teal); color:var(--dark); font-size:.84rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; box-shadow:0 12px 28px #244a3926; transform:translate3d(var(--x,20px),var(--y,24px),0); cursor:grab; touch-action:none; user-select:none; }
+    .node::before { content:""; position:absolute; inset:12px; border:1px solid #18362e42; border-radius:26px 26px 26px 8px; pointer-events:none; }
+    .node:focus-visible, button:focus-visible { outline:3px solid #18362e; outline-offset:4px; }
+    .node.is-dragging { cursor:grabbing; box-shadow:0 22px 38px #244a3940; }
+    .node.is-settling { transition:transform 360ms cubic-bezier(.22,1,.36,1), box-shadow 220ms ease-out; }
+    .controls { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:20px 0 14px; }
+    .controls button { min-height:44px; padding:0 17px; border:1px solid var(--dark); border-radius:999px; background:var(--dark); color:white; font:inherit; font-weight:700; cursor:pointer; }
+    .controls button.secondary { background:transparent; color:var(--dark); }
+    .help { margin:0; color:var(--muted); font-size:.92rem; }
+    .status { min-height:1.5em; margin:12px 0 28px; color:#3d7464; font-size:.9rem; }
+    .tip { margin:46px 0 34px; padding:18px 20px; border-left:3px solid var(--coral); background:#fff2ee; color:#5d413b; font-size:.9rem; }
+    footer { padding:26px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.83rem; }
+    @media (max-width:560px) { main { width:min(100% - 28px,920px); } .stage { min-height:310px; border-radius:18px; } .node { width:100px; min-height:100px; border-radius:30px 30px 30px 8px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .node.is-settling { transition:none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><strong>Motion study / 02</strong><span>Direct manipulation</span></header>
+    <section class="intro" aria-labelledby="title">
+      <p class="eyebrow">Pointer · bounds · keyboard</p>
+      <h1 id="title">Move one thing. Keep it clear.</h1>
+      <p>Drag the tile inside the dotted surface. When it has focus, arrow keys move it in small steps; Home recenters it. Pointer capture keeps the drag active even if the pointer leaves the tile.</p>
+    </section>
+    <section aria-label="Draggable object demonstration">
+      <div class="stage" id="stage">
+        <button class="node" id="node" type="button" aria-label="Movable teal tile" aria-describedby="help">Move me</button>
+      </div>
+      <div class="controls"><button id="reset" type="button">Return to start</button><button id="centre" class="secondary" type="button">Move to center</button></div>
+      <p class="help" id="help">Use pointer or touch to drag. Focus the tile and press an arrow key to move 16 pixels; press Home to return to the start.</p>
+      <p class="status" id="status" aria-live="polite">Position: 20, 24.</p>
+    </section>
+    <p class="tip" role="note">Implementation note: movement during drag is immediate for pointer fidelity. The settling curve is used only for explicit repositioning, not as a simulated physical spring.</p>
+    <footer>Standalone experiment · pointer capture, bounded translation, and keyboard fallback</footer>
+  </main>
+  <script>
+    (() => {
+      const stage = document.querySelector('#stage');
+      const node = document.querySelector('#node');
+      const status = document.querySelector('#status');
+      const start = {x:20,y:24};
+      let point = {...start};
+      let grab = {x:0,y:0};
+      let activePointer = null;
+      const clamp = (n,min,max) => Math.min(Math.max(n,min),Math.max(min,max));
+      const bounds = () => ({maxX:stage.clientWidth-node.offsetWidth,maxY:stage.clientHeight-node.offsetHeight});
+      function render(announce=false) {
+        node.style.setProperty('--x',`${point.x}px`);
+        node.style.setProperty('--y',`${point.y}px`);
+        if (announce) status.textContent=`Position: ${Math.round(point.x)}, ${Math.round(point.y)}.`;
+      }
+      function reposition(x,y) {
+        node.classList.remove('is-dragging');
+        node.classList.add('is-settling');
+        const b=bounds(); point={x:clamp(x,0,b.maxX),y:clamp(y,0,b.maxY)};
+        render(true);
+        window.setTimeout(()=>node.classList.remove('is-settling'),420);
+      }
+      node.addEventListener('pointerdown',event=>{
+        if (event.button!==undefined && event.button!==0) return;
+        event.preventDefault();
+        const r=node.getBoundingClientRect(); grab={x:event.clientX-r.left,y:event.clientY-r.top};
+        activePointer=event.pointerId; node.setPointerCapture(event.pointerId); node.classList.add('is-dragging'); node.classList.remove('is-settling');
+      });
+      node.addEventListener('pointermove',event=>{
+        if (event.pointerId!==activePointer) return;
+        const r=stage.getBoundingClientRect(),b=bounds();
+        point={x:clamp(event.clientX-r.left-grab.x,0,b.maxX),y:clamp(event.clientY-r.top-grab.y,0,b.maxY)};
+        render(false);
+      });
+      function finish(event) {
+        if (event.pointerId!==activePointer) return;
+        activePointer=null; node.classList.remove('is-dragging'); status.textContent=`Position: ${Math.round(point.x)}, ${Math.round(point.y)}.`;
+      }
+      node.addEventListener('pointerup',finish);
+      node.addEventListener('pointercancel',finish);
+      node.addEventListener('lostpointercapture',finish);
+      node.addEventListener('keydown',event=>{
+        const step=16; let x=point.x,y=point.y;
+        if (event.key==='ArrowLeft') x-=step;
+        else if (event.key==='ArrowRight') x+=step;
+        else if (event.key==='ArrowUp') y-=step;
+        else if (event.key==='ArrowDown') y+=step;
+        else if (event.key==='Home') { event.preventDefault(); reposition(start.x,start.y); return; }
+        else return;
+        event.preventDefault(); reposition(x,y);
+      });
+      document.querySelector('#reset').addEventListener('click',()=>reposition(start.x,start.y));
+      document.querySelector('#centre').addEventListener('click',()=>{ const b=bounds(); reposition(b.maxX/2,b.maxY/2); });
+      window.addEventListener('resize',()=>reposition(point.x,point.y));
+      render(true);
+    })();
+  </script>
+</body>
+</html>

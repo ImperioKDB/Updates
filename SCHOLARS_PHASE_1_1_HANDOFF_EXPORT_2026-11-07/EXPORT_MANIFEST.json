@@ -1,0 +1,154 @@
+{
+  "package_name": "SCHOLARS_PHASE_1_1_HANDOFF_EXPORT_2026-11-07",
+  "created_at": "2026-11-07",
+  "purpose": "Continue the Scholars Phase 1.1 implementation-readiness and scholarship-data reconciliation task in a new Manus session.",
+  "decision": "READY WITH CONDITIONS",
+  "read_only": true,
+  "repositories": {
+    "updates": "https://github.com/ImperioKDB/Updates",
+    "updates_commit_at_export": "b880bdc62a6b853ebc123a9111e94a343d1171a2",
+    "scholars": "https://github.com/ImperioKDB/Scholars",
+    "scholars_commit_inspected": "cf3682c"
+  },
+  "supabase": {
+    "project_id": "cmdglabohpttgfofcmqc",
+    "project_name": "scholarship-platform",
+    "region": "eu-west-1",
+    "access_mode": "read-only"
+  },
+  "contents": {
+    "evidence_note_count": 17,
+    "package_file_count": 25,
+    "includes_secrets": false,
+    "includes_student_or_auth_data": false,
+    "includes_production_writes": false
+  },
+  "next_session_start": "Read SCHOLARS_PHASE_1_1_SESSION_HANDOFF_2026-11-07.md, then the final audit and production snapshot.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 717,
+      "sha256": "907289470a4d4d0fb89b0104a3dd063cc0ce8f2f2ae905e4ce45dbee25bb81df"
+    },
+    {
+      "path": "SCHOLARS_PHASE_1_1_IMPLEMENTATION_READINESS_AUDIT_2026-11-07.md",
+      "bytes": 34201,
+      "sha256": "3b36c6f69c8f65fc5b0edf6ead55f8315828828883d52bdd82017f43d9597b61"
+    },
+    {
+      "path": "SCHOLARS_PHASE_1_1_PRODUCTION_SNAPSHOT_2026-11-07.md",
+      "bytes": 8930,
+      "sha256": "5c40a21f1500c8cfa59b9ffa20d45e12b29857fd63eb25f9f1901859c2788ddf"
+    },
+    {
+      "path": "SCHOLARS_PHASE_1_1_SESSION_HANDOFF_2026-11-07.md",
+      "bytes": 8533,
+      "sha256": "923b3f54c66a23e77ea3dabbd21e24bfbf9db53c78c6f93780628b5265f39e15"
+    },
+    {
+      "path": "SCHOLARS_PHASE_1_1_TASK_SPEC_2026-11-07.md",
+      "bytes": 8983,
+      "sha256": "54944d62ca9f08e89a3abd451d88173f78b45123e6abbd8e6c5ccedde6a6ae13"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_2026-11-07.md",
+      "bytes": 19422,
+      "sha256": "cc6868409f736744710a633c9e7450e347e23236324503e859e26a34e8364508"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_CONTINUATION_HANDOFF_2026-11-07.md",
+      "bytes": 11486,
+      "sha256": "3aa58c59845a9c0bc57e65756d28dc59dc5041bb48047d7e4cf0a67b1d8ba241"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/README.md",
+      "bytes": 2137,
+      "sha256": "12b43583d00a6542c8873c96c02d301d0fbaa46bedc18ec4e1a6713644d10fba"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/asuu.md",
+      "bytes": 7211,
+      "sha256": "ba5113e06ac1afa1186d1153ab0c4e29f7cc87da7ea23c059e0f98acc438e3e5"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/bode-amao.md",
+      "bytes": 5846,
+      "sha256": "fefc5cdf7d817dd2ff51a72b15cca24e945a854c2ccda615da6703bf70ac877f"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/decagon.md",
+      "bytes": 5247,
+      "sha256": "1b76db0ca454e34ae294ad8ecc1c10d8d1b41069e955daff0401cad54f22cfa9"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/ejiro.md",
+      "bytes": 6559,
+      "sha256": "1c12eeddb0f2bf07fde5409778c6e6f1a5d8d61ed01bc43ee201bb28b1c76bb7"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/florence.md",
+      "bytes": 6198,
+      "sha256": "cc6d7cb36ad34fc1d5e62399090089b1f173ed52fbcdc7857941f7184a402380"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/jg-afrika.md",
+      "bytes": 5374,
+      "sha256": "4c8b896c0f578624921c2ec77b90f871db917efaeb1e1f88b989ab80ef5334ca"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/kpmg.md",
+      "bytes": 5801,
+      "sha256": "81d05fde0b242026b6054d7e49b03d3153c372728dd25aacdeda6b708e90f6c1"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/lagos-state.md",
+      "bytes": 6289,
+      "sha256": "815f1e8b687232815cfe1dbc1deeaaf7f47491c875463daca6db70e649963158"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/light-and-bells.md",
+      "bytes": 4620,
+      "sha256": "643cabe1e02bfad1a49f07e28321bad48e07364ebcfaec29f18be19a3dfbf691"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/midwestern.md",
+      "bytes": 6167,
+      "sha256": "4f29611f16c95a5b2972cdc6b82e241d4a2ee572aa076e3cc9c2b87888079af9"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/mtn.md",
+      "bytes": 5935,
+      "sha256": "6f003ea87ddbe01c7824ce6318402f49fa9851834cd91f906025fdfc18b3b298"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/nddc.md",
+      "bytes": 5360,
+      "sha256": "6655b8d721fcfa36a8d5dfdcfe471fe01f394f3457b16bfadeffb02f8dc84d4c"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/nnpc-renaissance.md",
+      "bytes": 7019,
+      "sha256": "104c7456cf795b212d7aea6a999186a86bdfa340a17308ae1c41e93d22cb96a5"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/nnpc-seplat.md",
+      "bytes": 5617,
+      "sha256": "230f1515ca91a8c7c77d367855faa8cf3f243fc5dc1c8db7dea3c71de96b0ff8"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/pau-mastercard.md",
+      "bytes": 4900,
+      "sha256": "b2154c933791c18bc5d16fa4fe3c2fb2b3006bd30a84c2da2454b0ddc75cf48d"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/project-100.md",
+      "bytes": 5834,
+      "sha256": "42df59f39d87c989fe858294d70b7088c1210f2d30dc80215652682bf38040d9"
+    },
+    {
+      "path": "SCHOLARS_SCHOLARSHIP_DATA_REVALIDATION_EVIDENCE_2026-11-07/ptdf.md",
+      "bytes": 6358,
+      "sha256": "523063707f1a1a1e8deb20e6614cb62111aba538420e3c84b8ec7196ae4e6288"
+    }
+  ]
+}

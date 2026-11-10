@@ -1,0 +1,151 @@
+name: Scholars Synthetic Runner Preflight
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  runner-preflight:
+    name: Synthetic runner capability check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions: {}
+    steps:
+      - name: Run isolated synthetic PostgreSQL preflight
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          WORKDIR="$(mktemp -d "${RUNNER_TEMP:-/tmp}/scholars-runner-preflight.XXXXXX")"
+          CONTAINER="scholars-preflight-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          cleanup() {
+            status=$?
+            trap - EXIT
+
+            if command -v docker >/dev/null 2>&1; then
+              docker rm -f "$CONTAINER" >/dev/null 2>&1 || true
+              if docker inspect "$CONTAINER" >/dev/null 2>&1; then
+                echo 'cleanup_container=FAIL'
+                status=1
+              else
+                echo 'cleanup_container=PASS'
+              fi
+            else
+              echo 'cleanup_container=UNAVAILABLE'
+            fi
+
+            rm -rf -- "$WORKDIR"
+            if [[ ! -e "$WORKDIR" ]]; then
+              echo 'cleanup_temp=PASS'
+            else
+              echo 'cleanup_temp=FAIL'
+              status=1
+            fi
+
+            exit "$status"
+          }
+          trap cleanup EXIT
+
+          OS_NAME="$(uname -s)"
+          ARCH="$(uname -m)"
+          printf 'runner_os=%s\nrunner_arch=%s\n' "$OS_NAME" "$ARCH"
+          [[ "$OS_NAME" == 'Linux' ]]
+          [[ "$ARCH" == 'x86_64' || "$ARCH" == 'aarch64' ]]
+
+          for tool in psql pg_dump; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              printf 'host_%s=' "$tool"
+              "$tool" --version
+            else
+              printf 'host_%s=not-installed\n' "$tool"
+            fi
+          done
+
+          command -v docker >/dev/null 2>&1
+          DOCKER_CLIENT="$(docker version --format '{{.Client.Version}}')"
+          DOCKER_SERVER="$(docker version --format '{{.Server.Version}}')"
+          printf 'docker_client=%s\ndocker_server=%s\n' "$DOCKER_CLIENT" "$DOCKER_SERVER"
+
+          command -v sha256sum >/dev/null 2>&1
+          printf 'sha256sum=available\n'
+
+          CLI_VERSION="$(npm_config_cache="$WORKDIR/npm-cache" npx --yes supabase@2.122.1 --version 2>/dev/null)"
+          [[ "$CLI_VERSION" == '2.122.1' ]]
+          printf 'supabase_cli=%s\n' "$CLI_VERSION"
+
+          docker run --detach \
+            --name "$CONTAINER" \
+            --env POSTGRES_DB=scholars_synthetic \
+            --env POSTGRES_HOST_AUTH_METHOD=trust \
+            postgres:17 >/dev/null
+          printf 'postgres_image=postgres:17\n'
+
+          READY=0
+          for _ in {1..45}; do
+            if docker exec "$CONTAINER" pg_isready -q -U postgres -d scholars_synthetic; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+          [[ "$READY" -eq 1 ]]
+
+          PSQL_VERSION="$(docker exec "$CONTAINER" psql --version)"
+          PG_DUMP_VERSION="$(docker exec "$CONTAINER" pg_dump --version)"
+          printf 'container_psql=%s\ncontainer_pg_dump=%s\n' "$PSQL_VERSION" "$PG_DUMP_VERSION"
+          [[ "$PSQL_VERSION" == *' 17.'* ]]
+          [[ "$PG_DUMP_VERSION" == *' 17.'* ]]
+
+          cat > "$WORKDIR/synthetic.sql" <<'SQL'
+          CREATE SCHEMA synthetic;
+          CREATE TABLE synthetic.sample (
+            id integer PRIMARY KEY,
+            payload text NOT NULL
+          );
+          CREATE FUNCTION synthetic.echo_text(input_text text)
+          RETURNS text
+          LANGUAGE sql
+          IMMUTABLE
+          AS $$ SELECT input_text; $$;
+          CREATE INDEX synthetic_sample_payload_idx
+            ON synthetic.sample (payload);
+          ALTER TABLE synthetic.sample ENABLE ROW LEVEL SECURITY;
+          CREATE POLICY synthetic_sample_read_policy
+            ON synthetic.sample FOR SELECT USING (true);
+          INSERT INTO synthetic.sample (id, payload)
+          VALUES (1, 'SYNTHETIC_ROW_MARKER_9f37a6c2');
+          SQL
+
+          docker exec -i "$CONTAINER" \
+            psql -v ON_ERROR_STOP=1 -U postgres -d scholars_synthetic \
+            < "$WORKDIR/synthetic.sql" >/dev/null
+          printf 'synthetic_schema_setup=PASS\n'
+
+          DUMP="$WORKDIR/schema-only.sql"
+          docker exec "$CONTAINER" \
+            pg_dump --schema-only --no-owner --no-privileges \
+              --schema=synthetic -U postgres -d scholars_synthetic \
+            > "$DUMP"
+          [[ -s "$DUMP" ]]
+          grep -Eq 'CREATE TABLE synthetic\.sample' "$DUMP"
+          grep -Eq 'CREATE FUNCTION synthetic\.echo_text' "$DUMP"
+          grep -Eq 'CREATE INDEX synthetic_sample_payload_idx ON synthetic\.sample' "$DUMP"
+          grep -Eq 'CREATE POLICY synthetic_sample_read_policy' "$DUMP"
+          grep -Fq 'ENABLE ROW LEVEL SECURITY' "$DUMP"
+          if grep -Fq 'SYNTHETIC_ROW_MARKER_9f37a6c2' "$DUMP"; then
+            echo 'schema_only_row_exclusion=FAIL'
+            exit 1
+          fi
+          if grep -Eq '^(INSERT INTO|COPY synthetic\.sample)' "$DUMP"; then
+            echo 'schema_only_data_statement=FAIL'
+            exit 1
+          fi
+          printf 'schema_only_definitions=PASS\nschema_only_row_exclusion=PASS\n'
+
+          # Calculate the checksum locally, but do not print or persist it.
+          sha256sum "$DUMP" >/dev/null
+          printf 'synthetic_dump_sha256=calculated_redacted\n'
+          printf 'synthetic_dump_nonempty=PASS\n'
+          printf 'runner_preflight=PASS\n'

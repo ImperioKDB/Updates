@@ -1,0 +1,185 @@
+SCHOLARS — PHASE 1.3.1: AUDIT CLARIFICATION ADDENDUM
+
+You are continuing the Scholars scholarship-data quality and catalogue-governance project.
+
+Repository: "ImperioKDB/Updates"
+
+1. Source documents
+
+Read these documents completely before beginning:
+
+- "SCHOLARS_PHASE_1_3_AUDIENCE_ELIGIBILITY_AND_CATALOGUE_SCOPE_AUDIT_2026-11-07.md"
+- All 17 individual evidence notes in "SCHOLARS_PHASE_1_3_AUDIENCE_ELIGIBILITY_EVIDENCE_2026-11-07/"
+- The associated source register.
+- "SCHOLARS_PHASE_1_2_1_JG_AFRIKA_ELIGIBILITY_ADDENDUM_2026-11-07.md"
+- "SCHOLARS_PHASE_1_2_PRODUCTION_CORRECTION_SPECIFICATION_2026-11-07.md"
+
+Do not rely on summaries or assumptions. Inspect the actual documents and reconcile the findings.
+
+2. Objective
+
+Create a documentation-only clarification addendum to Phase 1.3.
+
+The addendum must resolve two editorial-model weaknesses identified during independent review:
+
+Issue A — Classification B combines different dimensions.
+
+The current classification system risks conflating:
+
+- Whether an opportunity genuinely exists.
+- Whether the opportunity is suitable for Scholars' initial Nigerian undergraduate audience.
+- Whether applications are currently open.
+- Whether an application route is verified and usable.
+- Whether enough evidence exists to publish it as actionable.
+
+These are separate questions and must not be represented by one classification.
+
+Define independent dimensions:
+
+1. "provider_authenticity"
+2. "audience_eligibility"
+3. "academic_level_fit"
+4. "application_status"
+5. "application_route_status"
+6. "evidence_freshness"
+7. "publication_disposition"
+
+For each dimension, define its purpose, allowed states, and the evidence required to assign a state.
+
+Do not create database columns or implement a schema. This is an editorial and conceptual specification only.
+
+Issue B — Evidence dates are not sufficiently distinguishable.
+
+The report and source register do not consistently distinguish between:
+
+- When the production database record was inspected.
+- When an official provider source was last checked.
+- When audience eligibility was last assessed.
+- When the underlying evidence was originally published.
+- Whether evidence was freshly rechecked or carried forward.
+
+Define separate date concepts and explain how they should be recorded and interpreted.
+
+Never describe carried-forward evidence as freshly verified.
+
+3. Reconcile the 17 records
+
+Revisit all 17 records and provide a revised matrix.
+
+Preserve the original evidence and findings unless a documented contradiction requires correction.
+
+For every record, report:
+
+- Opportunity name.
+- Provider authenticity assessment.
+- Intended audience.
+- Academic-level fit.
+- Audience eligibility state.
+- Current application status.
+- Application-route status.
+- Evidence freshness.
+- Publication disposition.
+- Outstanding questions.
+- Evidence supporting each decision.
+
+Do not automatically convert a record classified B into an actionable listing.
+
+A record must independently satisfy the audience, academic-level, current-cycle, and application-route requirements before being considered actionable.
+
+In particular, preserve these distinctions:
+
+- ASUU: A Federal University of Kashere branch-specific call must not be represented as a national ASUU scholarship. Its expired cycle must not appear as currently actionable.
+- Bode Amao: Audience fit does not resolve the conflicting application instructions or establish a current application cycle.
+- Decagon Foundation: Keep the Foundation scholarship distinct from the fee-paying Decagon Institute programme. Do not claim that the ₦275,000 annual Institute fee is waived or payable by scholarship recipients without provider confirmation. Do not overstate funding coverage while the tuition-only versus accommodation/living-cost discrepancy remains unresolved.
+- JG Afrika: Retain the exclusion/restriction decision for the Nigerian undergraduate catalogue until citizenship and university-location eligibility are confirmed.
+- NDDC: Keep postgraduate opportunities outside the undergraduate catalogue. A portal HTTP 403 challenge is not proof that an application is closed or that submissions are working.
+- PAU Mastercard Foundation: Preserve the conflict between the university's closed-cycle information and the external directory's open status.
+- Historical opportunities: Do not shift previous deadlines into future years or infer a new cycle.
+
+If new evidence is required, identify it as outstanding. Do not invent answers.
+
+4. Publication policy
+
+Define a clear rule for the initial Scholars Nigerian undergraduate catalogue.
+
+At minimum:
+
+- An authentic opportunity is not automatically eligible for publication.
+- Audience eligibility and academic-level fit are separate.
+- A currently open application is not automatically actionable if its application route is unresolved.
+- A reachable application URL does not prove that submissions are accepted.
+- An inaccessible URL does not automatically prove that the programme is closed.
+- Historical opportunities must remain distinguishable from active opportunities.
+- Unresolved records should be withheld from actionable listings and routed to manual review.
+- Paid training programmes must not be misrepresented as scholarships.
+
+Explain the minimum conditions a record must satisfy before receiving an actionable/open presentation.
+
+5. Required deliverables
+
+Create:
+
+"SCHOLARS_PHASE_1_3_1_AUDIT_CLARIFICATION_ADDENDUM_2026-11-08.md"
+
+The document must contain:
+
+1. Purpose and scope.
+2. Summary of the two identified weaknesses.
+3. Revised multidimensional classification model.
+4. Evidence-date and freshness model.
+5. Revised 17-record decision matrix.
+6. Revised publication eligibility rules.
+7. Outstanding provider clarifications.
+8. Implications for Phase 2.
+9. Explicit production-safety statement.
+
+Update the source register only if necessary to correct the date/freshness distinctions. Do not rewrite or silently replace the original Phase 1.3 report.
+
+6. Strict boundaries
+
+This task is READ-ONLY with respect to Scholars production.
+
+You are authorized to:
+
+- Inspect existing documentation.
+- Inspect existing repository history.
+- Research official provider sources where necessary.
+- Create the clarification addendum.
+- Update the documentation source register if required.
+- Commit and push documentation changes to "ImperioKDB/Updates".
+
+You are NOT authorized to:
+
+- Modify the Scholars application repository.
+- Modify application code.
+- Modify Supabase tables, records, policies, functions, or migrations.
+- Change scholarship records or their verification status.
+- Change deadlines, application URLs, or instructions in production.
+- Deploy, merge application changes, or trigger production data operations.
+- Submit applications or contact providers on the user's behalf.
+
+7. Evidence and quality requirements
+
+- Prefer official provider sources.
+- Record source URLs and the actual date checked.
+- Separate direct provider evidence from secondary reporting.
+- Explicitly label unresolved claims.
+- Do not fabricate publication dates, verification dates, deadlines, eligibility conditions, or application availability.
+- Preserve the distinction between an opportunity's authenticity and its relevance to Scholars' initial audience.
+- Ensure all 17 records are accounted for.
+- Ensure the revised dimensions do not contradict one another.
+- Make the document usable as a direct foundation for Phase 2.
+
+8. Final response
+
+After completing the work, report:
+
+1. Commit SHA and link.
+2. Exact files created or changed.
+3. Whether all 17 records were reconciled.
+4. Any classification changes and why.
+5. Remaining unresolved questions.
+6. Confirmation that no Scholars production code, database, or deployment was changed.
+7. Whether the addendum is ready to serve as the authoritative input for Phase 2.
+
+Do not begin Phase 2 in this task.

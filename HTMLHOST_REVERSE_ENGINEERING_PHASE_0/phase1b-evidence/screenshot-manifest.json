@@ -1,0 +1,31 @@
+{
+  "capture_date": "2026-11-08",
+  "retained_distinct_screenshots": {
+    "futuristic-dark-canvas-before.png": {
+      "path": "phase1b-evidence/futuristic-dark-canvas-before.png",
+      "sha256": "7cb7e0ba074669ccd8199195299aad4fdcbe135d15afc13aedad6495bd8fb449"
+    },
+    "futuristic-dark-canvas-after-pointer.png": {
+      "path": "phase1b-evidence/futuristic-dark-canvas-after-pointer.png",
+      "sha256": "009de191ecc42847097a3501f873549edeff1b76337afb1976550a98618222de"
+    },
+    "futuristic-dark-reduced-motion-static.png": {
+      "path": "phase1b-evidence/futuristic-dark-reduced-motion-static.png",
+      "sha256": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79"
+    }
+  },
+  "reduced_motion_identical_sample_hash": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+  "consolidated_duplicate_samples": {
+    "futuristic-dark-reduced-motion-A.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-reduced-motion-B.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-reduced-motion-C-pointer.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-reduced-motion-before.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-reduced-motion-idle.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-reduced-motion-after-pointer.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-pointer-reduce-before.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-pointer-reduce-idle.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "futuristic-dark-pointer-reduce-after.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79",
+    "future-pointer-before.png": "3c2fb25adf37648ba610fced84929e8b2f1639125f0b2ae279c05f9157049b79"
+  },
+  "visual_interpretation": "Three reduced-motion screenshots (before, idle, after pointer movement) were visually inspected and byte-identical. A focused follow-up recorded 20 window-level pointer/mouse events targeting HEADER, NAV, DIV, and MAIN; this does not establish canvas-level event handling or prove the cause of unchanged raster output."
+}

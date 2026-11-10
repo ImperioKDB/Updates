@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Experiment 01 — Scroll reveal</title>
+  <style>
+    :root { color-scheme: light; --paper:#f3f1e9; --ink:#18211c; --muted:#66716a; --line:#d8ddd4; --green:#b9dc59; --white:#fffef9; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(100% - 40px, 920px); margin:0 auto; }
+    .mast { display:flex; justify-content:space-between; align-items:center; padding:24px 0; border-bottom:1px solid var(--line); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+    .mast strong { font-weight:750; }
+    .mast span { color:var(--muted); }
+    .hero { min-height:76vh; display:flex; flex-direction:column; justify-content:center; padding:80px 0 96px; }
+    .eyebrow { margin:0 0 18px; color:#48613a; font-size:.76rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { max-width:760px; margin:0; font-size:clamp(3rem,8vw,6.7rem); line-height:.92; letter-spacing:-.07em; font-weight:650; }
+    .hero p:last-child { max-width:570px; margin:28px 0 0; color:var(--muted); font-size:1.12rem; }
+    .stack { display:grid; gap:18px; padding:20px 0 100px; }
+    .card { display:grid; grid-template-columns:64px 1fr; gap:20px; padding:26px; border:1px solid var(--line); border-radius:22px; background:var(--white); box-shadow:0 8px 28px #1f2a2010; }
+    .index { display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:var(--green); font-weight:750; }
+    h2 { margin:2px 0 7px; font-size:clamp(1.25rem,3vw,1.8rem); letter-spacing:-.035em; }
+    .card p { max-width:620px; margin:0; color:var(--muted); }
+    .note { margin:0 0 42px; padding:18px 20px; border-left:3px solid #88a63b; background:#e9eddf; color:#3d4a3d; font-size:.92rem; }
+    footer { padding:30px 0 54px; border-top:1px solid var(--line); color:var(--muted); font-size:.83rem; }
+    html.js .reveal { opacity:0; transform:translateY(20px); transition:opacity 620ms cubic-bezier(.22,1,.36,1), transform 620ms cubic-bezier(.22,1,.36,1); transition-delay:var(--delay,0ms); }
+    html.js .reveal[data-visible="true"] { opacity:1; transform:translateY(0); }
+    @media (max-width:560px) {
+      main { width:min(100% - 28px, 920px); }
+      .hero { min-height:72vh; padding:64px 0 72px; }
+      .card { grid-template-columns:44px 1fr; gap:12px; padding:20px 17px; border-radius:18px; }
+      .index { width:36px; height:36px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      html.js .reveal, html.js .reveal[data-visible="true"] { opacity:1; transform:none; transition:none; transition-delay:0ms; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="mast"><strong>Motion study / 01</strong><span>Scroll-triggered entrance</span></header>
+    <section class="hero" aria-labelledby="title">
+      <p class="eyebrow">Observe · enter · settle</p>
+      <h1 id="title">Let content arrive with intent.</h1>
+      <p>Scroll down to reveal each panel once. The observer only changes a small state attribute; CSS handles the opacity and position transition.</p>
+    </section>
+    <section class="stack" aria-label="Scroll reveal examples">
+      <article class="card reveal" style="--delay:0ms"><span class="index" aria-hidden="true">01</span><div><h2>Start with hierarchy</h2><p>Reveal the section label and primary idea as one readable unit instead of animating every word.</p></div></article>
+      <article class="card reveal" style="--delay:70ms"><span class="index" aria-hidden="true">02</span><div><h2>Keep the travel short</h2><p>A restrained vertical offset is enough to communicate arrival without making the page feel like a carousel.</p></div></article>
+      <article class="card reveal" style="--delay:140ms"><span class="index" aria-hidden="true">03</span><div><h2>Use motion sparingly</h2><p>One reveal per section helps preserve reading rhythm. The stagger here is only 70 milliseconds between neighboring panels.</p></div></article>
+      <article class="card reveal" style="--delay:0ms"><span class="index" aria-hidden="true">04</span><div><h2>Make the fallback complete</h2><p>Without JavaScript, all content remains visible. With reduced motion enabled, the reveal becomes immediate.</p></div></article>
+    </section>
+    <p class="note" role="note">Implementation note: this demo uses IntersectionObserver for visibility, CSS transitions for visual change, and no animation library.</p>
+    <footer>Standalone experiment · no external assets or dependencies</footer>
+  </main>
+  <script>
+    (() => {
+      const cards = [...document.querySelectorAll('.reveal')];
+      document.documentElement.classList.add('js');
+      const showAll = () => cards.forEach(card => card.dataset.visible = 'true');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        showAll();
+        return;
+      }
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.dataset.visible = 'true';
+          currentObserver.unobserve(entry.target);
+        }
+      }, { root:null, rootMargin:'0px 0px -8% 0px', threshold:0.12 });
+      cards.forEach(card => observer.observe(card));
+    })();
+  </script>
+</body>
+</html>
