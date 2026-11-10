@@ -13,7 +13,7 @@ export type ResourceSitemapRow = {
 };
 
 export async function readAllPublicRows<T extends SitemapRow>(
-  table: "scholarships" | "opportunities",
+  table: "scholarship_public_previews" | "opportunity_public_previews",
   select: string,
 ): Promise<T[]> {
   const supabase = createPublicClient();

@@ -26,8 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // eligible for the sitemap when their detail pages retain useful history;
   // active feeds still apply their own deadline filters.
   const [scholarships, opportunities] = await Promise.all([
-    readAllPublicRows<SitemapRow>("scholarships", "id, slug, updated_at"),
-    readAllPublicRows<SitemapRow>("opportunities", "id, slug, updated_at"),
+    readAllPublicRows<SitemapRow>("scholarship_public_previews", "id, slug, updated_at"),
+    readAllPublicRows<SitemapRow>("opportunity_public_previews", "id, slug, updated_at"),
   ]);
   const resources = await readAllResourceRows();
 

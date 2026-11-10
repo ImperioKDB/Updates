@@ -114,6 +114,17 @@ export function safeNextPath(
   return next;
 }
 
+const OPPORTUNITY_RETURN_PATH_RE = /^\/(?:scholarship|opportunity)\/[A-Za-z0-9][A-Za-z0-9._~-]*$/;
+
+/** Only canonical public opportunity pages may be used as onboarding returns. */
+export function safeOpportunityReturnPath(
+  next: string | null | undefined,
+  fallback = "/dashboard",
+): string {
+  const safe = safeNextPath(next, fallback);
+  return OPPORTUNITY_RETURN_PATH_RE.test(safe) ? safe : fallback;
+}
+
 // Minimal HTML escaping for email composition (table-based Brevo emails
 // cannot rely on a templating engine). Covers every interpolation point.
 export function escapeHtml(value: string): string {

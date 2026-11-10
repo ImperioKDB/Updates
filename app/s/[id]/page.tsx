@@ -11,7 +11,7 @@ export default async function LegacyScholarshipSharePage({
   const { id } = await params;
   const supabase = createPublicClient();
   const { data } = await supabase
-    .from("scholarships")
+    .from("scholarship_public_previews")
     .select("slug, deadline, last_cycle_closed_at")
     .eq("id", id)
     .eq("verified", true)

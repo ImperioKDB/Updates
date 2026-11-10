@@ -42,7 +42,7 @@ type LiveScholarship = {
 async function loadLiveScholarships(): Promise<LiveScholarship[]> {
   const supabase = createPublicClient();
   const { data } = await supabase
-    .from("scholarships")
+    .from("scholarship_public_previews")
     .select("id, slug, title, provider_name, amount, deadline, opens_at, last_cycle_closed_at, discipline, level")
     .eq("verified", true)
     .in("level", ["undergrad", "both"])

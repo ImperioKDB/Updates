@@ -11,7 +11,7 @@ export default async function LegacyOpportunitySharePage({
   const { id } = await params;
   const supabase = createPublicClient();
   const { data } = await supabase
-    .from("opportunities")
+    .from("opportunity_public_previews")
     .select("slug")
     .eq("id", id)
     .eq("verified", true)

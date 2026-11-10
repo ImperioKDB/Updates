@@ -1,8 +1,9 @@
 import { cache } from "react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { createPublicClient } from "@/lib/supabase/public";
+import { createClient } from "@/lib/supabase/server";
 import { isClosedListing } from "@/lib/dates";
 import { Breadcrumbs, SeoJsonLd } from "@/components/SeoJsonLd";
 
@@ -31,26 +32,21 @@ import { Breadcrumbs, SeoJsonLd } from "@/components/SeoJsonLd";
 // captured into a cookie by middleware.ts before this component ever
 // renders -- this file doesn't need to read or forward it.
 const PUBLIC_COLUMNS =
-  "id, slug, type, title, provider_name, description, duration, location, compensation, discipline, deadline, application_url, how_to_apply, verified";
+  "id, slug, type, title, provider_name, description, compensation, deadline, verified";
 
 type PublicOpportunity = {
   id: string;
   slug: string;
-  type: "fellowship" | "internship" | "competition" | "mentorship" | "training";
+  type: string;
   title: string;
   provider_name: string;
   description: string | null;
-  duration: string | null;
-  location: string | null;
   compensation: string | null;
-  discipline: string | null;
   deadline: string | null;
-  application_url: string | null;
-  how_to_apply: string | null;
   verified: boolean;
 };
 
-const TYPE_LABELS: Record<PublicOpportunity["type"], string> = {
+const TYPE_LABELS: Record<string, string> = {
   fellowship: "Fellowship",
   internship: "Internship",
   competition: "Competition",
@@ -58,7 +54,7 @@ const TYPE_LABELS: Record<PublicOpportunity["type"], string> = {
   training: "Training",
 };
 
-const TYPE_TONES: Record<PublicOpportunity["type"], string> = {
+const TYPE_TONES: Record<string, string> = {
   fellowship: "bg-navy-50 text-navy",
   internship: "bg-emerald-light text-emerald",
   competition: "bg-amber-light text-amber",
@@ -66,10 +62,14 @@ const TYPE_TONES: Record<PublicOpportunity["type"], string> = {
   training: "bg-navy-50 text-navy",
 };
 
+function typeLabel(type: string): string {
+  return TYPE_LABELS[type] ?? type.replace(/[-_]+/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
 const loadOpportunity = cache(async (slug: string): Promise<PublicOpportunity | null> => {
   const supabase = createPublicClient();
   const { data } = await supabase
-    .from("opportunities")
+    .from("opportunity_public_previews")
     .select(PUBLIC_COLUMNS)
     .eq("slug", slug)
     .eq("verified", true)
@@ -118,7 +118,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function formatDeadline(deadline: string): string {
   const date = new Date(deadline + "T00:00:00Z");
@@ -132,6 +133,8 @@ export default async function PublicOpportunityPage({ params }: { params: Promis
   if (!opportunity) {
     notFound();
   }
+  const { data: { user } } = await createClient().auth.getUser();
+  if (user) redirect(`/opportunities/${opportunity.id}`);
   const base = process.env.NEXT_PUBLIC_APP_URL || "https://www.scholars.com.ng";
   const publicUrl = `${base}/opportunity/${slug}`;
   const closed = isClosedListing(opportunity);
@@ -144,8 +147,8 @@ export default async function PublicOpportunityPage({ params }: { params: Promis
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Opportunities for students", href: "/opportunities-for-students" }, { name: opportunity.title }]} />
         <div className="bg-white rounded-2xl border border-hairline shadow-card p-6">
           <div className="flex items-center gap-2 mb-3">
-            <span className={`text-xs font-medium px-2 py-1 rounded-full ${TYPE_TONES[opportunity.type]}`}>
-              {TYPE_LABELS[opportunity.type]}
+            <span className={`text-xs font-medium px-2 py-1 rounded-full ${TYPE_TONES[opportunity.type] ?? "bg-navy-50 text-navy"}`}>
+              {typeLabel(opportunity.type)}
             </span>
             <span className="text-xs text-navy-light">{opportunity.provider_name}</span>
           </div>
@@ -173,21 +176,11 @@ export default async function PublicOpportunityPage({ params }: { params: Promis
                 Rolling / no deadline
               </span>
             )}
-            {opportunity.location && <span className="text-xs text-navy-light">{opportunity.location}</span>}
-            {opportunity.discipline && <span className="text-xs text-navy-light">&middot; {opportunity.discipline}</span>}
           </div>
           {opportunity.description && (
             <div className="mb-5">
               <h2 className="font-display text-lg font-semibold text-navy mb-2">About this opportunity</h2>
               <p className="text-sm text-ink leading-relaxed">{opportunity.description}</p>
-            </div>
-          )}
-          {(opportunity.duration || opportunity.how_to_apply || opportunity.application_url) && (
-            <div className="rounded-xl border border-hairline p-4 mb-5 space-y-2">
-              <h2 className="font-display text-lg font-semibold text-navy">Application details</h2>
-              {opportunity.duration && <p className="text-sm text-navy-light"><span className="font-medium text-navy">Duration:</span> {opportunity.duration}</p>}
-              {opportunity.how_to_apply && <p className="text-sm text-navy-light leading-relaxed">{opportunity.how_to_apply}</p>}
-              {opportunity.application_url && <a href={opportunity.application_url} rel="nofollow" className="inline-block text-sm font-medium text-navy underline">{closed ? "View the official page for historical details" : "Visit the official application page"}</a>}
             </div>
           )}
           <div className="flex items-start gap-3 bg-navy-50 rounded-xl p-4 mb-5">
@@ -196,19 +189,19 @@ export default async function PublicOpportunityPage({ params }: { params: Promis
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
             <p className="text-sm text-navy-light leading-relaxed">
-              <span className="font-medium text-navy">{closed ? "This opportunity is closed." : "Opportunities like this aren&apos;t scored on Scholars."}</span>{" "}
-              {closed ? "Create a free account to keep it in your history." : "Create a free account to save it, track your application, and get reminded before it closes."}
+              <span className="font-medium text-navy">{closed ? "This opportunity is closed." : "Details are protected."}</span>{" "}
+              Create a free Scholars account to view eligibility and application details.
             </p>
           </div>
           <Link
-            href="/signup?next=/onboarding"
+            href={`/signup?next=${encodeURIComponent(`/onboarding?next=${encodeURIComponent(`/opportunity/${opportunity.slug}`)}`)}`}
             className="block text-center rounded-seal bg-navy text-white text-sm font-medium px-6 py-3.5 hover:bg-navy-light transition-colors"
           >
             {closed ? "Save this opportunity -- join free" : "Track this opportunity -- join free"}
           </Link>
           <p className="text-sm text-navy-light mt-4 text-center">
             Already have an account?{" "}
-            <Link href="/login" className="text-navy font-medium hover:underline">
+            <Link href={`/login?next=${encodeURIComponent(`/onboarding?next=${encodeURIComponent(`/opportunity/${opportunity.slug}`)}`)}`} className="text-navy font-medium hover:underline">
               Log in
             </Link>
           </p>

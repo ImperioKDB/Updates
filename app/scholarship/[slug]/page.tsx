@@ -1,13 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { createPublicClient } from "@/lib/supabase/public";
+import { createClient } from "@/lib/supabase/server";
 import { formatVerifiedOn, isClosedListing } from "@/lib/dates";
 import { Breadcrumbs, SeoJsonLd } from "@/components/SeoJsonLd";
 import { PublicScholarshipCommunity } from "@/components/PublicScholarshipCommunity";
 import { isUuid } from "@/lib/validate";
-import { getApplicationLinkLabel, getPublicApplicationDetails } from "@/lib/public-application";
 // app/scholarship/[slug]/page.tsx
 // GET /s/[id] -- public, unauthenticated share landing page for a single
 // verified scholarship. Deliberately outside app/scholarships/** (which
@@ -19,7 +19,8 @@ import { getApplicationLinkLabel, getPublicApplicationDetails } from "@/lib/publ
 // rarely (verification flips). A 5-minute revalidation window keeps
 // WhatsApp previews fast and off the database. This route is eligible for
 // ISR because it reads through the cookie-free public client only.
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 // Shows only facts every visitor can honestly see: title, provider,
 // amount, deadline, description, and (Push C) when a human last checked
 // the listing. NEVER a match score or eligibility status -- those are
@@ -31,7 +32,7 @@ export const revalidate = 300;
 // captured into a cookie by middleware.ts before this component ever
 // renders -- this file doesn't need to read or forward it.
 const PUBLIC_COLUMNS =
-  "id, slug, title, provider_name, description, amount, deadline, last_cycle_closed_at, level, discipline, verified, last_verified_at, application_url, how_to_apply";
+  "id, slug, title, provider_name, description, amount, deadline, last_cycle_closed_at, level, discipline, verified, last_verified_at";
 type PublicScholarship = {
   id: string;
   slug: string;
@@ -45,13 +46,11 @@ type PublicScholarship = {
   discipline: string | null;
   verified: boolean;
   last_verified_at: string | null;
-  application_url: string | null;
-  how_to_apply: string | null;
 };
 const loadScholarship = cache(async (slug: string): Promise<PublicScholarship | null> => {
   const supabase = createPublicClient();
   const { data: slugData } = await supabase
-    .from("scholarships")
+    .from("scholarship_public_previews")
     .select(PUBLIC_COLUMNS)
     .eq("slug", slug)
     .eq("verified", true)
@@ -59,7 +58,7 @@ const loadScholarship = cache(async (slug: string): Promise<PublicScholarship | 
   if (slugData) return slugData as PublicScholarship;
   if (!isUuid(slug)) return null;
   const { data: idData } = await supabase
-    .from("scholarships")
+    .from("scholarship_public_previews")
     .select(PUBLIC_COLUMNS)
     .eq("id", slug)
     .eq("verified", true)
@@ -121,13 +120,11 @@ export default async function PublicScholarshipPage({ params }: { params: Promis
   if (!scholarship) {
     notFound();
   }
+  const { data: { user } } = await createClient().auth.getUser();
+  if (user) redirect(`/scholarships/${scholarship.id}`);
   const base = process.env.NEXT_PUBLIC_APP_URL || "https://www.scholars.com.ng";
   const publicUrl = `${base}/scholarship/${scholarship.slug || slug}`;
   const closed = isClosedListing(scholarship);
-  const applicationDetails = getPublicApplicationDetails({
-    instructions: scholarship.how_to_apply,
-    url: scholarship.application_url,
-  });
   const returnTo = `/scholarship/${scholarship.slug || slug}`;
   const onboardingPath = `/onboarding?next=${encodeURIComponent(returnTo)}`;
   const signupPath = `/signup?next=${encodeURIComponent(onboardingPath)}`;
@@ -180,23 +177,6 @@ export default async function PublicScholarshipPage({ params }: { params: Promis
               <p className="text-sm text-ink leading-relaxed">{scholarship.description}</p>
             </div>
           )}
-          {(applicationDetails.instructions || applicationDetails.url) && (
-            <div className="rounded-xl border border-hairline p-4 mb-5 space-y-2">
-              <h2 className="font-display text-lg font-semibold text-navy">Application details</h2>
-              {applicationDetails.instructions && (
-                <p className="text-sm text-navy-light leading-relaxed">{applicationDetails.instructions}</p>
-              )}
-              {applicationDetails.url && (
-                <a
-                  href={applicationDetails.url.toString()}
-                  rel="nofollow"
-                  className="inline-block text-sm font-medium text-navy underline"
-                >
-                  {getApplicationLinkLabel({ closed, protocol: applicationDetails.url.protocol })}
-                </a>
-              )}
-            </div>
-          )}
           <div className="rounded-xl border border-hairline p-4 mb-5">
             <h2 className="font-display text-lg font-semibold text-navy mb-2">Who it is for</h2>
             <p className="text-sm text-navy-light leading-relaxed">
@@ -210,16 +190,15 @@ export default async function PublicScholarshipPage({ params }: { params: Promis
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
             <p className="text-sm text-navy-light leading-relaxed">
-              <span className="font-medium text-navy">Your eligibility isn&apos;t shown yet.</span>{" "}
-              Build a free profile and Scholars checks this scholarship&apos;s requirements against your
-              GPA, state, discipline, and more -- automatically.
+              <span className="font-medium text-navy">Details are protected.</span>{" "}
+              Create a free Scholars account to view eligibility and application details.
             </p>
           </div>
           <Link
             href={signupPath}
             className="block text-center rounded-seal bg-navy text-white text-sm font-medium px-6 py-3.5 hover:bg-navy-light transition-colors"
           >
-            See if you qualify -- join free
+            Create a free Scholars account to view eligibility and application details.
           </Link>
           <p className="text-sm text-navy-light mt-4 text-center">
             Already have an account?{" "}

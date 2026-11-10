@@ -21,7 +21,7 @@ function rows(prefix: string, count: number, offset = 0): TestRow[] {
   }));
 }
 
-function configureTable(table: "scholarships" | "opportunities", batches: TestRow[][], error?: Error) {
+function configureTable(table: "scholarship_public_previews" | "opportunity_public_previews", batches: TestRow[][], error?: Error) {
   const calls: Array<[number, number]> = [];
   const chain = {
     select: vi.fn(() => chain),
@@ -54,9 +54,9 @@ describe("sitemap data reader", () => {
 
   it("retrieves all records across 500-row batches without omissions", async () => {
     const scholarshipRows = [...rows("scholarship", SITEMAP_BATCH_SIZE), ...rows("scholarship", 1, SITEMAP_BATCH_SIZE)];
-    const { chain, calls } = configureTable("scholarships", [scholarshipRows.slice(0, SITEMAP_BATCH_SIZE), scholarshipRows.slice(SITEMAP_BATCH_SIZE)]);
+    const { chain, calls } = configureTable("scholarship_public_previews", [scholarshipRows.slice(0, SITEMAP_BATCH_SIZE), scholarshipRows.slice(SITEMAP_BATCH_SIZE)]);
 
-    const result = await readAllPublicRows("scholarships", "id, slug, updated_at");
+    const result = await readAllPublicRows("scholarship_public_previews", "id, slug, updated_at");
 
     expect(result).toHaveLength(501);
     // The fixtures use unique slugs; this confirms every fixture row is retained.
@@ -69,10 +69,10 @@ describe("sitemap data reader", () => {
   it("supports both scholarship and opportunity public sources, including closed and postgraduate slugs", async () => {
     const scholarship = { slug: "postgraduate-scholarship", updated_at: updatedAt };
     const opportunity = { slug: "closed-opportunity", updated_at: updatedAt };
-    const scholarshipConfig = configureTable("scholarships", [[scholarship]]);
-    const scholarshipResult = await readAllPublicRows("scholarships", "id, slug, updated_at");
-    const opportunityConfig = configureTable("opportunities", [[opportunity]]);
-    const opportunityResult = await readAllPublicRows("opportunities", "id, slug, updated_at");
+    const scholarshipConfig = configureTable("scholarship_public_previews", [[scholarship]]);
+    const scholarshipResult = await readAllPublicRows("scholarship_public_previews", "id, slug, updated_at");
+    const opportunityConfig = configureTable("opportunity_public_previews", [[opportunity]]);
+    const opportunityResult = await readAllPublicRows("opportunity_public_previews", "id, slug, updated_at");
 
     expect(scholarshipResult).toEqual([scholarship]);
     expect(opportunityResult).toEqual([opportunity]);
@@ -81,9 +81,9 @@ describe("sitemap data reader", () => {
   });
 
   it("fails closed when Supabase cannot read a public source", async () => {
-    configureTable("opportunities", [], new Error("network unavailable"));
+    configureTable("opportunity_public_previews", [], new Error("network unavailable"));
 
-    await expect(readAllPublicRows("opportunities", "id, slug, updated_at"))
-      .rejects.toThrow("Unable to build sitemap from public opportunities");
+    await expect(readAllPublicRows("opportunity_public_previews", "id, slug, updated_at"))
+      .rejects.toThrow("Unable to build sitemap from public opportunity_public_previews");
   });
 });

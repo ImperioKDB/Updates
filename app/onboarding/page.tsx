@@ -41,7 +41,7 @@ import {
 } from "@/lib/profile";
 import { INSTITUTION_OPTIONS, institutionTypeFor } from "@/lib/data/institutions";
 import { track } from "@/lib/analytics";
-import { safeNextPath } from "@/lib/validate";
+import { safeOpportunityReturnPath } from "@/lib/validate";
 const STEPS = ["Core", "Personal", "Academic", "Documents", "Matching"];
 const DISCIPLINE_COMBO_OPTIONS = DISCIPLINE_OPTIONS.map((d) => ({ value: d, label: d }));
 const ONBOARDING_DRAFT_KEY = "scholars.onboarding.draft.v2";
@@ -138,7 +138,7 @@ function OnboardingForm() {
   // Public scholarship pages send new users here with their canonical URL in
   // `next`. Keep that destination through onboarding so referred users return
   // to the exact listing they came to evaluate instead of a generic dashboard.
-  const returnTo = safeNextPath(searchParams.get("next"), "/dashboard");
+  const returnTo = safeOpportunityReturnPath(searchParams.get("next"), "/dashboard");
   const onboardingPath = `/onboarding?next=${encodeURIComponent(returnTo)}`;
   const lgaOptions = useMemo(
     () => getLGAsForState(form.state_of_origin).map((l) => ({ value: l, label: l })),
