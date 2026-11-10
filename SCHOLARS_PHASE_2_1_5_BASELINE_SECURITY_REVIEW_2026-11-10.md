@@ -1,75 +1,60 @@
 # Scholars Phase 2.1.5 — Candidate Baseline Security Review
 
-**Investigation date:** 2026-11-10
-**Scope:** Read-only production catalog review of privileges, RLS, functions, views, storage, managed-schema triggers, extensions, and destination defaults. No RPC was invoked and no setting was modified.
+**Evidence window:** 2026-11-10, 10:25–10:32 CET (UTC+01:00)
+**Scope:** Review security-sensitive production schema findings available from the prior bounded catalog inventory and identify what cannot be certified without the schema artifact. No RPC was invoked and no production or staging setting was changed.
 
-## Executive finding
+## Decision
 
-The live database has broad browser-role ACLs on many tables and 31 public security-definer functions, but RLS and function ACLs determine the effective path. These facts are confirmed configuration risks requiring deliberate review; they are not, by themselves, proof of an exploitable vulnerability. No blanket revocation is recommended.
+**No candidate baseline is available for security approval.** Prior Phase 2.1.5 catalog evidence records meaningful ACL, RLS, function, view, storage, and destination-default risks. Those configuration findings are not proof of an exploitable attack path. The underlying SQL artifact and several security details remain unreviewed, so this report does not sign off a restore.
 
-## Tables, ownership, and privileges
+## Evidence standard and methodology
 
-All 45 public tables are owned by `postgres`, have RLS enabled, and have `relforcerowsecurity = false`. The public ACL inventory shows many application tables granting `arwdDxtm` to `anon` and `authenticated`; this includes high-value domains such as applications, profiles, notifications, discovery, and community data. Resource Center editorial tables are narrower, with service-role and authenticated access. Public Resource Center views have read-only browser ACLs.
+The environments reviewed are production `cmdglabohpttgfofcmqc` and staging `aqhktriwaglvvrchxmtd`. Both project references and active status were re-confirmed through the read-only Supabase connector.
 
-The effective security boundary therefore depends on policy correctness and role context, not ACL inspection alone. `TRUNCATE`, `REFERENCES`, and `TRIGGER` capabilities must be explicitly checked in any future artifact review; the current sanitized ACL summary should not be interpreted as authorization to alter them.
+The current review re-confirmed project identity, staging's empty application-table inventory, and the installed-extension list using dedicated read-only Supabase tools. It did not run arbitrary SQL, fetch production rows, retrieve function bodies, invoke RPCs, or generate a dump. The detailed catalog figures below are inherited from the earlier Phase 2.1.5 bounded inventory published at commit `a88ab72fcdddd58fe28315a1c04229a09511ab77`; they are explicitly not fresh DDL-capture results. [1] [2]
 
-Production `postgres` default privileges for public tables and functions are narrower than staging's `postgres` defaults. Staging's `postgres` defaults grant public, anonymous, authenticated, and service-role access on new public schemas, functions, and tables. Both environments also expose broad platform defaults under `supabase_admin`, and both have broad storage defaults. A restore executed under a different creator role can therefore produce materially different access behavior.
+## Security-sensitive findings
 
-## RLS findings
+| Area | Prior catalog evidence | Security meaning and remaining uncertainty |
+|---|---|---|
+| Tables and RLS | 45 public tables were reported with RLS enabled and zero with `FORCE ROW LEVEL SECURITY`; many browser-role ACLs were reported as broad | RLS and ACL metadata do not prove row exposure. Table owners and bypass roles can bypass RLS. No row access was tested in this review. |
+| RLS policy logic | Multiple permissive policy combinations and role-target patterns were reported | PostgreSQL combines permissive policies with OR semantics; each policy set needs table-by-table review. No policy was changed or tested against real data. |
+| Browser-executable security-definer functions | 31 public security-definer functions were reported. The prior review flagged browser EXECUTE posture for `is_admin(uuid)`, `get_admin_metrics_summary(timestamptz)`, and `run_achievement_checks(uuid)` | Grants and security mode are configuration risks; they do not alone prove reachable exploitation. Function bodies, dynamic SQL, call paths, and data-bearing results remain unverified here. Do not invoke sensitive production RPCs. |
+| Function search paths | Prior metadata recorded a mixture of explicit empty search paths and `search_path=public` | Each privileged function needs body-level qualification and safe search-path review before approval. No blanket function revoke is safe without application regression tests. |
+| Resource Center views | Four public views were reported as postgres-owned, with browser SELECT access and `security_barrier=true`; `security_invoker=true` was not established | View owner/RLS semantics and underlying-table access must be tested in an isolated environment. The present evidence does not prove an actual leak. |
+| Storage and managed schemas | Prior inventory reported two public buckets, public asset reads, own-avatar management, admin-managed site objects, and a custom `auth.users` trigger | No object bytes or user records were accessed. Bucket configuration, policy expressions, trigger bodies, and platform-managed hooks must be reviewed separately; never replay platform internals blindly. |
+| Destination defaults | The prior security report recorded different default privileges for production and staging creators, including broader staging `postgres` defaults | This was not re-queried in this pass. A restore under a different creator can change effective access. Re-check every authorized creator role and apply an approved ACL overlay before any staging restore. |
+| Extensions and Vault | Current extension inventories agree on five installed versions; `supabase_vault` is platform-managed | No Vault contents were read. Do not dump or copy Vault secrets or assume extension-created objects are represented in a schema export. |
 
-| Finding | Status |
-|---|---|
-| Public application tables with RLS enabled | Confirmed: 45 |
-| Tables with force RLS | Confirmed: 0 |
-| Public policies | Confirmed through bounded `pg_policies` read |
-| Policy roles | Mix of `{public}`, `{authenticated}`, `{anon,authenticated}`, and targeted roles |
-| Permissive-policy combinations | Present in catalog; requires per-table logical review |
-| Data-path exploitation | Not tested; no sensitive RPC or data access invoked |
+The project dependency matrix warns that a blanket revoke of `anon` or `authenticated` table grants would break catalogue reads, matching, saves, applications, notifications, profiles, community, Resource Center, admin pages, and server routes using session-aware clients. Make additive replacements, update call sites, and test role boundaries before any narrowly scoped grant change. [3]
 
-Policies include own-row checks, admin checks through `is_admin(auth.uid())`, verified/public filters, and storage bucket/path checks. The presence of multiple permissive policies means a future reviewer must evaluate their OR-combination semantics table by table. No policy was changed.
+## Confirmed facts, inherited evidence, and inference
 
-## Functions and RPC exposure
+**Reconfirmed in this pass:** production and staging project refs and health; staging returned no tables in the requested application schemas and no migration entries; both extension inventories report the same five installed versions; no schema artifact or table-row contents were produced.
 
-The following previously identified functions were confirmed as security-definer functions owned by `postgres`:
+**Inherited catalog findings, not re-run here:** the object counts and ACL/RLS/function/view/storage/default-privilege details in the table above, as recorded in the prior Phase 2.1.5 report. These remain useful review leads but do not replace inspection of the actual artifact.
 
-| Function | Browser EXECUTE posture | Search path configuration | Confirmed concern |
-|---|---|---|---|
-| `is_admin(uuid)` | PUBLIC execute appears in ACL | Empty search path configuration | Privileged predicate is publicly callable; body not invoked or exposed |
-| `get_admin_metrics_summary(timestamptz)` | `anon` and `authenticated` execute | `search_path=public` | Admin-summary RPC has browser grants; reachable behavior not tested |
-| `run_achievement_checks(uuid)` | PUBLIC/anon/authenticated execute | Empty search path configuration | Privileged trigger/achievement path is publicly callable by ACL |
+**Inference requiring validation:** replaying an artifact under staging defaults or a different migration executor could expose objects or change behavior. This is a restoration risk, not evidence that current production access is exploitable.
 
-The database contains 31 public security-definer functions. Several use `search_path=public`; several older functions use an explicitly empty search path configuration. The catalog review did not retrieve function bodies, so dynamic SQL, qualification of every relation, and privileged operations remain unverified. No sensitive RPC was invoked.
+## Required review controls
 
-## Views
+1. Obtain the private, unmodified capture artifacts and their hashes; never publish raw DDL.
+2. Compare table ACLs, column ACLs, ownership, RLS/force-RLS state, policies, sequences, and default ACLs against approved least-privilege expectations.
+3. Review every browser EXECUTE grant on security-definer functions, including function body, owner, `search_path`, dynamic SQL, and data flow.
+4. Verify view security-invoker/definer settings and published-row filters in an isolated synthetic environment.
+5. Review `auth.users` and Storage triggers/policies separately from generic schema capture; preserve platform-managed objects.
+6. Determine the staging creation role and destination default-privilege overlay before any restore.
+7. Run anonymous, Student A/Student B, admin, and worker tests using synthetic identities only.
 
-The four Resource Center public views are owned by `postgres`, use `security_barrier=true`, and grant `SELECT` to `anon` and `authenticated`. Their definitions filter active, published, and time-valid content. The catalog evidence did not establish a `security_invoker=true` option; this must be verified in the extraction artifact or by an explicitly authorized catalog field. Underlying table access and view behavior must be tested without using production records.
+No blanket revocation, DDL, production RPC, row access, or staging restore is recommended or authorized by this report.
 
-## Storage and managed schemas
+## Limitations and unresolved questions
 
-Production has two public buckets: `avatars` and `site`. The storage object policies allow public reads for both buckets; authenticated users can manage their own avatar path, and authenticated admins can manage site objects through `is_admin`. This is consistent with an intentionally public asset surface, but path and MIME controls require independent review.
-
-A custom `auth.users` trigger, `on_auth_user_created`, calls `handle_new_user()`. Application triggers cover profiles, applications, scholarships, WAEC summaries, XP, discussions, notifications, and related achievements. Storage platform/custom triggers are present and must not be replayed blindly into a new environment.
-
-## Extensions
-
-Production and staging match on `pg_stat_statements` 1.11, `pgcrypto` 1.3, `plpgsql` 1.0, `supabase_vault` 0.3.1, and `uuid-ossp` 1.1. Vault is platform-managed; no Vault contents were read or copied.
-
-## Confirmed facts versus inference
-
-- **Confirmed:** ACLs, RLS flags, policy metadata, function security mode, function ACL summaries, view options, buckets, storage policies, triggers, extensions, and default-privilege records from bounded catalog reads.
-- **Not confirmed:** exploitability, function-body safety, dynamic-SQL behavior, exact PostgREST exposure, or whether any public RPC returns sensitive rows.
-- **Inference:** restoring under staging's broader `postgres` defaults could expose newly created objects unless restoration role and ACL overlays are explicitly controlled.
-
-## Required security gates
-
-1. Obtain and sanitize the actual schema artifacts.
-2. Review every public/browser EXECUTE grant on security-definer functions.
-3. Confirm fixed search paths and fully qualified references in privileged bodies.
-4. Verify view invoker/definer behavior and API exposure.
-5. Reconcile policy combinations against the application dependency matrix.
-6. Restore only under an approved executor role with an explicit ACL plan; do not use staging defaults implicitly.
+No portable schema artifact was available for function-body review, complete effective-privilege analysis, managed-schema replay assessment, or artifact-specific coverage review. PostgREST exposed schemas, exact destination creator defaults, view invoker semantics, and exploitability remain unresolved. The inherited catalog observations must not be treated as a restore approval.
 
 ## References
 
-- [Supabase declarative schema caveats](https://supabase.com/docs/guides/local-development/declarative-database-schemas)
-- [Supabase diff engines](https://supabase.com/docs/guides/local-development/diff-engines)
+[1]: https://github.com/ImperioKDB/Updates/blob/a88ab72fcdddd58fe28315a1c04229a09511ab77/SCHOLARS_PHASE_2_1_5_BASELINE_SECURITY_REVIEW_2026-11-10.md "Prior Phase 2.1.5 Security Catalog Review"
+[2]: https://github.com/ImperioKDB/Updates/blob/a88ab72fcdddd58fe28315a1c04229a09511ab77/SCHOLARS_PHASE_2_1_5_SCHEMA_CAPTURE_AND_COVERAGE_REPORT_2026-11-10.md "Prior Phase 2.1.5 Catalog Inventory"
+[3]: https://github.com/ImperioKDB/Updates/blob/3d3da285f1b076fbfebb1fdf1adbaadeb178d71f/SCHOLARS_PHASE_2_1_2_API_OBJECT_AND_APPLICATION_DEPENDENCY_MATRIX_2026-11-09.md "Phase 2.1.2 API Object and Application Dependency Matrix"
+[4]: https://www.postgresql.org/docs/current/ddl-rowsecurity.html "PostgreSQL Row Security Policies"
