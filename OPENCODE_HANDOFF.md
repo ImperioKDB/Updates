@@ -56,7 +56,7 @@ At source commit `44ed6c1dceeb09aad0ec0c82c792a362cdfa381a`:
 | `experiment/schema.sql` | Synthetic schema, roles, grants/revokes, RLS policies, functions, trigger, and fabricated rows used only in the disposable database | `338261db6d6b2388f23a6a3a738bb6e0f5900433` |
 | `experiment/run.sh` | Password-authenticated setup/assertions, extraction commands, object inventories, diagnostics, lexical data exclusion, forbidden-operation tests, sanitized summary, fail-closed aggregate | `4746b410754d5b839c520bf7d40585f2b8eaaa87` |
 
-Direct source links: [workflow](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362cdfa381a/.github/workflows/isolated-schema-proof.yml), [schema](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362a362cdfa381a/experiment/schema.sql), [runner](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362cdfa381a/experiment/run.sh).
+Direct source links: [workflow](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362cdfa381a/.github/workflows/isolated-schema-proof.yml), [schema](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362cdfa381a/experiment/schema.sql), [runner](https://github.com/ImperioKDB/scholars-schema-extraction/blob/44ed6c1dceeb09aad0ec0c82c792a362cdfa381a/experiment/run.sh).
 
 > Note: the schema URL above should be checked by OpenCode before use; the authoritative source identifier is the exact commit and blob SHA in the table. If a copied URL contains a typographical path error, use the commit/path URL generated directly from GitHub rather than guessing.
 
