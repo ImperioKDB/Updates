@@ -45,18 +45,18 @@ Four of five attempted skills loaded successfully through OpenCode's native skil
 
 | File | Change type | Summary |
 |---|---|---|
-| `components/resource-center-interactions.tsx` | Modified | `ResourceMobileNav` — verified already met all requirements; no functional change required in this pass |
+| `components/resource-center-interactions.tsx` | Modified | `ResourceMobileNav` — navigation links changed from `closeAndFocusTrigger` to `close` so link selection does not attempt to restore focus to the now-unmounted trigger; all other requirements already met |
 | `components/resource-center-interactions.test.tsx` | Modified | Test file — 10 tests covering all required scenarios |
 
 **Diff stat:** 2 files changed, 23 insertions(+), 5 deletions(-).
 
-No application source change was required because the existing `ResourceMobileNav` implementation already satisfied every Phase 2 requirement from the baseline audit. The diff is limited to these two files only.
+One application source change was required: navigation links previously called `closeAndFocusTrigger()` (which attempted to restore focus to the trigger after navigation, a no-op once the page unmounts). Links now call `close()` so the menu closes and normal navigation proceeds without restoring focus to the old trigger. All other Phase 2 requirements were already met by the existing implementation and were preserved.
 
 ---
 
 ## 4. Implementation details
 
-`ResourceMobileNav` was inspected against each Phase 2 requirement. All requirements were already met by the current implementation, so behaviour was preserved rather than rewritten.
+`ResourceMobileNav` was inspected against each Phase 2 requirement. Most requirements were already met by the existing implementation; one behaviour was corrected — navigation links now call `close()` instead of `closeAndFocusTrigger()` so focus is not unnecessarily restored to the old trigger after navigation.
 
 | Requirement | Status | How it is met |
 |---|---|---|
