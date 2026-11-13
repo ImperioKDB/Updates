@@ -42,7 +42,7 @@ OpenCode's native `skill` tool was invoked for each of the seven installed skill
 | `webapp-testing` | Yes | Yes | Playwright reconnaissance-then-action pattern; `wait_for_load_state('networkidle')`; `with_server.py` helper scripts; `sync_playwright()`; headless Chromium | None |
 | `web-design-guidelines` | No | No | N/A — not installed | Skill not present in `.agents/skills/` or `skills-lock.json`; `skill` tool reports "Unable to load skill web-design-guidelines" |
 
-Six of seven skills are installed and loadable natively. `web-design-guidelines` is referenced in the project skill inventory but is **not installed** — its directory is absent from `.agents/skills/` and it is absent from `skills-lock.json`.
+Six of seven skills are installed and loadable natively. Re-verified against `.agents/skills/` (directories: `emil-design-eng`, `frontend-design`, `mobile-native`, `seo`, `vercel-react-best-practices`, `webapp-testing`) and `skills-lock.json` (six entries): `web-design-guidelines` is **not installed** — its directory is absent from `.agents/skills/` and it is absent from `skills-lock.json`. The `skill` tool reports "Unable to load skill web-design-guidelines". No runtime success is claimed for it.
 
 ### Overlapping instructions and precedence
 
@@ -99,21 +99,21 @@ Six of seven skills are installed and loadable natively. `web-design-guidelines`
 
 ## 5. Confirmed defects
 
-### D1 — Mobile nav button lacks `aria-controls` when menu closed / focus management not verified
+### D1 — Mobile nav menu: conditional rendering, no focus restoration on close, no outside-click close
 **Severity:** Medium
-**Evidence:** `components/resource-center-interactions.tsx` lines 19-21. The menu button has `aria-expanded={open}` and `aria-controls="resource-mobile-menu"` but the menu container only exists in DOM when `open` is true; when closed, `aria-controls` references a non-existent id. Escape closes menu, but no focus return to trigger button.
-**Why it matters:** Screen reader users navigating the mobile menu trigger encounter a dangling `aria-controls` reference; closing the menu drops focus to body rather than returning to the button.
-**Recommended correction:** Render the menu container always (hidden via `hidden`/CSS) so `aria-controls` resolves, and return focus to the menu button on close.
+**Evidence:** `components/resource-center-interactions.tsx` lines 7-33. The menu container is rendered only when `open` is true (`{open && (...)}` line 22), so `aria-controls="resource-mobile-menu"` on the button (line 19) references an id that does not exist in the DOM while closed. Escape closes the menu (lines 11-15) but focus is not returned to the trigger button. There is no outside-click close handler, and keyboard navigation relies on the browser's default tab order within the revealed menu.
+**Why it matters:** Screen-reader users encounter a dangling `aria-controls` reference when the menu is closed; closing the menu drops focus to the document body instead of returning to the trigger, disorienting keyboard users; without outside-click close, the menu can remain open after tapping elsewhere.
+**Recommended correction:** Implement a robust disclosure pattern: keep `aria-controls` valid (render the menu panel always, hidden with `hidden`/CSS, or reconcile `aria-controls` with panel presence), return focus to the menu button on close, close on Escape (already handled) and on outside click, and ensure menu links are keyboard-focusable in a logical order.
 **Within approved frontend scope:** Yes.
 **Relevant skill:** mobile-native (accessible menus and interactive controls).
 
-### D2 — Search results list lacks `role="list"` and matching items lack `role="listitem"`
-**Severity:** Medium
-**Evidence:** `components/resource-center-search.tsx` lines 27-33. Matches are rendered as bare `<Link>`/`<a>` inside a `div[role="status"][aria-live="polite"]`; no list semantics.
-**Why it matters:** Screen readers announce each match as a live-region string without list context; the status announcement plus links can be redundant/confusing.
-**Recommended correction:** Wrap matches in `<ul role="list">` with `<li role="listitem">`; keep `aria-live` on the container or remove if list semantics suffice.
+### D2 (semantic improvement, not a confirmed defect) — Search results lack explicit list roles
+**Severity:** Low (semantic improvement; no demonstrated accessibility failure)
+**Evidence:** `components/resource-center-search.tsx` lines 27-33. Search matches are rendered as bare `<Link>` elements inside a `div[role="status"][aria-live="polite"]`; no `role="list"`/`role="listitem"` is present.
+**Why it matters:** Adding list semantics would give screen-reader users list context (e.g., "3 items") and make the result set easier to navigate. However, the live region already announces results, and no actual accessibility failure (missing label, broken keyboard navigation, or missing required role) has been demonstrated from the current markup.
+**Recommended correction:** Consider wrapping matches in `<ul role="list"><li role="listitem">` for clearer list semantics, and review whether `aria-live="polite"` remains needed once list roles are added. Treat as an enhancement, not a blocker.
 **Within approved frontend scope:** Yes.
-**Relevant skill:** mobile-native / frontend-design.
+**Relevant skill:** frontend-design / mobile-native.
 
 ### D3 — `ReadingProgress` scroll listener attaches to `window` and reads `document.documentElement` on every scroll
 **Severity:** Low
@@ -131,13 +131,13 @@ Six of seven skills are installed and loadable natively. `web-design-guidelines`
 **Within approved frontend scope:** Out of scope for this phase (boundary rule 3 — no CMS/write operations).
 **Relevant skill:** N/A (boundary observation).
 
-### D5 — `ResourceAdSlot` renders an empty reserved ad block when ads disabled, contributing layout noise
-**Severity:** Low
-**Evidence:** `components/resource-center.tsx` lines 29-36. Always renders `<aside aria-label="Advertisement">` with either "Advertisement" text or `sr-only` "Advertisement space reserved".
-**Why it matters:** When ads disabled (default per `.env.example` `NEXT_PUBLIC_RESOURCE_ADS_ENABLED=false`), an empty bordered block still occupies `my-8` space on home/category/in-article placements.
-**Recommended correction:** Return null when ads are not enabled, or only render the placeholder when enabled.
-**Within approved frontend scope:** Yes.
-**Relevant skill:** vercel-react-best-practices (bundle/rendering).
+### D5 (observation) — `ResourceAdSlot` reserved placeholder when ads disabled
+**Severity:** Low (observation; not a defect to remove)
+**Evidence:** `components/resource-center.tsx` lines 29-36. The ad slot always renders `<aside aria-label="Advertisement">` (visible "Advertisement" text when enabled, `sr-only` "Advertisement space reserved" when disabled) occupying `my-8` space on home/category/in-article placements.
+**Why it matters:** Reserving a fixed ad slot prevents cumulative layout shift (CLS) when ads load or when the ads-enabled flag toggles between deployments. Removing the placeholder could cause page content to jump when an ad is injected, harming CLS.
+**Recommended correction:** Do not remove the placeholder solely to avoid an "empty" block. Assess the CLS impact first; if ads are permanently disabled, consider collapsing the slot only after confirming no layout-shift regression. No code change required in this phase.
+**Within approved frontend scope:** N/A — observation only.
+**Relevant skill:** vercel-react-best-practices (rendering / CLS).
 
 ---
 
@@ -170,35 +170,35 @@ Six of seven skills are installed and loadable natively. `web-design-guidelines`
 
 ## 7. Mobile findings
 
-### M1 (confirmed) — No viewport meta tag on Resource Center pages specifically
-**Severity:** Medium
-**Evidence:** Root layout (`app/layout.tsx`) has no `<meta name="viewport">`; `app/manifest.ts` and `app/robots.ts` exist but no viewport tag found in layout or resource pages.
-**Why it matters:** Without `width=device-width, initial-scale=1, viewport-fit=cover`, mobile browsers use a default viewport (often 980px), causing scaled-down layout and `env(safe-area-inset-*)` values of `0px` (notch content stops at safe area). `100dvh`/`100svh` behave unpredictably without a proper viewport.
-**Recommended correction:** Add `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />` via Next.js `viewport` export or in root layout.
-**Within approved frontend scope:** Yes.
-**Relevant skill:** mobile-native (Hard Rule: `env()` values are 0 without the meta tag).
-
-### M2 (confirmed) — No per-scheme `theme-color` meta tags
+### M1 (configuration) — No explicit `viewportFit: "cover"` configured
 **Severity:** Low
-**Evidence:** No `theme-color` meta tags in layout or resource pages; manifest sets `theme_color: #0B1E3D` but HTML meta overrides for browser chrome.
-**Why it matters:** Address bar/status bar color may not match the navy brand on mobile browsers.
-**Recommended correction:** Add `<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F5EF" />` and dark variant.
+**Evidence:** `app/layout.tsx` has no `viewport` export; a grep of `app/` finds no `viewportFit`, `themeColor`, or `interactiveWidget`. Next.js App Router auto-generates a default `<meta name="viewport" content="width=device-width, initial-scale=1">`, so a viewport IS present — it is not missing, and mobile browsers are not falling back to a 980px viewport.
+**Why it matters:** The default `viewportFit` is `auto`, so iOS notch/safe-area insets (`env(safe-area-inset-*)`) resolve to `0px` and content can be letterboxed behind the notch/Dynamic Island. This matters for fixed headers, bottom bars, and safe-area padding.
+**Recommended correction:** Add a `viewport` export to the root layout (`app/layout.tsx`) with `viewportFit: 'cover'` (and `interactiveWidget: 'resizes-content'` if software-keyboard resizing is desired), rather than hard-coding a meta tag.
+**Within approved frontend scope:** Yes — Next.js config, no runtime behaviour change.
+**Relevant skill:** mobile-native.
+
+### M2 (configuration) — No per-scheme `theme-color` configured
+**Severity:** Low
+**Evidence:** No `theme-color` meta tags in layout or resource pages; `app/manifest.ts` sets `theme_color: #0B1E3D`, but no HTML `theme-color` meta overrides browser chrome; no `viewport` export with `themeColor` exists in `app/`.
+**Why it matters:** Address bar/status bar color may not match the navy brand or parchment background on mobile browsers.
+**Recommended correction:** Add a `viewport` export to the root layout with `themeColor: [{ media: '(prefers-color-scheme: light)', color: '#F7F5EF' }, { media: '(prefers-color-scheme: dark)', color: '#0B1E3D' }]` rather than manually inserting duplicate `<meta name="theme-color">` tags. Next.js manages the tag and avoids duplication.
 **Within approved frontend scope:** Yes.
 **Relevant skill:** mobile-native.
 
-### M3 (confirmed) — Touch target sizes on category chips and category links may be below 44x44
+### M3 (measurement needed) — Touch target sizes on category chips/links not directly measured
 **Severity:** Low
-**Evidence:** `app/resources/page.tsx` line 72 category chips `px-4 py-2.5 text-sm`; category page chips `px-3 py-1.5 text-xs`. Compact padding could yield <44px touch targets on small screens.
-**Why it matters:** WCAG 2.2 / mobile-native guidance: touch targets should be at least 44x44 CSS px.
-**Recommended correction:** Increase vertical padding or add `min-h-[44px] min-w-[44px]` to interactive chips/links.
+**Evidence:** `app/resources/page.tsx` line 72 category chips `px-4 py-2.5 text-sm`; category page `app/resources/category/[slug]/page.tsx` line 49 chips `px-3 py-1.5 text-xs`. Computed CSS suggests vertical padding + text height may fall below 44px on some chips, but actual rendered dimensions were not measured in a browser (no device/browser automation available in this environment).
+**Why it matters:** WCAG 2.2 / mobile-native guidance: touch targets should be at least 44×44 CSS px. Height is the more likely constraint than width for text chips.
+**Recommended correction:** Measure the actual rendered touch-target height (padding + font size + line height) in a browser or with automated inspection; if below 44px, increase vertical padding (e.g., `py-3`/`py-3.5`) or add `min-h-[44px]` so the target clears 44px in height. Verify on real hardware.
 **Within approved frontend scope:** Yes.
 **Relevant skill:** mobile-native.
 
-### M4 (confirmed) — `user-select: none` not applied to button-like controls; `button:active` scale exists globally via globals.css
+### M4 (targeted) — Long-press text selection on controls not explicitly prevented
 **Severity:** Low
-**Evidence:** `app/globals.css` lines 97-112 apply `:active` scale to all buttons globally. Resource buttons (`ShareArticle`, `ResourceCard`, chips) use Tailwind classes; long-press text selection not explicitly prevented.
-**Why it matters:** Long-press on controls may select label text on iOS.
-**Recommended correction:** Add `user-select: none` / `-webkit-touch-callout: none` to button-like controls (share button, chips).
+**Evidence:** `app/globals.css` lines 97-112 apply `:active` scale (press feedback) to all buttons globally; Resource buttons (`ShareArticle`, `ResourceCard` links, chips) use Tailwind classes with no `-webkit-user-select` / `-webkit-touch-callout` suppression.
+**Why it matters:** Long-press on a control can select its label text or trigger iOS's callout on link-like controls. `user-select: none` must never be applied globally to `body` or content text (users copy addresses, error messages).
+**Recommended correction:** Apply `user-select: none` / `-webkit-user-select: none` / `-webkit-touch-callout: none` only to specific button-like controls where it is appropriate (e.g., the "Share guide" button, category chips), never globally or on body/content text. Verify press feedback (`:active` scale) already covers tactile response.
 **Within approved frontend scope:** Yes.
 **Relevant skill:** mobile-native.
 
@@ -308,28 +308,28 @@ Six of seven skills are installed and loadable natively. `web-design-guidelines`
 ## 12. Prioritised implementation roadmap
 
 ### P0 — Critical user-facing or accessibility defects
-1. **Add viewport meta tag** (`width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content`) — fixes mobile layout scaling and safe-area insets (M1, A3-related).
-2. **Fix mobile nav `aria-controls` + focus return on close** — D1.
+1. **Fix mobile nav menu focus restoration and outside-click close** — D1 (return focus to trigger on close; keep `aria-controls` valid; Escape + outside-click close).
 
 ### P1 — High-value frontend improvements
-3. **Add per-scheme `theme-color` meta tags** — M2.
-4. **Ensure touch targets >= 44x44 on category chips/links** — M3.
-5. **Add `user-select: none`/`-webkit-touch-callout: none` to button-like controls** — M4.
-6. **Add `role="list"`/`role="listitem"` to search results** — D2.
-7. **Throttle `ReadingProgress` scroll listener** — D3/P1.
+2. **Configure `viewportFit: 'cover'` in the root layout** — M1 (safe-area / notch handling on iOS via Next.js `viewport` export; not a missing viewport — Next.js generates the default `width=device-width, initial-scale=1`).
+3. **Add per-scheme `theme-color` via Next.js `viewport` export** — M2.
+4. **Measure and, if needed, enlarge category-chip touch targets to 44×44** — M3 (verify actual rendered dimensions first; height is the likely constraint).
+5. **Apply `user-select: none`/`-webkit-touch-callout: none` only to specific controls, never globally** — M4.
+6. **Consider explicit list roles on search results** — D2 (semantic enhancement; optional, no demonstrated failure).
+7. **Throttle `ReadingProgress` scroll listener** — D3/P1 (minor; proportional to current usage).
 8. **Add Playwright E2E tests** for Resource Center interactions — T1.
 9. **Add vitest + testing-library tests** for client components (`ResourceSearch`, `ResourceMobileNav`, `ReadingProgress`, `ShareArticle`, `ArticleTableOfContents`) — T2.
 
 ### P2 — Refinements and optimisation
-10. **Render `ResourceAdSlot` as null when ads disabled** — D5/P3.
-11. **Debounce client-side search filtering** — P2.
+10. **Evaluate CLS impact before changing `ResourceAdSlot` placeholder** — D5/P3 (do not remove without assessing layout-shift consequences).
+11. **Debounce client-side search filtering** — P2 (minor; dataset is currently five articles).
 12. **Consider parallelizing independent article-page data fetches** — P4.
 13. **Review `scroll-mt-24` offset vs masthead height on mobile** — A3.
-14. **Set `lang="en-NG"` if appropriate for Nigerian-English content** — A1.
+14. **Set `lang="en-NG"` if appropriate** — A1.
 15. **Improve `ShareArticle` status announcement consistency** — A2.
 
 ### Deferred — Work requiring separate approval
-16. **Editorial write path / CMS for admin Resource Center page** — blocked by boundary rule 3 (no CMS publishing/write operations) and rule 4 (no author/reviewer permission changes).
+16. **Editorial write path / CMS for admin Resource Center page** — blocked by boundary rules 3-4.
 17. **Database migrations / RLS changes** — blocked by boundary rules 1-2.
 18. **Authentication or permission changes** — blocked by boundary rule 4.
 
