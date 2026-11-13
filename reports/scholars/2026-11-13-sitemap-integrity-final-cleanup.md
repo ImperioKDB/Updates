@@ -27,9 +27,13 @@ This is the final cleanup of PR #32, which restores Scholars sitemap integrity. 
 
 ## File-by-file scope audit
 
-The PR diff (vs `main` at `de9b406`) contains 136 files. The majority came from merging `origin/main` (PR #29: Resource Centre public frontend) into the fix branch. Only the files below are sitemap-relevant changes authored for this PR.
+### Important: PR file count (12 net changes)
 
-### Files required for sitemap integrity
+GitHub's PR comparison (base `main` = commit `edb3b84`, head `fix/sitemap-public-data-integrity` = commit `8b6de63`) reports **12 changed files**. This is the authoritative net PR diff.
+
+A local `git diff main fix/sitemap-public-data-integrity` against the local clone's `main` (commit `de9b406`) shows 136 files because the local `main` does **not** contain PR #29 (Resource Centre public frontend, commit `137f2fa`), whereas GitHub's base `main` (`origin/main` = `edb3b84`) **does** contain it. The branch merged `origin/main` into itself (merge commit `fd76865`), so those Resource Centre files are already in GitHub's base and do not appear in the net diff.
+
+### The 12 files in the current net PR diff
 
 | File | Action | Required for sitemap? | Notes |
 |------|--------|----------------------|-------|
@@ -38,21 +42,22 @@ The PR diff (vs `main` at `de9b406`) contains 136 files. The majority came from 
 | `lib/sitemap-data.test.ts` | Changed | **Yes** | 19 unit tests including 6 category eligibility tests |
 | `app/sitemap.test.ts` | Changed | **Yes** | 18 route-level tests including 4 category eligibility tests |
 | `.gitignore` | Changed | **Yes** | Added `tsconfig.tsbuildinfo` to prevent build artifact commits |
-| `lib/supabase/config.ts` | Added | **Yes** | Defines `hasPublicSupabaseConfig()`, imported by `lib/sitemap-data.ts` for local-fallback gating. Also used by `lib/resource-center.ts` (which has its own local copy). |
+| `lib/supabase/config.ts` | Added | **Yes** | Defines `hasPublicSupabaseConfig()`, imported by `lib/sitemap-data.ts` for local-fallback gating |
+| `app/resources/page.tsx` | Changed | No | Resource Centre homepage UI from PR #29 merge context; page/component wiring for Resource Centre |
+| `app/resources/[slug]/page.tsx` | Changed | No | Resource Centre article page UI from PR #29 merge context |
+| `app/resources/category/[slug]/page.tsx` | Changed | No | Resource Centre category page UI from PR #29 merge context |
+| `components/resource-center-search.tsx` | Changed | No | Client-side search component from PR #29 merge context |
+| `lib/resource-center.ts` | Changed | No | Resource Centre data access layer; 1-line addition (`hasPublicSupabaseConfig()` guard in `getResourceImageUrl`) |
+| `next-env.d.ts` | Added | **Yes** | Standard Next.js type declaration file, referenced in `tsconfig.json` `include` array |
 
-### Files from origin/main merge (NOT sitemap-specific, kept as legitimate user changes)
+### Files in merge history (historical context, NOT net PR changes)
 
-These files came from `origin/main` (PR #29: Resource Centre public frontend) when it was merged into the fix branch. They are **not** required for sitemap integrity but are legitimate user changes preserved per instructions:
+The following files appear in the branch's commit history because PR #29 (Resource Centre public frontend) was merged into the fix branch (merge commit `fd76865`). They are present in GitHub's base branch (`origin/main` = `edb3b84`) and therefore do **not** appear in the net 12-file PR diff. They are listed here for historical context only.
 
-| File | Action | Required for sitemap? | Notes |
-|------|--------|----------------------|-------|
-| `lib/resource-center.ts` | Added | No | Resource Centre data access layer. Not imported by sitemap files. Has its own local `hasPublicSupabaseConfig()` copy. |
-| `lib/resource-content.ts` | Added | No | Local Resource Centre content (6 categories, 5 articles). Sitemap imports `LOCAL_RESOURCE_ARTICLES`/`LOCAL_RESOURCE_CATEGORIES` directly from here. |
-| `app/resources/page.tsx` | Changed | No | Resource Centre homepage UI. Not a sitemap dependency. |
-| `app/resources/[slug]/page.tsx` | Changed | No | Resource Centre article page UI. Not a sitemap dependency. |
-| `app/resources/category/[slug]/page.tsx` | Changed | No | Resource Centre category page UI. Not a sitemap dependency. |
-| `components/resource-center-search.tsx` | Added | No | Client-side search component for Resource Centre. Not a sitemap dependency. |
-| `next-env.d.ts` | Added | **Yes** | Standard Next.js type declaration file. Referenced in `tsconfig.json` `include` array. Required for TypeScript compilation. |
+- `lib/resource-content.ts` — Local Resource Centre content (6 categories, 5 articles). Sitemap imports `LOCAL_RESOURCE_ARTICLES`/`LOCAL_RESOURCE_CATEGORIES` from here, but this file was added by PR #29, not by this PR.
+- `components/resource-center.tsx` — Resource Centre UI components (from PR #29).
+- `components/resource-center-interactions.tsx` — Resource Centre interaction components (from PR #29).
+- `package-lock.json`, `package.json`, `skills-lock.json`, vitest config, `.agents/skills/*`, docs, migrations, and many other Resource Centre-related files (from PR #29).
 
 ### Removed from PR
 
@@ -63,19 +68,14 @@ These files came from `origin/main` (PR #29: Resource Centre public frontend) wh
 
 ### next-env.d.ts assessment
 
-`next-env.d.ts` does not exist on `main` (`de9b406`). It is new in the PR branch. It IS referenced in `tsconfig.json` (`"include": ["next-env.d.ts", "**/*.ts", ...]`). It is a standard Next.js file required for TypeScript compilation with Next.js types. **Retain it.**
+`next-env.d.ts` does not exist on the PR's base branch commit `edb3b84`. It is new in the PR branch. It IS referenced in `tsconfig.json` (`"include": ["next-env.d.ts", "**/*.ts", ...]`). It is a standard Next.js file required for TypeScript compilation with Next.js types. **Retain it.**
 
 ### lib/supabase/config.ts assessment
 
 `lib/supabase/config.ts` defines `hasPublicSupabaseConfig()`. It is imported and used by:
 - `lib/sitemap-data.ts` (lines 2, 53, 95) — for local fallback of resource articles/categories when Supabase config is absent
-- `lib/resource-center.ts` has its own local copy of the same function (line 217) — minor duplication but not a problem
 
 **Keep it.** It is justified, used, and tested indirectly through sitemap tests.
-
-### Resource Centre page/search changes assessment
-
-The Resource Centre page and search changes (`app/resources/page.tsx`, `app/resources/[slug]/page.tsx`, `app/resources/category/[slug]/page.tsx`, `components/resource-center-search.tsx`, `lib/resource-center.ts`) came from the `origin/main` merge. They are **not** necessary for the category eligibility implementation. The sitemap's `readAllResourceCategoryRows()` and `readAllResourceRows()` functions operate independently using `createPublicClient()` and `LOCAL_RESOURCE_*` constants. These files are preserved as legitimate user changes from origin/main per instructions ("Preserve user changes and do not force-push").
 
 ---
 
@@ -96,9 +96,17 @@ Categories become eligible automatically when their first published article is a
 |-------|--------|
 | `npx vitest run` | **PASS** — 27 files, 183 tests passed |
 | `npx tsc --noEmit` | **PASS** — clean (no type errors) |
-| `npx next build` | **PASS** — compiles successfully (`sitemap.xml` is dynamic/server-rendered) |
+| `npx next build` | **Compiles successfully** (TypeScript compilation succeeds, `sitemap.xml` is dynamic/server-rendered), but **prerendering fails on several routes** |
 
-**Build caveat:** `next build` reports `@supabase/ssr: URL and API key required` prerender errors on `/login`, `/signup`, `/onboarding`, `/legal/privacy`, `/legal/terms`, `/`, `/reset-password`, `/resources`. These are pre-existing environment limitations (no `NEXT_PUBLIC_SUPABASE_URL`/`SUPABASE_URL` set in this sandbox), unrelated to the sitemap change.
+### Build caveat (important)
+
+`npx next build` completes TypeScript compilation successfully, but **prerendering errors occur** on `/login`, `/signup`, `/onboarding`, `/legal/privacy`, `/legal/terms`, `/`, `/reset-password`, `/resources`:
+
+```
+Error: supabaseUrl is required.
+```
+
+These are **pre-existing environment limitations** — this sandbox does not have `NEXT_PUBLIC_SUPABASE_URL`/`SUPABASE_URL` set. They are unrelated to the sitemap change. The build did **not** complete a fully successful prerender; compilation succeeded but prerendering could not run without Supabase credentials.
 
 ### Sitemap-specific tests (37 total)
 
