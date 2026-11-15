@@ -30,7 +30,7 @@ Combined with the own-row RLS policy (`profiles_update_own`, `auth.uid() = id`) 
 
 No migration after `0029` revokes the table-level INSERT/UPDATE grant on `public.profiles` from `authenticated`. A chronological migration timeline is provided in Section 4.
 
-A read-only production verification SQL script has been published for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `f5c817cfab2dd23458a362abc3c5f45e78924382`.
+A read-only production verification SQL script has been published for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `5f4af4f2c96141a8a920288046952c3f6e189a67`.
 
 **Final verdict:** BLOCKED — CRITICAL FINDINGS OR ENVIRONMENTAL PREREQUISITES UNRESOLVED (live verification pending).
 
@@ -201,7 +201,7 @@ A refined read-only SQL script has been published for manual execution through t
 
 **File path:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
 **Repository:** ImperioKDB/Updates  
-**SQL publication commit SHA:** `f5c817cfab2dd23458a362abc3c5f45e78924382`  
+**SQL publication commit SHA:** `5f4af4f2c96141a8a920288046952c3f6e189a67`  
 **Status:** Published. **NOT executed.**
 
 ### What the script checks
@@ -262,7 +262,7 @@ Before publication, the script was statically reviewed to confirm:
 2. **Select the Scholars production project.** Confirm its project identity before proceeding. If you cannot confidently identify the correct Scholars project, stop and ask for confirmation before running anything.
 3. **Open SQL Editor** from the left-hand navigation.
 4. **Create a new query.**
-5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `f5c817cfab2dd23458a362abc3c5f45e78924382`).
+5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `5f4af4f2c96141a8a920288046952c3f6e189a67`).
 6. **Review the script** to confirm it contains only SELECT statements (no mutation statements).
 7. **Execute the query.**
 8. **Export or copy the result tables** without including credentials or personal records.
@@ -338,16 +338,16 @@ Only after these live results are available can the vulnerability be classified 
 
 **Report file:** `reports/scholars/2026-11-15-resource-center-phase-2b-privilege-regression-correction.md`  
 **SQL file:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
-**SQL publication commit SHA:** `f5c817cfab2dd23458a362abc3c5f45e78924382`  
+**SQL publication commit SHA:** `5f4af4f2c96141a8a920288046952c3f6e189a67`  
 **Target repository:** `ImperioKDB/Updates`  
 **Publication method:** GitHub Contents API  
 **Status:** Published. Both files have been published and verified back from GitHub.
 
 **Publication status summary:**
 
-- **SQL file has been published.** Commit `f5c817cfab2dd23458a362abc3c5f45e78924382`.
+- **SQL file has been published.** Commit `5f4af4f2c96141a8a920288046952c3f6e189a67`.
 - **SQL has NOT been executed.** No live database verification has occurred.
-- **Report has been published.** Commit `211195810e40855a8d1e7b5e4323d4bcdc8f24c9`.
+- **Report has been published.** Commit `5ca4aad3a021feb6636dc80174e48280cb06ba3c` (this commit contains the final metadata synchronisation; the report was previously published at an earlier revision).
 - **Static review only.** The SQL received static inspection only; no actual PostgreSQL execution testing was performed.
 
 This report is read-only. No implementation, remediation, migration, database access attempt, or deployment was performed. Await the user's execution of the read-only SQL and return of results before any remediation is authorized.
