@@ -18,14 +18,83 @@
 --
 -- File: reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql
 -- Repository: ImperioKDB/Updates
+-- Status: Static review only. Not executed against any database.
 -- =============================================================================
 
 --------------------------------------------------------------------------------
--- SECTION A: Effective privileges on public.profiles
+-- SECTION A: Schema-level privileges on public
 --------------------------------------------------------------------------------
 
--- A.1 Table-level INSERT privilege on public.profiles
--- Checks whether each role can INSERT into the profiles table at the table level.
+-- A.1 Schema USAGE privilege on public
+-- USAGE on a schema is required to access objects within it. Without USAGE,
+-- even table-level privileges cannot be exercised because the schema itself
+-- cannot be entered.
+SELECT
+  'anon' AS role_name,
+  has_schema_privilege('anon', 'public', 'USAGE') AS schema_usage,
+  has_schema_privilege('anon', 'public', 'CREATE') AS schema_create
+UNION ALL
+SELECT
+  'authenticated',
+  has_schema_privilege('authenticated', 'public', 'USAGE'),
+  has_schema_privilege('authenticated', 'public', 'CREATE')
+UNION ALL
+SELECT
+  'service_role',
+  has_schema_privilege('service_role', 'public', 'USAGE'),
+  has_schema_privilege('service_role', 'public', 'CREATE')
+UNION ALL
+SELECT
+  'public',
+  has_schema_privilege('public', 'public', 'USAGE'),
+  has_schema_privilege('public', 'public', 'CREATE');
+
+--------------------------------------------------------------------------------
+-- SECTION B: Role membership and inheritance checks
+--------------------------------------------------------------------------------
+
+-- B.1 Direct membership: is each API role a member of 'public'?
+-- pg_has_role(role, 'public', 'member') checks whether the role is a direct
+-- or indirect member of the PUBLIC role. Every role is implicitly a member of
+-- PUBLIC, but this confirms the catalog-level relationship.
+SELECT
+  'anon' AS role_name,
+  pg_has_role('anon', 'public', 'member') AS is_member_of_public
+UNION ALL
+SELECT
+  'authenticated',
+  pg_has_role('authenticated', 'public', 'member')
+UNION ALL
+SELECT
+  'service_role',
+  pg_has_role('service_role', 'public', 'member');
+
+-- B.2 Inheritance check: does each role inherit privileges from PUBLIC?
+-- pg_has_role(role, 'public', 'inheritable') checks whether the role can
+-- inherit privileges granted to PUBLIC. Note: inheritance behavior depends on
+-- the role's INHERIT attribute and PostgreSQL version; this check reflects
+-- the catalog-level inheritance flag, not necessarily runtime effective
+-- privileges in every configuration.
+SELECT
+  'anon' AS role_name,
+  pg_has_role('anon', 'public', 'inheritable') AS inherits_from_public
+UNION ALL
+SELECT
+  'authenticated',
+  pg_has_role('authenticated', 'public', 'inheritable')
+UNION ALL
+SELECT
+  'service_role',
+  pg_has_role('service_role', 'public', 'inheritable');
+
+--------------------------------------------------------------------------------
+-- SECTION C: Effective privileges on public.profiles
+--------------------------------------------------------------------------------
+
+-- C.1 Table-level INSERT/UPDATE privilege on public.profiles
+-- Checks whether each role can INSERT/UPDATE into the profiles table at the
+-- table level. These are the primary effective-privilege tests for the named
+-- API roles.
 SELECT
   'anon' AS role_name,
   has_table_privilege('anon', 'public.profiles', 'INSERT') AS table_level_insert,
@@ -42,12 +111,15 @@ SELECT
   has_table_privilege('service_role', 'public.profiles', 'UPDATE')
 UNION ALL
 SELECT
-  'PUBLIC',
-  has_table_privilege('PUBLIC', 'public.profiles', 'INSERT'),
-  has_table_privilege('PUBLIC', 'public.profiles', 'UPDATE');
+  'public',
+  has_table_privilege('public', 'public.profiles', 'INSERT'),
+  has_table_privilege('public', 'public.profiles', 'UPDATE');
 
--- A.2 Column-level INSERT privilege on profiles.is_admin
--- Checks whether each role can INSERT into the is_admin column specifically.
+-- C.2 Column-level INSERT/UPDATE privilege on profiles.is_admin
+-- Checks whether each role can INSERT/UPDATE into the is_admin column
+-- specifically. A column-level revoke does NOT cancel a table-level grant,
+-- so table-level UPDATE (Section C.1) may still permit UPDATE on is_admin
+-- even if column-level UPDATE is revoked.
 SELECT
   'anon' AS role_name,
   has_column_privilege('anon', 'public.profiles', 'is_admin', 'INSERT') AS column_insert_is_admin,
@@ -64,12 +136,13 @@ SELECT
   has_column_privilege('service_role', 'public.profiles', 'is_admin', 'UPDATE')
 UNION ALL
 SELECT
-  'PUBLIC',
-  has_column_privilege('PUBLIC', 'public.profiles', 'is_admin', 'INSERT'),
-  has_column_privilege('PUBLIC', 'public.profiles', 'is_admin', 'UPDATE');
+  'public',
+  has_column_privilege('public', 'public.profiles', 'is_admin', 'INSERT'),
+  has_column_privilege('public', 'public.profiles', 'is_admin', 'UPDATE');
 
--- A.3 Column-level privileges on ordinary profile columns (for comparison)
--- Shows that ordinary fields have column grants while is_admin may not at column level.
+-- C.3 Column-level privileges on ordinary profile columns (for comparison)
+-- Shows that ordinary fields have column grants while is_admin may not at
+-- column level, even though table-level UPDATE may still cover is_admin.
 SELECT
   'authenticated' AS role_name,
   'full_name' AS column_name,
@@ -81,11 +154,12 @@ SELECT
   has_column_privilege('authenticated', 'public.profiles', 'is_admin', 'UPDATE');
 
 --------------------------------------------------------------------------------
--- SECTION B: Row-Level Security (RLS) on public.profiles
+-- SECTION D: Row-Level Security (RLS) on public.profiles
 --------------------------------------------------------------------------------
 
--- B.1 RLS enablement and FORCE status
--- relrowsecurity = RLS is enabled; relforcerowsecurity = FORCE RLS (applies to table owner too)
+-- D.1 RLS enablement and FORCE status
+-- relrowsecurity = RLS is enabled; relforcerowsecurity = FORCE RLS (applies to
+-- table owner too, including postgres).
 SELECT
   n.nspname AS schema_name,
   c.relname AS table_name,
@@ -98,22 +172,29 @@ WHERE n.nspname = 'public'
   AND c.relname = 'profiles'
   AND c.relkind = 'r';
 
--- B.2 RLS policies on public.profiles
--- Shows policy name, command type, roles, USING expression, and WITH CHECK expression.
+-- D.2 RLS policies on public.profiles
+-- Shows policy name, command type, ALL policy roles (expanded from the
+-- polroles array), USING expression, and WITH CHECK expression.
+-- The PUBLIC pseudo-role appears as role OID 0 in polroles and is resolved
+-- via pg_get_userbyid(0).
 SELECT
   polname AS policy_name,
   polcmd AS command_type,  -- r = SELECT, a = INSERT, w = UPDATE, d = DELETE, * = ALL
-  pg_get_userbyid(polroles[1]) AS policy_role,
+  unnest_roles.policy_role,
   pg_get_expr(polqual, polrelid) AS using_expression,
   pg_get_expr(polwithcheck, polrelid) AS with_check_expression
 FROM pg_policy
 JOIN pg_class ON pg_class.oid = polrelid
 JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace
+CROSS JOIN LATERAL (
+  SELECT pg_get_userbyid(rol.rolid) AS policy_role
+  FROM unnest(polroles) AS rol(rolid)
+) AS unnest_roles
 WHERE pg_namespace.nspname = 'public'
   AND pg_class.relname = 'profiles'
-ORDER BY polname, polcmd;
+ORDER BY polname, polcmd, unnest_roles.policy_role;
 
--- B.3 Effective table grants on public.profiles (from information_schema)
+-- D.3 Effective table grants on public.profiles (from information_schema)
 -- Shows the grantee, privilege type, and whether it is grantable.
 SELECT
   grantee AS role_name,
@@ -124,7 +205,7 @@ WHERE table_schema = 'public'
   AND table_name = 'profiles'
 ORDER BY grantee, privilege_type;
 
--- B.4 Effective column grants on profiles.is_admin (from information_schema)
+-- D.4 Effective column grants on profiles.is_admin (from information_schema)
 SELECT
   grantee AS role_name,
   column_name,
@@ -136,10 +217,10 @@ WHERE table_schema = 'public'
 ORDER BY grantee, privilege_type;
 
 --------------------------------------------------------------------------------
--- SECTION C: Function metadata for public.is_admin(uuid)
+-- SECTION E: Function metadata for public.is_admin(uuid)
 --------------------------------------------------------------------------------
 
--- C.1 Function existence, owner, SECURITY DEFINER status, and configuration
+-- E.1 Function existence, owner, SECURITY DEFINER status, and configuration
 SELECT
   n.nspname AS schema_name,
   p.proname AS function_name,
@@ -155,11 +236,12 @@ WHERE n.nspname = 'public'
   AND pg_get_function_identity_arguments(p.oid) = 'uuid'
 ORDER BY p.proname;
 
--- C.2 Effective EXECUTE privilege on public.is_admin(uuid) for each role
+-- E.2 Effective EXECUTE privilege on public.is_admin(uuid) for each role
 -- has_function_privilege checks whether the role can execute the function.
+-- Does NOT execute the function; only checks privilege metadata.
 SELECT
-  'PUBLIC' AS role_name,
-  has_function_privilege('PUBLIC', 'public.is_admin(uuid)', 'EXECUTE') AS execute_privilege
+  'public' AS role_name,
+  has_function_privilege('public', 'public.is_admin(uuid)', 'EXECUTE') AS execute_privilege
 UNION ALL
 SELECT
   'anon',
@@ -173,13 +255,14 @@ SELECT
   'service_role',
   has_function_privilege('service_role', 'public.is_admin(uuid)', 'EXECUTE');
 
--- C.3 Function ACL (access control list) details from pg_proc
--- Shows the raw ACL entries for the function.
+-- E.3 Function ACL (access control list) details from pg_proc
+-- Shows the raw ACL entries for the function. NULL if no explicit ACL
+-- (defaults apply).
 SELECT
   n.nspname AS schema_name,
   p.proname AS function_name,
   pg_get_function_identity_arguments(p.oid) AS argument_types,
-  p.proacl AS function_acl_raw  -- NULL if no explicit ACL (defaults apply)
+  p.proacl AS function_acl_raw
 FROM pg_proc p
 JOIN pg_namespace n ON n.oid = p.pronamespace
 WHERE n.nspname = 'public'
