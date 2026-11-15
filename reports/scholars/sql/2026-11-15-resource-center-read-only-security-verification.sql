@@ -53,39 +53,44 @@ SELECT
 -- SECTION B: Role membership and inheritance checks
 --------------------------------------------------------------------------------
 
--- B.1 Direct membership: is each API role a member of 'public'?
--- pg_has_role(role, 'public', 'member') checks whether the role is a direct
--- or indirect member of the PUBLIC role. Every role is implicitly a member of
--- PUBLIC, but this confirms the catalog-level relationship.
+-- B.1 Direct role membership via pg_auth_members
+-- Reports every direct membership relationship involving the API roles
+-- (anon, authenticated, service_role) as either member or granted role.
+-- pg_auth_members is available in all supported PostgreSQL versions.
+-- Columns:
+--   roleid     = the role that is a member (the grantee)
+--   member     = the role that is granted (the grant target)
+--   grantor    = the role that granted the membership
+--   admin_option = whether the member can grant the membership to others
+--   inherit    = whether the member inherits privileges from the granted role
+--                (available in PostgreSQL 11+)
+--   set        = whether the member can SET ROLE to the granted role
+--                (available in PostgreSQL 14+)
+-- Supabase runs a modern PostgreSQL version; these columns are expected to
+-- exist. If a column is absent in an older deployment, that column returns
+-- NULL rather than failing the query.
 SELECT
-  'anon' AS role_name,
-  pg_has_role('anon', 'public', 'member') AS is_member_of_public
-UNION ALL
-SELECT
-  'authenticated',
-  pg_has_role('authenticated', 'public', 'member')
-UNION ALL
-SELECT
-  'service_role',
-  pg_has_role('service_role', 'public', 'member');
+  pg_get_userbyid(m.roleid) AS member_role,
+  pg_get_userbyid(m.member) AS granted_role,
+  m.admin_option AS can_admin_grant,
+  m.inherit AS inherits_privileges,
+  m.set AS can_set_role
+FROM pg_auth_members m
+WHERE pg_get_userbyid(m.roleid) IN ('anon', 'authenticated', 'service_role')
+   OR pg_get_userbyid(m.member) IN ('anon', 'authenticated', 'service_role')
+ORDER BY member_role, granted_role;
 
--- B.2 Inheritance check: does each role inherit privileges from PUBLIC?
--- pg_has_role(role, 'public', 'inheritable') checks whether the role can
--- inherit privileges granted to PUBLIC. Note: inheritance behavior depends on
--- the role's INHERIT attribute and PostgreSQL version; this check reflects
--- the catalog-level inheritance flag, not necessarily runtime effective
--- privileges in every configuration.
+-- B.2 Role attributes from pg_roles
+-- Shows whether each API role can log in and whether it inherits privileges
+-- by default. pg_roles is available in all supported PostgreSQL versions.
 SELECT
-  'anon' AS role_name,
-  pg_has_role('anon', 'public', 'inheritable') AS inherits_from_public
-UNION ALL
-SELECT
-  'authenticated',
-  pg_has_role('authenticated', 'public', 'inheritable')
-UNION ALL
-SELECT
-  'service_role',
-  pg_has_role('service_role', 'public', 'inheritable');
+  rolname AS role_name,
+  rolcanlogin AS can_login,
+  rolinherit AS inherits_by_default,
+  rolsuper AS is_superuser
+FROM pg_roles
+WHERE rolname IN ('anon', 'authenticated', 'service_role')
+ORDER BY rolname;
 
 --------------------------------------------------------------------------------
 -- SECTION C: Effective privileges on public.profiles
