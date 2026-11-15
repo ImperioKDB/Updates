@@ -58,26 +58,26 @@ SELECT
 -- (anon, authenticated, service_role) as either member or granted role.
 -- pg_auth_members is available in all supported PostgreSQL versions.
 -- Columns:
---   roleid     = the role that is a member (the grantee)
---   member     = the role that is granted (the grant target)
+--   member     = the role that is a member (the grantee)
+--   roleid     = the role that is granted (the grant target)
 --   grantor    = the role that granted the membership
 --   admin_option = whether the member can grant the membership to others
---   inherit    = whether the member inherits privileges from the granted role
---                (available in PostgreSQL 11+)
---   set        = whether the member can SET ROLE to the granted role
---                (available in PostgreSQL 14+)
--- Supabase runs a modern PostgreSQL version; these columns are expected to
--- exist. If a column is absent in an older deployment, that column returns
--- NULL rather than failing the query.
+--   inherit_option = whether inherited privileges flow from granted role
+--                    to member (PostgreSQL 16+; NULL on older versions)
+--   set_option = whether the member can SET ROLE to the granted role
+--                (PostgreSQL 16+; NULL on older versions)
+-- Optional membership columns are accessed via to_jsonb(m)->>'...' so the
+-- query does not fail on PostgreSQL versions that do not expose them.
 SELECT
-  pg_get_userbyid(m.roleid) AS member_role,
-  pg_get_userbyid(m.member) AS granted_role,
+  pg_get_userbyid(m.member) AS member_role,
+  pg_get_userbyid(m.roleid) AS granted_role,
+  pg_get_userbyid(m.grantor) AS grantor,
   m.admin_option AS can_admin_grant,
-  m.inherit AS inherits_privileges,
-  m.set AS can_set_role
+  to_jsonb(m)->>'inherit_option' AS inherits_privileges,
+  to_jsonb(m)->>'set_option' AS can_set_role
 FROM pg_auth_members m
-WHERE pg_get_userbyid(m.roleid) IN ('anon', 'authenticated', 'service_role')
-   OR pg_get_userbyid(m.member) IN ('anon', 'authenticated', 'service_role')
+WHERE pg_get_userbyid(m.member) IN ('anon', 'authenticated', 'service_role')
+   OR pg_get_userbyid(m.roleid) IN ('anon', 'authenticated', 'service_role')
 ORDER BY member_role, granted_role;
 
 -- B.2 Role attributes from pg_roles
