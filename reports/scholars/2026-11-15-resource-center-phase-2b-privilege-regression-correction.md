@@ -30,7 +30,7 @@ Combined with the own-row RLS policy (`profiles_update_own`, `auth.uid() = id`) 
 
 No migration after `0029` revokes the table-level INSERT/UPDATE grant on `public.profiles` from `authenticated`. A chronological migration timeline is provided in Section 4.
 
-A read-only production verification SQL script has been prepared (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed.
+A read-only production verification SQL script has been published and refined (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `ee9f39bc16687b93a0a6455f6ec59c239e029e78`; this correction report will be published at a new commit SHA.
 
 **Final verdict:** BLOCKED — CRITICAL FINDINGS OR ENVIRONMENTAL PREREQUISITES UNRESOLVED (live verification pending).
 
@@ -197,30 +197,44 @@ Based on migration source inspection (VERIFIED — SOURCE):
 
 ## 7. Production verification SQL and its path
 
-A read-only SQL script has been prepared for manual execution through the Supabase SQL Editor. It contains SELECT statements only and does not modify any database object, read profile rows, or expose secrets.
+A refined read-only SQL script has been published for manual execution through the Supabase SQL Editor. It contains SELECT statements only and does not modify any database object, read profile rows, or expose secrets.
 
 **File path:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
 **Repository:** ImperioKDB/Updates  
-**Status:** Written locally, ready for publication. **NOT executed.**
+**SQL publication commit SHA:** `ee9f39bc16687b93a0a6455f6ec59c239e029e78`  
+**Status:** Published. **NOT executed.**
 
 ### What the script checks
 
 | Section | Check | Method |
 |---------|-------|--------|
-| A.1 | Table-level INSERT/UPDATE on `public.profiles` for anon/authenticated/service_role/PUBLIC | `has_table_privilege()` |
-| A.2 | Column-level INSERT/UPDATE on `profiles.is_admin` for each role | `has_column_privilege()` |
-| A.3 | Column-level UPDATE on ordinary fields (e.g., `full_name`) for comparison | `has_column_privilege()` |
-| B.1 | RLS enabled and FORCE RLS status on `profiles` | `pg_class.relrowsecurity`, `relforcerowsecurity` |
-| B.2 | RLS policies on `profiles` (USING, WITH CHECK expressions) | `pg_policy` catalog |
-| B.3 | Effective table grants on `profiles` | `information_schema.role_table_grants` |
-| B.4 | Effective column grants on `profiles.is_admin` | `information_schema.column_privileges` |
-| C.1 | Function existence, owner, SECURITY DEFINER, configuration (search_path) | `pg_proc` catalog |
-| C.2 | Effective EXECUTE privilege on `is_admin(uuid)` for each role | `has_function_privilege()` |
-| C.3 | Raw function ACL | `pg_proc.proacl` |
+| A | Schema USAGE and CREATE privilege on `public` for anon/authenticated/service_role/public | `has_schema_privilege()` |
+| B | Role membership/inheritance: membership in and inheritance from `public` | `pg_has_role()` |
+| C.1 | Table-level INSERT/UPDATE on `public.profiles` for anon/authenticated/service_role/public | `has_table_privilege()` |
+| C.2 | Column-level INSERT/UPDATE on `profiles.is_admin` for each role | `has_column_privilege()` |
+| C.3 | Column-level UPDATE on ordinary fields (e.g., `full_name`) for comparison | `has_column_privilege()` |
+| D.1 | RLS enabled and FORCE RLS status on `profiles` | `pg_class.relrowsecurity`, `relforcerowsecurity` |
+| D.2 | RLS policies on `profiles` — ALL policy roles expanded (USING, WITH CHECK) | `pg_policy` catalog with `unnest(polroles)` |
+| D.3 | Effective table grants on `profiles` | `information_schema.role_table_grants` |
+| D.4 | Effective column grants on `profiles.is_admin` | `information_schema.column_privileges` |
+| E.1 | Function existence, owner, SECURITY DEFINER, configuration (search_path) | `pg_proc` catalog |
+| E.2 | Effective EXECUTE privilege on `is_admin(uuid)` for each role | `has_function_privilege()` |
+| E.3 | Raw function ACL | `pg_proc.proacl` |
+
+### New checks added in this refinement
+
+1. **Schema privilege checks (`has_schema_privilege`):** Verifies USAGE and CREATE on schema `public` for all four roles. Schema USAGE is a prerequisite for accessing any table within it — without USAGE, table privileges cannot be exercised even if granted. CREATE on the schema is separate from permission to modify existing tables.
+
+2. **Role membership/inheritance checks (`pg_has_role`):** Verifies whether each API role is a member of `public` and whether it inherits privileges from `public`. This helps identify whether privileges granted to `public` flow through to `anon` and `authenticated`. Note: inheritance behavior depends on the role's INHERIT attribute and PostgreSQL version; the catalog check reflects the inheritance flag, not necessarily runtime effective privileges in every configuration.
+
+3. **Corrected PUBLIC pseudo-role spelling:** All `has_table_privilege`, `has_column_privilege`, and `has_function_privilege` calls now use lowercase `'public'` (the documented PostgreSQL pseudo-role argument) instead of uppercase `'PUBLIC'`. This ensures the privilege-check queries evaluate without failing due to an invalid role name.
+
+4. **Expanded policy role reporting:** Section D.2 now uses `unnest(polroles)` with a `CROSS JOIN LATERAL` to expand and report every role assigned to each RLS policy, instead of only reporting `polroles[1]` (the first role). The `PUBLIC` policy role (OID 0) is correctly resolved via `pg_get_userbyid(0)`. Output preserves policy name, command type, every applicable policy role, USING expression, and WITH CHECK expression.
 
 ### SQL safety verification
 
-Before publication, the script was verified to contain:
+Before publication, the script was statically reviewed to confirm:
+
 - ✅ Only SELECT statements and read-only metadata queries
 - ✅ No INSERT, UPDATE, DELETE, TRUNCATE, ALTER, DROP, CREATE, GRANT, or REVOKE
 - ✅ No calls to functions that modify data
@@ -228,6 +242,9 @@ Before publication, the script was verified to contain:
 - ✅ No reads of actual profile rows or personal data
 - ✅ No secrets, credentials, or connection strings
 - ✅ Compatible with Supabase SQL Editor
+- ✅ Missing optional objects or roles do not prevent unrelated sections from running (each query is independent)
+
+**Classification:** This is a **static review** only. The SQL has not been executed against PostgreSQL, and no live test environment was used to validate execution.
 
 ---
 
@@ -239,7 +256,7 @@ Before publication, the script was verified to contain:
 2. **Select the Scholars production project.** Confirm its project identity before proceeding. If you cannot confidently identify the correct Scholars project, stop and ask for confirmation before running anything.
 3. **Open SQL Editor** from the left-hand navigation.
 4. **Create a new query.**
-5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates).
+5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `ee9f39bc16687b93a0a6455f6ec59c239e029e78`).
 6. **Review the script** to confirm it contains only SELECT statements (no mutation statements).
 7. **Execute the query.**
 8. **Export or copy the result tables** without including credentials or personal records.
@@ -249,12 +266,13 @@ Before publication, the script was verified to contain:
 
 | Expected result if vulnerability exists | Interpretation |
 |----------------------------------------|----------------|
+| `has_schema_privilege('authenticated', 'public', 'USAGE')` = `true` | `authenticated` can access schema `public` (prerequisite for table access) |
 | `has_table_privilege('authenticated', 'public.profiles', 'UPDATE')` = `true` | `authenticated` has table-level UPDATE on profiles |
 | `has_column_privilege('authenticated', 'public.profiles', 'is_admin', 'UPDATE')` = `true` | `authenticated` can UPDATE `is_admin` at column level |
 | `has_table_privilege('authenticated', 'public.profiles', 'UPDATE')` = `true` AND column-level = `false` | Table-level grant exists but column-level revoke applied — **table-level grant still permits UPDATE on is_admin** (this is the vulnerability) |
 | `relrowsecurity` = `true` AND `relforcerowsecurity` = `false` | RLS enabled but not forced (table owner can bypass) |
 | Policy `profiles_update_own` with `USING (auth.uid() = id)` | Own-row policy permits self-update |
-| `has_function_privilege('PUBLIC', 'public.is_admin(uuid)', 'EXECUTE')` = `true` | Arbitrary-UUID oracle is callable by PUBLIC |
+| `has_function_privilege('public', 'public.is_admin(uuid)', 'EXECUTE')` = `true` | Arbitrary-UUID oracle is callable by PUBLIC |
 
 ### What NOT to do
 
@@ -310,12 +328,13 @@ Only after these live results are available can the vulnerability be classified 
 
 ---
 
-## Report publication
+## 11. Report publication
 
 **Report file:** `reports/scholars/2026-11-15-resource-center-phase-2b-privilege-regression-correction.md`  
 **SQL file:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
+**SQL publication commit SHA:** `ee9f39bc16687b93a0a6455f6ec59c239e029e78`  
 **Target repository:** `ImperioKDB/Updates`  
 **Publication method:** GitHub Contents API  
-**Status:** Written locally, ready for publication. No commit SHA recorded yet.
+**Status:** Written locally, ready for publication. No report commit SHA recorded yet (will be assigned on publish).
 
 This report is read-only. No implementation, remediation, migration, database access attempt, or deployment was performed. Await the user's execution of the read-only SQL and return of results before any remediation is authorized.
