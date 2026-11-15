@@ -30,7 +30,7 @@ Combined with the own-row RLS policy (`profiles_update_own`, `auth.uid() = id`) 
 
 No migration after `0029` revokes the table-level INSERT/UPDATE grant on `public.profiles` from `authenticated`. A chronological migration timeline is provided in Section 4.
 
-A read-only production verification SQL script has been published and refined (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `ee9f39bc16687b93a0a6455f6ec59c239e029e78`; this correction report will be published at a new commit SHA.
+A read-only production verification SQL script has been published (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `13a5138cc377813ee0ad74dc084cfb6c70febccc`.
 
 **Final verdict:** BLOCKED — CRITICAL FINDINGS OR ENVIRONMENTAL PREREQUISITES UNRESOLVED (live verification pending).
 
@@ -201,7 +201,7 @@ A refined read-only SQL script has been published for manual execution through t
 
 **File path:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
 **Repository:** ImperioKDB/Updates  
-**SQL publication commit SHA:** `ee9f39bc16687b93a0a6455f6ec59c239e029e78`  
+**SQL publication commit SHA:** `13a5138cc377813ee0ad74dc084cfb6c70febccc`  
 **Status:** Published. **NOT executed.**
 
 ### What the script checks
@@ -209,7 +209,7 @@ A refined read-only SQL script has been published for manual execution through t
 | Section | Check | Method |
 |---------|-------|--------|
 | A | Schema USAGE and CREATE privilege on `public` for anon/authenticated/service_role/public | `has_schema_privilege()` |
-| B | Role membership/inheritance: membership in and inheritance from `public` | `pg_has_role()` |
+| B | Role membership inspection via `pg_auth_members` and `pg_roles` | Catalog queries (replaces invalid `pg_has_role` calls) |
 | C.1 | Table-level INSERT/UPDATE on `public.profiles` for anon/authenticated/service_role/public | `has_table_privilege()` |
 | C.2 | Column-level INSERT/UPDATE on `profiles.is_admin` for each role | `has_column_privilege()` |
 | C.3 | Column-level UPDATE on ordinary fields (e.g., `full_name`) for comparison | `has_column_privilege()` |
@@ -221,15 +221,17 @@ A refined read-only SQL script has been published for manual execution through t
 | E.2 | Effective EXECUTE privilege on `is_admin(uuid)` for each role | `has_function_privilege()` |
 | E.3 | Raw function ACL | `pg_proc.proacl` |
 
-### New checks added in this refinement
+### Changes made to the SQL script in this revision
 
-1. **Schema privilege checks (`has_schema_privilege`):** Verifies USAGE and CREATE on schema `public` for all four roles. Schema USAGE is a prerequisite for accessing any table within it — without USAGE, table privileges cannot be exercised even if granted. CREATE on the schema is separate from permission to modify existing tables.
+1. **Removed invalid `pg_has_role` checks:** The previous script used `pg_has_role('anon', 'public', 'member')` and `pg_has_role('authenticated', 'public', 'inheritable')`. Both are invalid:
+   - `PUBLIC` is a PostgreSQL pseudo-role, not an ordinary role-membership target. It must not be queried through `pg_has_role` as if it were a regular role.
+   - `'inheritable'` is not a valid `pg_has_role` privilege argument. Supported arguments are `MEMBER`, `USAGE`, and `SET`.
 
-2. **Role membership/inheritance checks (`pg_has_role`):** Verifies whether each API role is a member of `public` and whether it inherits privileges from `public`. This helps identify whether privileges granted to `public` flow through to `anon` and `authenticated`. Note: inheritance behavior depends on the role's INHERIT attribute and PostgreSQL version; the catalog check reflects the inheritance flag, not necessarily runtime effective privileges in every configuration.
+2. **Replaced with `pg_auth_members` + `pg_roles` inspection:** Section B now queries `pg_auth_members` directly to report every direct membership relationship involving `anon`, `authenticated`, and `service_role` (as either member or granted role). It also queries `pg_roles` to report role attributes (can_login, inherits_by_default, is_superuser). These catalogs are available in all supported PostgreSQL versions and avoid the invalid `pg_has_role` usage.
 
-3. **Corrected PUBLIC pseudo-role spelling:** All `has_table_privilege`, `has_column_privilege`, and `has_function_privilege` calls now use lowercase `'public'` (the documented PostgreSQL pseudo-role argument) instead of uppercase `'PUBLIC'`. This ensures the privilege-check queries evaluate without failing due to an invalid role name.
+3. **Corrected PUBLIC pseudo-role spelling:** All `has_table_privilege`, `has_column_privilege`, `has_schema_privilege`, and `has_function_privilege` calls use lowercase `'public'` (the documented PostgreSQL pseudo-role argument).
 
-4. **Expanded policy role reporting:** Section D.2 now uses `unnest(polroles)` with a `CROSS JOIN LATERAL` to expand and report every role assigned to each RLS policy, instead of only reporting `polroles[1]` (the first role). The `PUBLIC` policy role (OID 0) is correctly resolved via `pg_get_userbyid(0)`. Output preserves policy name, command type, every applicable policy role, USING expression, and WITH CHECK expression.
+4. **Expanded policy role reporting:** Section D.2 uses `unnest(polroles)` with `CROSS JOIN LATERAL` to expand and report every role assigned to each RLS policy, including `PUBLIC` (OID 0 resolved via `pg_get_userbyid(0)`).
 
 ### SQL safety verification
 
@@ -256,7 +258,7 @@ Before publication, the script was statically reviewed to confirm:
 2. **Select the Scholars production project.** Confirm its project identity before proceeding. If you cannot confidently identify the correct Scholars project, stop and ask for confirmation before running anything.
 3. **Open SQL Editor** from the left-hand navigation.
 4. **Create a new query.**
-5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `ee9f39bc16687b93a0a6455f6ec59c239e029e78`).
+5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `13a5138cc377813ee0ad74dc084cfb6c70febccc`).
 6. **Review the script** to confirm it contains only SELECT statements (no mutation statements).
 7. **Execute the query.**
 8. **Export or copy the result tables** without including credentials or personal records.
@@ -332,9 +334,9 @@ Only after these live results are available can the vulnerability be classified 
 
 **Report file:** `reports/scholars/2026-11-15-resource-center-phase-2b-privilege-regression-correction.md`  
 **SQL file:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
-**SQL publication commit SHA:** `ee9f39bc16687b93a0a6455f6ec59c239e029e78`  
+**SQL publication commit SHA:** `13a5138cc377813ee0ad74dc084cfb6c70febccc`  
 **Target repository:** `ImperioKDB/Updates`  
 **Publication method:** GitHub Contents API  
-**Status:** Written locally, ready for publication. No report commit SHA recorded yet (will be assigned on publish).
+**Status:** Written locally, ready for publication. Report commit SHA will be assigned on publish.
 
 This report is read-only. No implementation, remediation, migration, database access attempt, or deployment was performed. Await the user's execution of the read-only SQL and return of results before any remediation is authorized.
