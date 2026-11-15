@@ -258,7 +258,7 @@ Before publication, the script was statically reviewed to confirm:
 2. **Select the Scholars production project.** Confirm its project identity before proceeding. If you cannot confidently identify the correct Scholars project, stop and ask for confirmation before running anything.
 3. **Open SQL Editor** from the left-hand navigation.
 4. **Create a new query.**
-5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `13a5138cc377813ee0ad74dc084cfb6c70febccc`).
+5. **Paste the read-only SQL script** from the file `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql` (published to ImperioKDB/Updates at commit `145a362a082536277fb6a741b9b4bb63182434a2`).
 6. **Review the script** to confirm it contains only SELECT statements (no mutation statements).
 7. **Execute the query.**
 8. **Export or copy the result tables** without including credentials or personal records.
