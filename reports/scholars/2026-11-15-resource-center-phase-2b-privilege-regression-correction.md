@@ -345,7 +345,7 @@ Only after these live results are available can the vulnerability be classified 
 
 **Publication status summary:**
 
-- **SQL file has been published.** Commit `145a362a082536277fb6a741b9b4bb63182434a2`.
+- **SQL file has been published.** Commit `f5c817cfab2dd23458a362abc3c5f45e78924382`.
 - **SQL has NOT been executed.** No live database verification has occurred.
 - **Report has been published.** Commit `9abf8c51bc3a47c49e5f7a664623b26632a343fb`.
 - **Static review only.** The SQL received static inspection only; no actual PostgreSQL execution testing was performed.
