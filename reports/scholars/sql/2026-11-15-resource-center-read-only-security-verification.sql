@@ -163,8 +163,11 @@ SELECT
 --------------------------------------------------------------------------------
 
 -- D.1 RLS enablement and FORCE status
--- relrowsecurity = RLS is enabled; relforcerowsecurity = FORCE RLS (applies to
--- table owner too, including postgres).
+-- relrowsecurity = RLS is enabled (policies apply to ordinary access).
+-- relforcerowsecurity = FORCE ROW LEVEL SECURITY (subjects the table owner
+-- to RLS as well). Superusers and roles with BYPASSRLS still bypass RLS
+-- regardless of FORCE RLS; FORCE RLS does not override superuser or
+-- BYPASSRLS privileges.
 SELECT
   n.nspname AS schema_name,
   c.relname AS table_name,
