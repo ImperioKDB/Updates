@@ -30,7 +30,7 @@ Combined with the own-row RLS policy (`profiles_update_own`, `auth.uid() = id`) 
 
 No migration after `0029` revokes the table-level INSERT/UPDATE grant on `public.profiles` from `authenticated`. A chronological migration timeline is provided in Section 4.
 
-A read-only production verification SQL script has been published (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `13a5138cc377813ee0ad74dc084cfb6c70febccc`.
+A read-only production verification SQL script has been published (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `145a362a082536277fb6a741b9b4bb63182434a2`.
 
 **Final verdict:** BLOCKED — CRITICAL FINDINGS OR ENVIRONMENTAL PREREQUISITES UNRESOLVED (live verification pending).
 
