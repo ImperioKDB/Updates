@@ -83,7 +83,7 @@ Roles in PostgreSQL can inherit privileges from other roles they are members of.
 
 ### 3.4 How PUBLIC grants affect anon and authenticated
 
-`GRANT ... TO PUBLIC` makes the privilege available to every database role. Since `anon` and `authenticated` are PostgreSQL roles (not `PUBLIC` itself), they do not automatically receive `PUBLIC` privileges unless they are members of `PUBLIC` — which every role implicitly is. However, the more direct path is explicit grants to `anon` and `authenticated`, as seen in migration `0029:4`.
+`GRANT ... TO PUBLIC` makes the privilege available to every database role. `PUBLIC` is a special PostgreSQL pseudo-role — privileges granted to it are automatically available to all database roles, including `anon`, `authenticated`, and `service_role`. This does **not** mean every role appears as an ordinary membership entry in `pg_auth_members`; `PUBLIC` membership is implicit and is not recorded as a row in `pg_auth_members`. The direct path for explicit grants is to grant to `anon` and `authenticated` individually, as seen in migration `0029:4`.
 
 ### 3.5 Why RLS policies do not replace SQL privileges
 
@@ -247,8 +247,8 @@ Before publication, the script was statically reviewed to confirm:
 - ✅ No execution of `public.is_admin(uuid)` with any arguments
 - ✅ No reads of actual profile rows or personal data
 - ✅ No secrets, credentials, or connection strings
-- ✅ Compatible with Supabase SQL Editor
-- ✅ Missing optional objects or roles do not prevent unrelated sections from running (each query is independent)
+- ✅ Compatible with Supabase SQL Editor (static review only; not actually executed)
+- ✅ Missing optional objects or roles do not prevent unrelated sections from being run separately; however, any individual query that references a missing object or role will fail on its own
 
 **Classification:** This is a **static review** only. The SQL has not been executed against PostgreSQL, and no live test environment was used to validate execution.
 
@@ -347,7 +347,7 @@ Only after these live results are available can the vulnerability be classified 
 
 - **SQL file has been published.** Commit `f5c817cfab2dd23458a362abc3c5f45e78924382`.
 - **SQL has NOT been executed.** No live database verification has occurred.
-- **Report has been published.** Commit `9abf8c51bc3a47c49e5f7a664623b26632a343fb`.
+- **Report has been published.** Commit `211195810e40855a8d1e7b5e4323d4bcdc8f24c9`.
 - **Static review only.** The SQL received static inspection only; no actual PostgreSQL execution testing was performed.
 
 This report is read-only. No implementation, remediation, migration, database access attempt, or deployment was performed. Await the user's execution of the read-only SQL and return of results before any remediation is authorized.
