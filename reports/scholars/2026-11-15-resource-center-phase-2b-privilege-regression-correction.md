@@ -30,7 +30,7 @@ Combined with the own-row RLS policy (`profiles_update_own`, `auth.uid() = id`) 
 
 No migration after `0029` revokes the table-level INSERT/UPDATE grant on `public.profiles` from `authenticated`. A chronological migration timeline is provided in Section 4.
 
-A read-only production verification SQL script has been published (Section 7) for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `145a362a082536277fb6a741b9b4bb63182434a2`.
+A read-only production verification SQL script has been published for manual execution through the Supabase SQL Editor. It has NOT been executed. The SQL file is published at commit `145a362a082536277fb6a741b9b4bb63182434a2` (this report's own revision points to the SQL revision published in commit `9abf8c51bc3a47c49e5f7a664623b26632a343fb`, which was the report revision preceding this one).
 
 **Final verdict:** BLOCKED — CRITICAL FINDINGS OR ENVIRONMENTAL PREREQUISITES UNRESOLVED (live verification pending).
 
@@ -223,15 +223,19 @@ A refined read-only SQL script has been published for manual execution through t
 
 ### Changes made to the SQL script in this revision
 
-1. **Removed invalid `pg_has_role` checks:** The previous script used `pg_has_role('anon', 'public', 'member')` and `pg_has_role('authenticated', 'public', 'inheritable')`. Both are invalid:
+1. **Corrected `pg_auth_members` column interpretation:** PostgreSQL defines `m.member` as the member role and `m.roleid` as the granted role — the opposite of what earlier versions of this script assumed. Section B now correctly maps `m.member` → member_role and `m.roleid` → granted_role.
+
+2. **Version-compatible membership fields:** The `inherit_option` and `set_option` columns are PostgreSQL 16+ additions and do not exist on older versions. They are now accessed via `to_jsonb(m)->>'inherit_option'` and `to_jsonb(m)->>'set_option'`, which return NULL when the columns are absent rather than failing the query. `admin_option` is retained as it is available across relevant versions.
+
+3. **Removed invalid `pg_has_role` checks:** The previous script used `pg_has_role('anon', 'public', 'member')` and `pg_has_role('authenticated', 'public', 'inheritable')`. Both are invalid:
    - `PUBLIC` is a PostgreSQL pseudo-role, not an ordinary role-membership target. It must not be queried through `pg_has_role` as if it were a regular role.
    - `'inheritable'` is not a valid `pg_has_role` privilege argument. Supported arguments are `MEMBER`, `USAGE`, and `SET`.
 
-2. **Replaced with `pg_auth_members` + `pg_roles` inspection:** Section B now queries `pg_auth_members` directly to report every direct membership relationship involving `anon`, `authenticated`, and `service_role` (as either member or granted role). It also queries `pg_roles` to report role attributes (can_login, inherits_by_default, is_superuser). These catalogs are available in all supported PostgreSQL versions and avoid the invalid `pg_has_role` usage.
+4. **Replaced with `pg_auth_members` + `pg_roles` inspection:** Section B now queries `pg_auth_members` directly to report every direct membership relationship involving `anon`, `authenticated`, and `service_role` (as either member or granted role). It also queries `pg_roles` to report role attributes (can_login, inherits_by_default, is_superuser). These catalogs are available in all supported PostgreSQL versions and avoid the invalid `pg_has_role` usage.
 
-3. **Corrected PUBLIC pseudo-role spelling:** All `has_table_privilege`, `has_column_privilege`, `has_schema_privilege`, and `has_function_privilege` calls use lowercase `'public'` (the documented PostgreSQL pseudo-role argument).
+5. **Corrected PUBLIC pseudo-role spelling:** All `has_table_privilege`, `has_column_privilege`, `has_schema_privilege`, and `has_function_privilege` calls use lowercase `'public'` (the documented PostgreSQL pseudo-role argument).
 
-4. **Expanded policy role reporting:** Section D.2 uses `unnest(polroles)` with `CROSS JOIN LATERAL` to expand and report every role assigned to each RLS policy, including `PUBLIC` (OID 0 resolved via `pg_get_userbyid(0)`).
+6. **Expanded policy role reporting:** Section D.2 uses `unnest(polroles)` with `CROSS JOIN LATERAL` to expand and report every role assigned to each RLS policy, including `PUBLIC` (OID 0 resolved via `pg_get_userbyid(0)`).
 
 ### SQL safety verification
 
@@ -337,6 +341,13 @@ Only after these live results are available can the vulnerability be classified 
 **SQL publication commit SHA:** `145a362a082536277fb6a741b9b4bb63182434a2`  
 **Target repository:** `ImperioKDB/Updates`  
 **Publication method:** GitHub Contents API  
-**Status:** Written locally, ready for publication. Report commit SHA will be assigned on publish.
+**Status:** Published. Both files have been published and verified back from GitHub.
+
+**Publication status summary:**
+
+- **SQL file has been published.** Commit `145a362a082536277fb6a741b9b4bb63182434a2`.
+- **SQL has NOT been executed.** No live database verification has occurred.
+- **Report has been published.** Commit `9abf8c51bc3a47c49e5f7a664623b26632a343fb`.
+- **Static review only.** The SQL received static inspection only; no actual PostgreSQL execution testing was performed.
 
 This report is read-only. No implementation, remediation, migration, database access attempt, or deployment was performed. Await the user's execution of the read-only SQL and return of results before any remediation is authorized.
