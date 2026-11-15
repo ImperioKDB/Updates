@@ -201,7 +201,7 @@ A refined read-only SQL script has been published for manual execution through t
 
 **File path:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
 **Repository:** ImperioKDB/Updates  
-**SQL publication commit SHA:** `13a5138cc377813ee0ad74dc084cfb6c70febccc`  
+**SQL publication commit SHA:** `145a362a082536277fb6a741b9b4bb63182434a2`  
 **Status:** Published. **NOT executed.**
 
 ### What the script checks
@@ -334,7 +334,7 @@ Only after these live results are available can the vulnerability be classified 
 
 **Report file:** `reports/scholars/2026-11-15-resource-center-phase-2b-privilege-regression-correction.md`  
 **SQL file:** `reports/scholars/sql/2026-11-15-resource-center-read-only-security-verification.sql`  
-**SQL publication commit SHA:** `13a5138cc377813ee0ad74dc084cfb6c70febccc`  
+**SQL publication commit SHA:** `145a362a082536277fb6a741b9b4bb63182434a2`  
 **Target repository:** `ImperioKDB/Updates`  
 **Publication method:** GitHub Contents API  
 **Status:** Written locally, ready for publication. Report commit SHA will be assigned on publish.
