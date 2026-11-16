@@ -25,9 +25,7 @@ The original test report contained ambiguous CI identifiers ("133628909053" and 
 
 These are **different identifier types** and should not be conflated.
 
-### Corrected TEST_RESULTS.md
-
-Published to `ImperioKDB/Updates/SCHOLARS_FRONTEND_ENGINEERING/TEST_RESULTS.md` (commit `03f1a4cc8e10dbb894572ec199da685de1b2c198`), later superseded by commit `181aedc5fd0c43c7a9ae0f624671a0f7a2a9b4bc` which includes the corrected CI identifier terminology.
+The CI identifier terminology correction is documented in commit `cc736d3004afb9be53a0d8ce0a05f60a58416c9f` in the Updates repository.
 
 ---
 
@@ -93,17 +91,19 @@ All retry callbacks correctly use `() => fn` wrapper. Drafts preserved on failed
 | Vercel deployment URL | https://scholars-2ro84294p-imperiokdbs-projects.vercel.app |
 | Production URL | https://scholars.com.ng |
 
-### Production Smoke Tests
+### Production Smoke Tests (Unauthenticated, Read-Only)
 
 | Route | Status | Result |
 |-------|--------|--------|
-| https://scholars.com.ng/ | 200 | Landing page renders with scholarship content |
-| https://scholars.com.ng/sitemap.xml | 200 | Valid XML sitemap accessible |
-| https://scholars.com.ng/login | 200 | Login page loads |
-| https://scholars.com.ng/onboarding | 200 | Onboarding page loads |
-| https://scholars.com.ng/dashboard | 200 | Dashboard page loads |
+| https://scholars.com.ng/ | 200 | Landing page renders |
+| https://scholars.com.ng/sitemap.xml | 200 | XML sitemap renders |
+| https://scholars.com.ng/login | 200 | Login page renders |
+| https://scholars.com.ng/onboarding | 200 | Redirected to login (`https://www.scholars.com.ng/login?next=%2Fonboarding`) |
+| https://scholars.com.ng/dashboard | 200 | Redirected to login (`https://www.scholars.com.ng/login?next=%2Fdashboard`) |
 
-All production routes respond successfully with HTTP 200. The production deployment corresponds to the merged `main` commit `8cd345df1fe8c79f041b5264ede7b3ab9a750221`.
+All five requested URLs returned a final document with HTTP 200. Non-www URLs canonicalized to `www.scholars.com.ng`. No visible runtime exceptions or error UI were observed. One informational PWA install-banner console message appeared. No login, registration, form submission, or data-changing action was performed.
+
+**Important:** The onboarding and dashboard pages did **not** render their authenticated content. Both redirected to the login page with the requested destination preserved in the `next` query parameter. These results verify authentication redirect behaviour and destination preservation, **not** successful authenticated access or onboarding/dashboard functionality.
 
 ---
 
@@ -119,6 +119,16 @@ All production routes respond successfully with HTTP 200. The production deploym
 | Commit SHA | `03f1a4cc8e10dbb894572ec199da685de1b2c198` |
 | Commit URL | https://github.com/ImperioKDB/Updates/commit/03f1a4cc8e10dbb894572ec199da685de1b2c198 |
 
+### CI Identifier Correction Commit
+
+| Field | Value |
+|-------|-------|
+| Repository | ImperioKDB/Updates |
+| Directory | `SCHOLARS_FRONTEND_ENGINEERING/` |
+| File | `TEST_RESULTS.md` |
+| Commit SHA | `cc736d3004afb9be53a0d8ce0a05f60a58416c9f` |
+| Commit URL | https://github.com/ImperioKDB/Updates/commit/cc736d3004afb9be53a0d8ce0a05f60a58416c9f |
+
 ### Final Test Results
 
 | Check | Result |
@@ -130,7 +140,7 @@ All production routes respond successfully with HTTP 200. The production deploym
 | Check-run "Vercel Preview Comments" (ID: 133629487008) | Passed |
 | Commit status | success |
 | Production deployment | success (deployment ID: 7837384389) |
-| Production smoke tests | All routes return HTTP 200 |
+| Production smoke tests | Landing, sitemap, login return HTTP 200; onboarding/dashboard redirect to login with `next` parameter preserved |
 
 ### Outstanding Limitations
 
@@ -142,6 +152,12 @@ All production routes respond successfully with HTTP 200. The production deploym
 | Lighthouse/performance analysis | Not performed |
 | End-to-end user-journey testing | Not performed |
 | Real user registration | Not performed (no real data submitted) |
+| Authenticated onboarding completion | Not performed (onboarding redirects to login when unauthenticated) |
+| Dashboard functionality | Not performed (dashboard redirects to login when unauthenticated) |
+
+### Production Smoke Testing Limitation
+
+Production smoke testing was unauthenticated and read-only. The homepage, sitemap and login page rendered successfully. The onboarding and dashboard URLs redirected to login with their requested destinations preserved. Authenticated onboarding completion, dashboard functionality and actual scholarship application journeys remain unverified.
 
 ### Confirmations
 
@@ -151,6 +167,6 @@ All production routes respond successfully with HTTP 200. The production deploym
 - ✅ PR #35 was not touched; remains open
 - ✅ PR #36 was merged into `main` (merge commit: `8cd345df1fe8c79f041b5264ede7b3ab9a750221`)
 - ✅ Production deployment succeeded on `https://scholars.com.ng`
-- ✅ Production smoke tests passed (landing, sitemap, login, onboarding, dashboard all return HTTP 200)
+- ✅ Production smoke tests passed (landing, sitemap, login return HTTP 200; onboarding/dashboard redirect to login with `next` preserved)
 - ✅ No unrelated files or database changes introduced
 - ✅ Scholars visual identity and architecture preserved
