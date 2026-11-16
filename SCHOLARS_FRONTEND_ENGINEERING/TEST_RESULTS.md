@@ -14,7 +14,7 @@
 ### 1. Unit / integration suite (vitest)
 
 **Command:** `cd /workspaces/Scholars && npx vitest run`  
-**Result: PASSED**
+**Result: PASSED** (locally executed)
 
 ```
 Test Files  30 passed (30)
@@ -57,6 +57,18 @@ Not run — no ESLint configuration exists in the repository (running `next lint
 
 ---
 
+## GitHub CI checks (verified on GitHub)
+
+| Check | Status | Run identifier | Commit SHA |
+|-------|--------|---------------|------------|
+| Build | Passed | 133628909053 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Vercel Preview Comments | Passed | 133629487008 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Commit status | success | — | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+
+All CI checks ran on commit `503cbda9376fd8c0b116f2f97cc127a0ea73c98c`, the head of `feat/frontend-advertisement-readiness-clean`.
+
+---
+
 ## Tests NOT performed
 
 | Area | Specific check | Why not performed |
@@ -74,6 +86,18 @@ Not run — no ESLint configuration exists in the repository (running `next lint
 
 ---
 
+## Verification category summary
+
+| Category | Performed | Evidence |
+|----------|-----------|----------|
+| Locally executed tests (vitest) | Yes | 30 files / 201 tests passed |
+| TypeScript typecheck | Yes | `tsc --noEmit` exit 0 |
+| GitHub CI checks | Yes | Build run #133628909053 passed; Vercel Preview Comments run #133629487008 passed |
+| Vercel preview checks | Yes | Commit status `success` on `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Production deployment | No | Not deployed |
+
+---
+
 ## Honest statement
 
 All code changes (`app/onboarding/page.tsx`, `app/onboarding/page.test.tsx`) pass `tsc --noEmit` and the full vitest suite (30 files / 201 tests passed). No screenshot, Lighthouse score, Web Vital, frame-trace, or screen-reader result is included because none was measured. Advertisement readiness is functionally supported but cannot be fully claimed until `next build` completes with real Supabase credentials and browser/device/accessibility verification runs on the deployed build.
@@ -87,25 +111,13 @@ All code changes (`app/onboarding/page.tsx`, `app/onboarding/page.test.tsx`) pas
 | PR number | 36 |
 | PR URL | https://github.com/ImperioKDB/Scholars/pull/36 |
 | Head branch | `feat/frontend-advertisement-readiness-clean` |
-| Head commit SHA | `503cbda...` |
+| Head commit SHA | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
 | Base branch | `main` |
 | Mergeable | True |
-| Commits | 3 |
-| Additions | 412 |
+| Commits | 4 |
+| Additions | 438 |
 | Deletions | 9 |
 | Changed files | 2 |
-
----
-
-## CI status (as reported by GitHub)
-
-| Check | Status |
-|-------|--------|
-| Build | `in_progress` |
-| Vercel Preview Comments | `completed / success` |
-| Vercel | `pending` |
-
-Build check and Vercel status pending on GitHub — not claimed as passed.
 
 ---
 
@@ -126,3 +138,4 @@ The deferred Promise approach genuinely holds the retry request pending:
 11. `saveProfileAndGoDashboard` continues, navigates to `/dashboard`
 
 This proves the retry callback is stored in state (not executed immediately as a React state updater would), and the button correctly disappears while the request is in flight.
+
