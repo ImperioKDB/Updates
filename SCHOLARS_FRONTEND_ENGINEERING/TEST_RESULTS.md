@@ -59,13 +59,17 @@ Not run — no ESLint configuration exists in the repository (running `next lint
 
 ## GitHub CI checks (verified on GitHub)
 
-| Check | Status | Run identifier | Commit SHA |
-|-------|--------|---------------|------------|
-| Build | Passed | 133628909053 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
-| Vercel Preview Comments | Passed | 133629487008 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
-| Commit status | success | — | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Check | Status | Identifier type | Identifier value | Commit SHA |
+|-------|--------|----------------|------------------|------------|
+| GitHub Actions workflow ("ci") | Passed | Workflow run ID | 43961246867 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| GitHub Actions workflow ("ci") | Passed | Workflow run number | 531 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Check-run ("build") | Passed | Check-run ID | 133628909053 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Check-run ("Vercel Preview Comments") | Passed | Check-run ID | 133629487008 | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| Vercel commit status | success | — | — | `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
 
 All CI checks ran on commit `503cbda9376fd8c0b116f2f97cc127a0ea73c98c`, the head of `feat/frontend-advertisement-readiness-clean`.
+
+> **Important identifier distinction:** The numbers 43961246867 (run ID) and 531 (run number) identify the GitHub Actions workflow run. The numbers 133628909053 and 133629487008 identify individual check-runs within that workflow run. They are different identifier types and should not be conflated.
 
 ---
 
@@ -92,8 +96,8 @@ All CI checks ran on commit `503cbda9376fd8c0b116f2f97cc127a0ea73c98c`, the head
 |----------|-----------|----------|
 | Locally executed tests (vitest) | Yes | 30 files / 201 tests passed |
 | TypeScript typecheck | Yes | `tsc --noEmit` exit 0 |
-| GitHub CI checks | Yes | Build run #133628909053 passed; Vercel Preview Comments run #133629487008 passed |
-| Vercel preview checks | Yes | Commit status `success` on `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
+| GitHub CI checks | Yes | Workflow run ID 43961246867 (run #531) passed; check-run ID 133628909053 passed |
+| Vercel preview checks | Yes | Check-run ID 133629487008 passed; commit status `success` on `503cbda9376fd8c0b116f2f97cc127a0ea73c98c` |
 | Production deployment | No | Not deployed |
 
 ---
