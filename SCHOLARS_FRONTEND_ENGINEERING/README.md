@@ -3,22 +3,54 @@
 **Product:** Scholars — Nigerian student scholarship platform  
 **Repository (application):** ImperioKDB/Scholars  
 **Repository (this report):** ImperioKDB/Updates → `SCHOLARS_FRONTEND_ENGINEERING/`  
-**Default branch:** `main`  
+**Feature branch:** `feat/frontend-advertisement-readiness`  
 **Governing skill:** `@premium-frontend-engineering` (Premium Frontend Engineering)  
-**Status:** Documentation published — no application code changed, no merge, no production deployment.
+**Status:** Implementation complete and verified; documentation published. No production deployment, no merge to main.
 
 ---
 
 ## Purpose
 
-Scholars has a paid advertisement that could begin running at any moment. This report documents a Premium Frontend Engineering reconnaissance, audit, and recommended remediation plan focused on the advertisement landing experience and the complete first-time student journey (landing → registration → onboarding → dashboard → discovery), with particular attention to mobile, accessibility, performance, and SEO.
+Scholars has a paid advertisement that could begin running at any moment. This report documents the Premium Frontend Engineering work to improve the advertisement landing experience and the complete first-time student journey (landing → registration → onboarding → dashboard → discovery), with attention to mobile, accessibility, performance, and SEO.
 
 This report is published strictly as documentation to `ImperioKDB/Updates`. Per the engagement boundaries:
 
-- No changes were made to the Scholars application source code.
-- No frontend branch was merged.
-- Nothing was deployed to production.
-- No database schema, Supabase auth behaviour, matching/eligibility algorithm, or security control was modified.
+- No changes to database schemas or migrations.
+- No changes to Supabase authentication behaviour.
+- No changes to scholarship matching / eligibility algorithms.
+- No security controls weakened; no credentials exposed.
+- Nothing deployed to production; nothing merged into `main` without explicit authorization.
+
+---
+
+## What was actually done (implementation summary)
+
+| Area | Status | Detail |
+|------|--------|--------|
+| Onboarding failed-save retry actions | **Implemented** | `saveProfileAndGoDashboard`, `handleFinish`, `handleSkip` now expose an inline "Try again" button on failure; draft is preserved (cleared only after a successful, acknowledged save). |
+| Onboarding draft preservation | **Implemented & verified** | Drafts survive failed saves; `clearDraft()` runs only on successful save. Verified by source review + typecheck. |
+| Onboarding layout at 320–375px | **Implemented** | Card padding reduced from `p-5 sm:p-8` to `p-4 sm:p-5`; step-0 actions already stacked full-width on mobile. |
+| Auth return-path preservation | **Verified already present** | Password login, Google OAuth, signup, and callback all preserve and validate a same-origin `next` via `safeNextPath`. Default fallback `/dashboard` only when absent/unsafe. No code change required. |
+| Vitest configuration | **Fixed** | Committed `vitest.config.js` was corrupted (`opencodeimport`); corrected to valid `import`. Test suite now runs: 29 files, 194 tests passed. |
+| Accessibility (P1) | **Verified already present** | ConfirmDialog naming/focus, StepIndicator `aria-current`/live status, ReportScholarshipButton & DraftPanel labelling, mobile drawer focus capture/restore, combobox semantics, reduced-motion gating — all present in current source. |
+| Visual consistency (P2) | **Verified consistent** | Navy/parchment/emerald palette, Fraunces/Manrope typography, `rounded-seal` radius, `shadow-card` elevation preserved; no generic SaaS styling introduced. |
+
+---
+
+## What was NOT implemented (and why)
+
+- **Production build (`next build`)**: Cannot complete in this environment. `.env.local` defines `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_APP_URL` but they are empty (only `VERCEL_OIDC_TOKEN` is set). Prerendering fails with `supabaseUrl is required`. This is a **configuration/environment prerequisite**, not a code defect. A real deployment must supply these secrets before build.
+- **Browser/E2E tests**: No Playwright/Cypress tooling configured; not performed.
+- **Device testing at 320–1440px, screen-reader sessions (VoiceOver/NVDA), Lighthouse, Chrome performance trace**: Not performed in this session. Honestly flagged as outstanding.
+
+---
+
+## Advertisement-readiness assessment
+
+The first-time student journey is functionally sound for ad traffic: landing, auth (with return-path preservation), onboarding (with retry + draft safety), dashboard, and discovery all load server-side and pass unit tests + typecheck. **However**, advertisement readiness cannot be fully claimed until:
+
+1. The deployment environment supplies `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_APP_URL` and `next build` completes.
+2. Browser/device testing (320–1440px) and accessibility verification are run on the deployed build.
 
 ---
 
@@ -26,52 +58,14 @@ This report is published strictly as documentation to `ImperioKDB/Updates`. Per 
 
 | Document | Contents |
 |----------|----------|
-| `README.md` | This file: purpose, scope, how to read, publication status, links. |
-| `FRONTEND_AUDIT.md` | Phase 1 reconnaissance and Phase 2 detailed frontend audit: current implementation, problem, impact, proposed improvement, priority, relevant files for every identified issue. |
-| `IMPLEMENTATION_REPORT.md` | Phase 3 visual direction and Phase 4 implementation plan: design decisions, approved high-impact improvements (P0–P3), files created/modified/removed (none in application), mobile/responsive/accessibility/performance/SEO recommendations. |
-| `TEST_RESULTS.md` | Phase 5 quality assurance: tests actually performed (vitest 194/29 passed; build environment limitation), tests not performed (browser/E2E, device, screen-reader, Lighthouse, trace), actual results, and honest limitations. |
+| `README.md` | This file: purpose, scope, implementation summary, publication status, links. |
+| `FRONTEND_AUDIT.md` | Re-validated findings against current source: current implementation, problem, impact, proposed improvement, priority, relevant files; distinguishes implemented vs. already-present vs. outstanding. |
+| `IMPLEMENTATION_REPORT.md` | Design decisions, files created/modified/removed, rationale, P1/P2 verification, mobile/responsive/accessibility/performance/SEO notes. |
+| `TEST_RESULTS.md` | Tests actually performed (vitest 194/29 passed; typecheck pass; build environment limitation) and tests not performed. |
 
 ---
 
-## How to read this report
-
-- **Completed work:** reconnaissance, source-level audit, test execution, report authorship and publication.
-- **Recommendations not yet implemented:** all frontend code changes (P0–P3). None have been applied to the Scholars repository.
-- **Tests actually performed:** `vitest run` (29 files, 194 tests passed) and an attempted `next build`.
-- **Tests not performed:** browser rendering, device testing at 320–1440px, screen-reader sessions (VoiceOver/NVDA), keyboard-only traversal, `prefers-reduced-motion` verification, Lighthouse, Chrome performance trace, production bundle analysis.
-
----
-
-## Publication status
-
-| Item | Detail |
-|------|--------|
-| Repository | `https://github.com/ImperioKDB/Updates` |
-| Target directory | `SCHOLARS_FRONTEND_ENGINEERING/` |
-| Branch | `main` (default) |
-| Commit message | `docs(scholars): publish premium frontend engineering report` |
-| Authentication | `GH_PAT` environment variable (never hardcoded, never printed) |
-| Application changes | None |
-
-Links to published documents are listed at the end of this README once publication is verified.
-
----
-
-## Engagement boundaries (safety)
-
-The following were explicitly preserved and not touched:
-
-- Production database schemas (no migrations).
-- Supabase authentication behaviour (no auth config changes).
-- Scholarship matching / eligibility algorithms (no matching-engine changes).
-- Security controls (no bypass of approved data projections).
-- Backend contracts (no unapproved backend contracts created).
-- Privileged data / write actions remain server-side.
-- No migration, permission, publication, payment, or external-action behaviour created from a visual request.
-
----
-
-## Links to published documents (verified after publication)
+## Links to published documents
 
 1. [README.md](./README.md)
 2. [FRONTEND_AUDIT.md](./FRONTEND_AUDIT.md)
@@ -80,4 +74,14 @@ The following were explicitly preserved and not touched:
 
 ---
 
-*This report distinguishes measured results from acceptance targets and recommendations, per the Premium Frontend Engineering skill. No result is claimed unless it was actually observed.*
+## Safety boundaries honoured
+
+- No production database schema changes; no migrations.
+- No Supabase authentication behaviour changes.
+- No scholarship matching / eligibility algorithm changes.
+- No security controls bypassed; no approved data projections circumvented.
+- No privileged data or write actions moved to the browser.
+- No migration, permission, publication, payment, or external-action behaviour created.
+- Nothing deployed to production; no merge into `main`.
+
+Work performed on dedicated feature branch `feat/frontend-advertisement-readiness`.
