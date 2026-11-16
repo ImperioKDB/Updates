@@ -3,9 +3,10 @@
 **Product:** Scholars — Nigerian student scholarship platform  
 **Repository (application):** ImperioKDB/Scholars  
 **Repository (this report):** ImperioKDB/Updates → `SCHOLARS_FRONTEND_ENGINEERING/`  
-**Feature branch:** `feat/frontend-advertisement-readiness`  
+**Pull request:** https://github.com/ImperioKDB/Scholars/pull/36  
+**Feature branch:** `feat/frontend-advertisement-readiness-clean`  
 **Governing skill:** `@premium-frontend-engineering` (Premium Frontend Engineering)  
-**Status:** Implementation complete and verified; documentation published. No production deployment, no merge to main.
+**Status:** Clean PR created (PR #36), not merged, not deployed. Replaces PR #35 which contained unrelated Resource Centre files.
 
 ---
 
@@ -31,7 +32,7 @@ This report is published strictly as documentation to `ImperioKDB/Updates`. Per 
 | Onboarding draft preservation | **Implemented & verified** | Drafts survive failed saves; `clearDraft()` runs only on successful save. Verified by source review + typecheck. |
 | Onboarding layout at 320–375px | **Implemented** | Card padding reduced from `p-5 sm:p-8` to `p-4 sm:p-5`; step-0 actions already stacked full-width on mobile. |
 | Auth return-path preservation | **Verified already present** | Password login, Google OAuth, signup, and callback all preserve and validate a same-origin `next` via `safeNextPath`. Default fallback `/dashboard` only when absent/unsafe. No code change required. |
-| Vitest configuration | **Fixed** | Committed `vitest.config.js` was corrupted (`opencodeimport`); corrected to valid `import`. Test suite now runs: 29 files, 194 tests passed. |
+| Vitest configuration | **Already fixed on main** | `vitest.config.js` contains `import { defineConfig } from "vitest/config";` on main. No change needed. |
 | Accessibility (P1) | **Verified already present** | ConfirmDialog naming/focus, StepIndicator `aria-current`/live status, ReportScholarshipButton & DraftPanel labelling, mobile drawer focus capture/restore, combobox semantics, reduced-motion gating — all present in current source. |
 | Visual consistency (P2) | **Verified consistent** | Navy/parchment/emerald palette, Fraunces/Manrope typography, `rounded-seal` radius, `shadow-card` elevation preserved; no generic SaaS styling introduced. |
 
@@ -84,4 +85,4 @@ The first-time student journey is functionally sound for ad traffic: landing, au
 - No migration, permission, publication, payment, or external-action behaviour created.
 - Nothing deployed to production; no merge into `main`.
 
-Work performed on dedicated feature branch `feat/frontend-advertisement-readiness`.
+Work performed on dedicated feature branch `feat/frontend-advertisement-readiness-clean`.
