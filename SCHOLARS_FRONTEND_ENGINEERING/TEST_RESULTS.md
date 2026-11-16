@@ -19,7 +19,7 @@
 ```
 Test Files  30 passed (30)
    Tests  201 passed (201)
-Duration  68.30s
+Duration  64.47s
 ```
 
 This includes **7 onboarding retry regression tests** in `app/onboarding/page.test.tsx`:
@@ -31,7 +31,7 @@ This includes **7 onboarding retry regression tests** in `app/onboarding/page.te
 | "handleFinish failure then successful retry" | Final onboarding save failure → retry succeeds → navigates to `/dashboard`. |
 | "handleSkip failure then successful retry" | Skip save failure → retry succeeds → navigates to `/dashboard`. |
 | "draft preserved on failed save, cleared only after successful completion" | `localStorage.removeItem` (clearDraft) NOT called on failed save; IS called after successful save. |
-| "retry controls disappear while a retry is running" | Retry button present before click; disappears while retry in flight (`retrySave` set to null). |
+| "retry button unavailable while a retry request is in flight" | Retry button present before click; disappears while retry in flight (`retrySave` set to null at save start). Uses a deferred Promise to hold the retry request pending, then resolves it and verifies navigation. |
 | "successful retry navigation and save endpoints called correctly" | Both save calls are POST to `/api/profile` with `full_name` in body; navigation to `/dashboard` occurs. |
 
 **Test files exercised (30):**
@@ -45,9 +45,11 @@ All original test files plus `app/onboarding/page.test.tsx` (7 tests). Original 
 **Result: PASSED** (exit 0, no output).  
 Typechecks the onboarding fix (`() => fn` callback wrappers), the test file, and all application source.
 
----
+### 3. ESLint
 
-### 3. Production build (`next build`)
+Not run — no ESLint configuration exists in the repository (running `next lint` prompts for interactive setup).
+
+### 4. Production build (`next build`)
 
 **Result: NOT COMPLETABLE — environment limitation.**
 
@@ -85,7 +87,7 @@ All code changes (`app/onboarding/page.tsx`, `app/onboarding/page.test.tsx`) pas
 | PR number | 36 |
 | PR URL | https://github.com/ImperioKDB/Scholars/pull/36 |
 | Head branch | `feat/frontend-advertisement-readiness-clean` |
-| Head commit SHA | `f2de5c1d06a5...` |
+| Head commit SHA | `503cbda...` |
 | Base branch | `main` |
 | Mergeable | True |
 | Commits | 3 |
@@ -104,3 +106,23 @@ All code changes (`app/onboarding/page.tsx`, `app/onboarding/page.test.tsx`) pas
 | Vercel | `pending` |
 
 Build check and Vercel status pending on GitHub — not claimed as passed.
+
+---
+
+## In-flight retry test verification
+
+The deferred Promise approach genuinely holds the retry request pending:
+
+1. `failPostProfileCount` is set to 2 (tracking POST consumes 1, save POST consumes 1)
+2. On page load, the tracking POST to `/api/profile` fires and fails (consuming 1 failure)
+3. After `fillStep0AndSubmit()`, the save POST to `/api/profile` fails (consuming the 2nd failure)
+4. The retry button appears
+5. Before clicking retry, `deferredResolve` is set to a Promise resolve function
+6. Clicking retry triggers `saveProfileAndGoDashboard()`, which calls `setRetrySave(null)` then `fetch("/api/profile", { method: "POST" })`
+7. The fetch mock checks `if (deferredResolve)` — truthy — and returns a new pending Promise, storing the resolve function
+8. The retry button disappears (because `setRetrySave(null)` was called synchronously before the fetch)
+9. The saving state is visible
+10. The test calls `deferredResolve({ ok: true, ... })`, resolving the fetch promise
+11. `saveProfileAndGoDashboard` continues, navigates to `/dashboard`
+
+This proves the retry callback is stored in state (not executed immediately as a React state updater would), and the button correctly disappears while the request is in flight.
