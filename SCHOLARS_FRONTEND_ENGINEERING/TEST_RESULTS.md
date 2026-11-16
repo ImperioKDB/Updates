@@ -2,8 +2,9 @@
 
 **Product:** Scholars — Nigerian student scholarship platform  
 **Repository (application):** ImperioKDB/Scholars  
-**Feature branch:** `feat/frontend-advertisement-readiness`  
-**Governing skill:** `@premium-frontend-engineering`  
+**Feature branch:** `feat/frontend-advertisement-readiness-clean`  
+**Pull request:** https://github.com/ImperioKDB/Scholars/pull/36  
+**Governing skill:** `@premium-frontend-engineering` (Premium Frontend Engineering)  
 **Status:** Actual results only; no results invented. Tests not performed are explicitly listed.
 
 ---
@@ -13,15 +14,15 @@
 ### 1. Unit / integration suite (vitest)
 
 **Command:** `cd /workspaces/Scholars && npx vitest run`  
-**Prerequisite fix:** The committed `vitest.config.js` was corrupted (line 1 read `opencodeimport { ... }`). Corrected to `import { defineConfig } from "vitest/config";` — alias `@` → project root, jsdom environment, automatic JSX. No other config change.
+**Prerequisite:** The committed `vitest.config.js` was previously corrupted (line 1 read `opencodeimport { ... }`). It is **already fixed on `main`** (`import { defineConfig } from "vitest/config";`). No config change was included in this PR.
 
 **Result: PASSED**
 
 ```
 Test Files  29 passed (29)
    Tests  194 passed (194)
-Start at  12:16:09
-Duration  53.71s (transform 485ms, setup 0ms, collect 1.00s, tests 29.43s, environment 17.34s, prepare 1.73s)
+Start at  13:05:17
+Duration  59.57s (transform 651ms, setup 0ms, collect 1.24s, tests 30.67s, environment 21.11s, prepare 2.01s)
 ```
 
 **Test files exercised (29):**
@@ -74,4 +75,4 @@ The following Premium Frontend Engineering verification steps were **not** perfo
 
 ## Honest statement
 
-All code changes (`vitest.config.js`, `app/onboarding/page.tsx`) pass `tsc --noEmit` and the full vitest suite (194/194). No screenshot, Lighthouse score, Web Vital, frame-trace, or screen-reader result is included because none was measured. Advertisement readiness is **functionally supported** by the implementation but **cannot be fully claimed** until `next build` completes with real Supabase credentials and browser/device/accessibility verification is run on the deployed build.
+All code changes (`app/onboarding/page.tsx`) pass `tsc --noEmit` and the full vitest suite (194/194). No screenshot, Lighthouse score, Web Vital, frame-trace, or screen-reader result is included because none was measured. Advertisement readiness is **functionally supported** by the implementation but **cannot be fully claimed** until `next build` completes with real Supabase credentials and browser/device/accessibility verification is run on the deployed build.
