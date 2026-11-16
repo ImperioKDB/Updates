@@ -19,16 +19,24 @@
 **Result: PASSED**
 
 ```
-Test Files  29 passed (29)
-   Tests  194 passed (194)
-Start at  13:05:17
-Duration  59.57s (transform 651ms, setup 0ms, collect 1.24s, tests 30.67s, environment 21.11s, prepare 2.01s)
+Test Files  30 passed (30)
+   Tests  197 passed (197)
+Start at  13:27:08
+Duration  76.74s (transform 914ms, setup 0ms, collect 2.11s, tests 35.12s, environment 29.88s, prepare 2.74s)
 ```
 
-**Test files exercised (29):**
-`lib/discovery/safeFetch.test.ts`, `lib/auth/return-destination.test.ts` (12 — covers `safeNextPath` same-origin whitelisting underpinning auth return paths), `lib/auth/redirect-origin.test.ts`, `lib/auth/cookie-domain.test.ts`, `lib/auth/pwa-session.test.ts`, `lib/auth/otp-input.test.ts`, `lib/canonical-host-redirect.test.ts`, `lib/canonical-host-redirect.integration.test.ts`, `lib/matching/engine.test.ts`, `lib/matching/discipline.test.ts`, `lib/discovery/adapters.test.ts`, `lib/fetch.test.ts`, `lib/onboarding-prompts.test.ts`, `lib/public-application.test.ts`, `lib/public-pagination.test.ts`, `lib/push/broadcastContent.test.ts`, `lib/email/batches.test.ts`, `lib/admin/guard.test.ts`, `lib/whatsapp/communityInvitations.test.ts`, `app/manifest.test.ts`, `app/sitemap.test.ts` (18 — SEO sitemap correctness), `app/resources/page.test.ts`, `components/Combobox.test.tsx` (11 — combobox behaviour), `components/ResourceArticleBody.test.tsx`, `components/resource-center-search.test.tsx`, `components/resource-center.test.ts`.
+This includes **3 new regression tests** in `app/onboarding/page.test.tsx` covering the retry bug fix:
 
-**Interpretation:** The full unit/integration suite is green. The `return-destination` tests validate the `safeNextPath` whitelist (same-origin relative paths only; blocks `//evil.com`, backslash tricks, control characters) that guards auth return-path redirects. No vitest test currently exercises the onboarding page's retry actions directly (the route is not imported by any test file) — that is a test gap.
+| Test | What it verifies |
+|------|-----------------|
+| "does not execute the retry callback automatically; retry calls save again on click" | After a failed profile save, `fetch` is called exactly once (proving `setRetrySave(() => fn)` stores the callback rather than executing it as a state updater). |
+| "preserves the draft on failed save (clearDraft not called on failure)" | On failed save, `localStorage.removeItem` (clearDraft) is NOT called — the draft survives. |
+| "redirects to login on HTTP 401 during save" | On HTTP 401, `router.replace` is called with a `/login` path. |
+
+**Test files exercised (30):**
+All 29 original test files plus the new `app/onboarding/page.test.tsx` (3 tests). The original 29 files include `lib/auth/return-destination.test.ts` (12 — covers `safeNextPath` same-origin whitelisting underpinning auth return paths), `app/sitemap.test.ts` (18 — SEO sitemap correctness), `components/Combobox.test.tsx` (11 — combobox behaviour), and others.
+
+**Interpretation:** The full unit/integration suite is green. The `return-destination` tests validate the `safeNextPath` whitelist (same-origin relative paths only; blocks `//evil.com`, backslash tricks, control characters) that guards auth return-path redirects.
 
 ---
 
@@ -36,7 +44,7 @@ Duration  59.57s (transform 651ms, setup 0ms, collect 1.24s, tests 30.67s, envir
 
 **Command:** `cd /workspaces/Scholars && npx tsc --noEmit`  
 **Result: PASSED** (exit 0, no output).  
-This typechecks the onboarding edits (`retrySave` state, retry bindings, JSX) and all other application source.
+This typechecks the onboarding fix (`() => fn` callback wrappers, `retrySave` state type `(() => void) | null`), the new test file, and all other application source.
 
 ---
 
@@ -69,10 +77,9 @@ The following Premium Frontend Engineering verification steps were **not** perfo
 | SEO crawl | Search-engine rendering, structured-data validation | Requires live deployment |
 | E2E user journeys | Ad-click → register → onboard → match flow | No E2E suite (Playwright/Cypress) configured |
 | Visual regression | Screenshot comparison across breakpoints | No screenshots captured; no visual-regression tooling |
-| Onboarding retry actions | Direct vitest test of `retrySave` behaviour | Route not imported by any test file; test gap |
 
 ---
 
 ## Honest statement
 
-All code changes (`app/onboarding/page.tsx`) pass `tsc --noEmit` and the full vitest suite (194/194). No screenshot, Lighthouse score, Web Vital, frame-trace, or screen-reader result is included because none was measured. Advertisement readiness is **functionally supported** by the implementation but **cannot be fully claimed** until `next build` completes with real Supabase credentials and browser/device/accessibility verification is run on the deployed build.
+All code changes (`app/onboarding/page.tsx`, `app/onboarding/page.test.tsx`) pass `tsc --noEmit` and the full vitest suite (30 files / 197 tests passed). No screenshot, Lighthouse score, Web Vital, frame-trace, or screen-reader result is included because none was measured. Advertisement readiness is **functionally supported** by the implementation but **cannot be fully claimed** until `next build` completes with real Supabase credentials and browser/device/accessibility verification is run on the deployed build.
