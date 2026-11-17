@@ -13,12 +13,15 @@
 
 ## Executive Summary
 
-An independent read-only audit of the Task 003 implementation was conducted. The implementation exists as committed (6 agents, 6 workflows, 4 project configs, documentation, tests), all validation checks pass (65/65), and no secrets were committed. However, **critical process and readiness issues were identified**:
+An independent read-only audit of the Task 003 implementation was conducted against `ImperioKDB/agentic-workbench`. The implementation exists as committed (6 agents, 6 workflows, 4 project configs, documentation, tests), all validation checks pass (65/65), and no secrets were committed. However, **critical process and readiness issues were identified**:
 
-1. **Process violation:** All implementation changes were pushed **directly to `main`** with no feature branch, no pull request, and no review. Zero PRs exist in `ImperioKDB/agentic-workbench`.
-2. **No runtime testing:** All 65 validation checks are structural (file existence, text matching, JSON validity). Zero actual agent workflows were executed at runtime.
-3. **No branch protection:** `main` has no branch protection (private repo, not GitHub Pro), so there are no required PR reviews, no status checks, and no enforce admins.
-4. **Contradictory status:** `TEST_MANIFEST.md` claims "Executed" but all 8 scenarios were verified by specification review only, not actual execution. `ROADMAP.md` lists Testing as "Pending."
+1. **Process violation (CRITICAL):** All 7 Task 003 implementation commits were pushed **directly to `main`** with no feature branch, no pull request, and no review. Zero PRs exist in `ImperioKDB/agentic-workbench`. This bypasses the repository's own documented approval gates.
+
+2. **No runtime testing (CRITICAL):** All 65 validation checks are structural (file existence, text matching, JSON validity). Zero actual agent workflows were executed at runtime. The 8 claimed workflow scenarios were verified by specification review only.
+
+3. **No branch protection (HIGH):** `main` has no branch protection (private repo, not GitHub Pro), so there are no required PR reviews, no status checks, and no enforce admins. Anyone with push access can push directly to `main`.
+
+4. **Contradictory documentation (MEDIUM):** `ROADMAP.md` lists Testing as "Pending" while `TEST_MANIFEST.md` claims "Executed." Additionally, `TEST_MANIFEST.md` is untracked (exists on disk but not committed to git).
 
 **Task 004 is NOT safe to begin** until this audit is reviewed and the process violations are addressed.
 
@@ -34,11 +37,12 @@ An independent read-only audit of the Task 003 implementation was conducted. The
 | Owner | `ImperioKDB` (type: User) |
 | Visibility | Private |
 | Default branch | `main` |
-| Remote HEAD | `origin/main` |
 | Repository ID | 1461073610 |
 | Created at | 2026-11-17T07:38:58Z |
+| Pushed at | 2026-11-17T08:12:15Z |
+| HTML URL | https://github.com/ImperioKDB/agentic-workbench |
 
-### Commit history (all commits, linear chain on `main`)
+### Commit history (all 7 commits, single linear chain on `main`)
 
 | Full SHA | Short SHA | Parent | Author | Date | Message |
 |----------|-----------|--------|--------|------|---------|
@@ -55,13 +59,19 @@ Commit `f506a27e7ac436ec867bfecdbf7d001e3ae58f9b` is reachable from:
 - `remotes/origin/HEAD -> origin/main`
 - `remotes/origin/main`
 
-No feature branches exist. No other branches contain these commits.
+No feature branches exist. No other branches contain these commits. All tags: none.
 
 ### Pull requests in `ImperioKDB/agentic-workbench`
 
 **Total PRs: 0**
 
 No implementation PR exists in the target repository. All implementation was pushed directly to `main` without review.
+
+### Authentication/access finding
+
+- `GITHUB_TOKEN` returns **HTTP 404** when accessing `ImperioKDB/agentic-workbench` (private repo access limitation)
+- `GH_PAT` successfully accesses the repository (confirmed write/create access)
+- This demonstrates that `GITHUB_TOKEN` lacks access to private repositories, which explains earlier HTTP 404 responses
 
 ### Observed facts vs assumptions
 
@@ -72,50 +82,33 @@ No implementation PR exists in the target repository. All implementation was pus
 - All commits were authored by the same user (Abolaji Bright)
 - All commits were pushed directly to `main` between 07:39 and 08:11 on 2026-11-17
 
-**Assumptions (none required — all findings are directly observed):**
-- None.
-
 ---
 
 ## Phase 2 — Implementation Inspection
 
 ### Files verified to exist and match the implementation report
 
-All files claimed in the implementation report were inspected and confirmed present:
+All 31 tracked files were inspected. All files claimed in the implementation report were confirmed present:
 
-| Category | File | Exists | Matches Report |
-|----------|------|--------|----------------|
-| Config | `opencode.json` | Yes | Yes |
-| Instructions | `AGENTS.md` | Yes | Yes |
-| Agent spec | `agents/orchestrator.md` | Yes | Yes |
-| Agent spec | `agents/researcher.md` | Yes | Yes |
-| Agent spec | `agents/planner.md` | Yes | Yes |
-| Agent spec | `agents/developer.md` | Yes | Yes |
-| Agent spec | `agents/qa-engineer.md` | Yes | Yes |
-| Agent spec | `agents/reviewer.md` | Yes | Yes |
-| Workflow | `workflows/development/README.md` | Yes | Yes |
-| Workflow | `workflows/debugging/README.md` | Yes | Yes |
-| Workflow | `workflows/auditing/README.md` | Yes | Yes |
-| Workflow | `workflows/research/README.md` | Yes | Yes |
-| Workflow | `workflows/documentation/README.md` | Yes | Yes |
-| Workflow | `workflows/modification/README.md` | Yes | Yes |
-| Project config | `projects/scholars/config.json` | Yes | Yes |
-| Project config | `projects/resource-centre/config.json` | Yes | Yes |
-| Project config | `projects/serena/config.json` | Yes | Yes |
-| Project config | `projects/ai-video-factory/config.json` | Yes | Yes |
-| Project registry | `projects/registry.json` | Yes | Yes |
-| Test script | `tests/validate.py` | Yes | Yes |
-| Test manifest | `tests/TEST_MANIFEST.md` | Yes | Yes |
-| Docs | `docs/ARCHITECTURE.md` | Yes | Yes |
-| Docs | `docs/SECURITY.md` | Yes | Yes |
-| Docs | `docs/ROADMAP.md` | Yes | Yes |
-| Docs | `README.md` | Yes | Yes |
+| Category | Count | Files |
+|----------|-------|-------|
+| Agent specifications | 6 | `agents/orchestrator.md`, `agents/researcher.md`, `agents/planner.md`, `agents/developer.md`, `agents/qa-engineer.md`, `agents/reviewer.md` |
+| Workflow definitions | 6 | `workflows/development/README.md`, `workflows/debugging/README.md`, `workflows/auditing/README.md`, `workflows/research/README.md`, `workflows/documentation/README.md`, `workflows/modification/README.md` |
+| Project configs | 4 | `projects/scholars/config.json`, `projects/resource-centre/config.json`, `projects/serena/config.json`, `projects/ai-video-factory/config.json` |
+| Project READMEs | 4 | `projects/scholars/README.md`, `projects/resource-centre/README.md`, `projects/serena/README.md`, `projects/ai-video-factory/README.md` |
+| Project registry | 1 | `projects/registry.json` |
+| Test environment | 1 | `tests/validate.py` |
+| Documentation | 5 | `docs/ARCHITECTURE.md`, `docs/SECURITY.md`, `docs/ROADMAP.md`, `README.md`, `AGENTS.md` |
+| Config | 1 | `opencode.json` |
+| Other | 1 | `.gitignore` |
+
+**Critical finding:** `tests/TEST_MANIFEST.md` exists on disk but is **untracked** (not committed to git). The implementation report claimed it was committed, but `git ls-files` confirms it is not part of the repository history. It exists only as a local untracked file.
 
 ### OpenCode configuration review (`opencode.json`)
 
 **Valid JSON:** Yes  
 **Version:** 0.2.0  
-**Unsupported fields:** None — all fields are custom project fields, not OpenCode schema fields
+**Unsupported fields:** None — all fields are custom project fields. OpenCode does not publish a public schema for agent/workflow definition files.
 
 **Configuration structure:**
 - `agents`: 6 agents defined with name, file, description
@@ -123,15 +116,8 @@ All files claimed in the implementation report were inspected and confirmed pres
 - `workflows`: 6 workflow directories defined
 - `projects`: 4 project directories defined
 - `repository`: owner, name, private, default_branch — all correct
-- `boundaries`: task_003, do_not_modify, reporting_repo, no_autonomous_merge, no_autonomous_deploy, no_credential_printing, no_secret_in_reports
+- `boundaries`: task_003 ("in_progress"), do_not_modify, reporting_repo, no_autonomous_merge, no_autonomous_deploy, no_credential_printing, no_secret_in_reports
 - `approval_gates`: consequential_implementation, production_changes, repository_creation, pr_merge, credential_rotation — all set to "human"
-
-**Configuration assessment:**
-- `opencode.json` uses custom fields, not official OpenCode schema fields (OpenCode does not publish a public schema for `opencode.json` agent/workflow definitions)
-- All agent file paths resolve to existing files
-- All workflow directory paths resolve to existing directories
-- All project directory paths resolve to existing directories
-- Approval gates are properly defined with "human" as the required approver
 
 ### Agent specifications review
 
@@ -237,13 +223,14 @@ All 6 workflows contain: purpose, step-by-step instructions, ASCII flow diagram,
 
 ## Phase 4 — Security and Branch Protection
 
-### Secret scan
+### Secret scan (independent grep across all committed files)
 
-**Independent grep scan across all committed files:**
-- No actual credentials, tokens, API keys, or passwords found in any committed file
-- `tests/validate.py` contains regex *patterns* for detecting secrets (e.g., `ghu_[A-Za-z0-9]{20,}`), but these are detection patterns, not actual secrets
-- `gh auth token` was never executed (confirmed in docs/SECURITY.md)
-- No environment variable contents were printed or inspected
+**Result: No actual credentials found**
+
+All "secret" matches are false positives:
+- `tests/validate.py` lines 120-123 contain regex *patterns* for detecting secrets (e.g., `ghu_[A-Za-z0-9]{20,}`, `github_pat_`, `ghp_`, `x-access-token:`), not actual secrets
+- `docs/SECURITY.md` line 55 mentions `GH_TOKEN` in the context of documenting the historical Task 001 exposure incident — documentation, not an actual credential
+- Git history matches (4) are the same regex patterns being added in commits
 
 ### Branch protection settings
 
@@ -283,7 +270,7 @@ All 6 workflows contain: purpose, step-by-step instructions, ASCII flow diagram,
 
 ### Process violation identified
 
-**Violation:** All Task 003 implementation changes (7 commits) were pushed **directly to `main`** with:
+**Violation:** All 7 Task 003 implementation commits were pushed **directly to `main`** with:
 - No feature branch
 - No pull request in `ImperioKDB/agentic-workbench`
 - No code review
@@ -366,4 +353,4 @@ This violates the repository's own documented approval gates (PR merge requires 
 
 ---
 
-*This report is an independent read-only audit. No files were modified, no repositories were created or deleted, no branches were created in the target repository, and no pull requests were merged. PRs #15 and #16 remain open awaiting human review.*
+*This report is an independent read-only audit. No files were modified, no repositories were created or deleted, no branches were created in the target repository, and no pull requests were merged. PRs #15, #16, and #17 remain open awaiting human review.*
