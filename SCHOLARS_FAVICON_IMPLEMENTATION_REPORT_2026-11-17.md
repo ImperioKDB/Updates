@@ -136,7 +136,7 @@ Note: prerendering of several pages errored with `@supabase/ssr: Your project's 
 
 ### Production deployment verification (VERIFIED)
 
-PR #37 was merged (squash merge commit `b4d1ff91ad53e44741a15d17384bf480d2570524`) and deployed to production via Vercel. The Vercel CI check on the PR reported "Deployment has completed" (state: success). Production was verified after deployment.
+PR #37 was merged (squash merge commit `b4d1ff91ad53e44741a15d17384bf480d2570524`) and deployed to production via Vercel. The Vercel CI check on the PR reported "Deployment has completed" (state: success). Production was verified after deployment on 2026-11-17.
 
 Baseline before deploy:
 | URL | Baseline status |
@@ -242,11 +242,11 @@ This must **NOT** be reported as successful unless independently verified in Goo
 | Scholars pull request | https://github.com/ImperioKDB/Scholars/pull/37 (MERGED) |
 | Updates repository | https://github.com/ImperioKDB/Updates |
 | Updates report branch | `reports/scholars-favicon-implementation-2026-11-17` |
-| Updates report commit SHA | `0016b4a410a85bd5fa3e3d6933dadd8c6d3a28c7` |
+| Updates report commit SHA | `cbbf211dd041692be5ff2dcfb4a14531405732fa` |
 | Updates pull request | https://github.com/ImperioKDB/Updates/pull/12 (OPEN) |
 | Production domain | https://scholars.com.ng (served via www.scholars.com.ng) |
 | Updates report file | `SCHOLARS_FAVICON_IMPLEMENTATION_REPORT_2026-11-17.md` |
 
 ---
 
-**Report publication:** This report is published to ImperioKDB/Updates at branch `reports/scholars-favicon-implementation-2026-11-17` (commit `0016b4a410a85bd5fa3e3d6933dadd8c6d3a28c7`) via Pull Request #12: https://github.com/ImperioKDB/Updates/pull/12 (OPEN). File confirmed accessible on GitHub (raw.githubusercontent.com returns HTTP 200).
+**Report publication:** This report is published to ImperioKDB/Updates at branch `reports/scholars-favicon-implementation-2026-11-17` (commit `cbbf211dd041692be5ff2dcfb4a14531405732fa`) via Pull Request #12: https://github.com/ImperioKDB/Updates/pull/12 (OPEN). File confirmed accessible on GitHub (raw.githubusercontent.com returns HTTP 200).
