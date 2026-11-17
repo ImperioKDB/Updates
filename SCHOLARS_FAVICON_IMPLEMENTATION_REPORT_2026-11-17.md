@@ -14,7 +14,7 @@ The existing official Scholars logo (`public/logo.svg` / `public/logo.png`) was 
 
 Favicon assets were generated from the original logo without altering the brand (no redesign, recolouring, simplification, or modification). Only resizing and format conversion for favicon compatibility were performed. Aspect ratio and transparency were preserved; no unwanted background was introduced.
 
-The implementation is **committed on a dedicated branch and submitted as Pull Request #37 on ImperioKDB/Scholars**, but it has **NOT been merged or deployed to production** at the time of this report. Live production verification (HTTP 200 on the production domain) and rendered-favicon confirmation remain outstanding pending deploy.
+The implementation was **submitted as Pull Request #37 on ImperioKDB/Scholars, reviewed, merged (squash merge), and deployed to production** at `https://scholars.com.ng` / `https://www.scholars.com.ng`. Live production verification (HTTP 200 for all five favicon assets) and production metadata verification have been completed successfully.
 
 ## 2. Objective and scope
 
@@ -49,11 +49,11 @@ All generated assets were committed to `public/` in the Scholars repository so t
 
 | Asset | Path | Format | Dimensions | Transparency | Brand colours preserved | Verification status |
 |-------|------|--------|------------|--------------|-------------------------|---------------------|
-| Favicon (multi-size) | `public/favicon.ico` | ICO | 16×16, 32×32, 48×48 | Yes (32 bpp RGBA) | Yes | VERIFIED (local) |
-| Favicon PNG | `public/favicon-32x32.png` | PNG | 32 × 32 | Yes (RGBA) | Yes | VERIFIED (local) |
-| Favicon PNG | `public/favicon-48x48.png` | PNG | 48 × 48 | Yes (RGBA) | Yes | VERIFIED (local) |
-| Apple touch icon | `public/apple-touch-icon.png` | PNG | 180 × 180 | Yes (RGBA) | Yes | VERIFIED (local) |
-| SVG favicon | `public/favicon.svg` | SVG | viewBox 0 0 1024 1024 | Yes | Yes | VERIFIED (local) |
+| Favicon (multi-size) | `public/favicon.ico` | ICO | 16×16, 32×32, 48×48 | Yes (32 bpp RGBA) | Yes | VERIFIED (local + production) |
+| Favicon PNG | `public/favicon-32x32.png` | PNG | 32 × 32 | Yes (RGBA) | Yes | VERIFIED (local + production) |
+| Favicon PNG | `public/favicon-48x48.png` | PNG | 48 × 48 | Yes (RGBA) | Yes | VERIFIED (local + production) |
+| Apple touch icon | `public/apple-touch-icon.png` | PNG | 180 × 180 | Yes (RGBA) | Yes | VERIFIED (local + production) |
+| SVG favicon | `public/favicon.svg` | SVG | viewBox 0 0 1024 1024 | Yes | Yes | VERIFIED (local + production) |
 
 Generation method:
 - PNG assets downscaled from `public/logo.png` (256×256 RGBA) using Lanczos resampling.
@@ -134,61 +134,102 @@ Served `public/` via a local HTTP server and requested each production URL path 
 
 Note: prerendering of several pages errored with `@supabase/ssr: Your project's URL and API key are required` because `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` are not set in this environment. This is **pre-existing** and unrelated to the favicon change (`.env.local` contains no Supabase keys).
 
-### Production deployment verification (NOT VERIFIED — pending deploy)
+### Production deployment verification (VERIFIED)
 
-The PR has **not** been merged/deployed, so production does not yet serve the new assets. Baseline captured before this change:
+PR #37 was merged (squash merge commit `b4d1ff91ad53e44741a15d17384bf480d2570524`) and deployed to production via Vercel. The Vercel CI check on the PR reported "Deployment has completed" (state: success). Production was verified after deployment.
 
+Baseline before deploy:
 | URL | Baseline status |
 |-----|-----------------|
 | `https://www.scholars.com.ng/favicon.ico` | **HTTP 404** (no favicon existed — explains the generic globe icon) |
 | `https://www.scholars.com.ng/robots.txt` | 200, `Allow: /`, no favicon paths disallowed |
 
-Once the PR is merged and deployed, each asset URL is expected to return HTTP 200 (static files under `public/` are served by Next.js/Vercel). Live production 200 verification should be performed after deploy.
+Production verification after deploy:
+| URL | HTTP Status | Content-Type | Size | Valid Image | SHA256 matches committed asset |
+|-----|-------------|--------------|------|-------------|--------------------------------|
+| `https://www.scholars.com.ng/favicon.ico` | 200 | image/vnd.microsoft.icon | 8,605 bytes | Yes | IDENTICAL |
+| `https://www.scholars.com.ng/favicon.svg` | 200 | image/svg+xml | 76,818 bytes | Yes | IDENTICAL |
+| `https://www.scholars.com.ng/favicon-32x32.png` | 200 | image/png | 2,682 bytes | Yes | IDENTICAL |
+| `https://www.scholars.com.ng/favicon-48x48.png` | 200 | image/png | 4,914 bytes | Yes | IDENTICAL |
+| `https://www.scholars.com.ng/apple-touch-icon.png` | 200 | image/png | 36,520 bytes | Yes | IDENTICAL |
+
+All five production assets returned HTTP 200 with correct MIME types, contain valid image data, and are byte-identical (SHA256-verified) to the assets committed in PR #37.
 
 ### Rendered favicon in browser (NOT VERIFIED)
 
-Not directly performed in this headless environment; requires a deployed preview/production. Visual confirmation should be done after deploy by opening the site in a browser and inspecting the tab/bookmark icon.
+Not directly performed in this headless environment. Visual confirmation should be done by opening the site in a browser and inspecting the tab/bookmark icon. The favicon metadata is correctly rendered in production HTML (see Section 8).
 
 ## 8. Production deployment status
 
-**NOT DEPLOYED.**
+**DEPLOYED AND VERIFIED.**
 
 | Item | Status |
 |------|--------|
 | Branch | `feat/scholars-favicon-implementation` (tracking `scholars-origin/main`) |
 | Commit | `0d90b5e` — `feat(scholars): implement official logo as website favicon` |
-| Remote branch pushed | `scholars-origin/feat/scholars-favicon-implementation` (commit `0d90b5e`) |
-| Pull request | **Open**: https://github.com/ImperioKDB/Scholars/pull/37 |
-| Merged to production (`main`) | **No** |
-| Live on `https://scholars.com.ng` | **No** (baseline `favicon.ico` returns 404) |
+| Merge commit SHA | `b4d1ff91ad53e44741a15d17384bf480d2570524` (squash merge) |
+| Pull request | **Merged**: https://github.com/ImperioKDB/Scholars/pull/37 |
+| Merged to production (`main`) | **Yes** |
+| Vercel CI check | **Success** — "Deployment has completed" |
+| Live on `https://scholars.com.ng` / `https://www.scholars.com.ng` | **Yes** — all five assets return HTTP 200 |
 
-The PR is ready for review. Production activation awaits merge and deploy.
+### Production metadata verification
+
+The production homepage (`https://www.scholars.com.ng/`) renders the following favicon declarations, with no duplicates or conflicts:
+
+```
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any"/>
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"/>
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"/>
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" type="image/png"/>
+```
+
+- Canonical URL: `https://www.scholars.com.ng/`
+- Homepage loads: HTTP 200, no redirect issues
+- No duplicate or conflicting favicon declarations found
+- All asset URLs are root-relative and resolve correctly on both `scholars.com.ng` and `www.scholars.com.ng`
 
 ## 9. Google Search favicon implications
 
+### Google's favicon requirements — implementation assessment
+
+| Requirement | Status | Evidence |
+|-------------|--------|----------|
+| Crawlable and indexable asset URL | VERIFIED | `robots.txt` contains `Allow: /`; no favicon paths disallowed; all assets return HTTP 200 |
+| Stable favicon URL | VERIFIED | Root-relative URLs (`/favicon.ico`, etc.) — stable across deploys |
+| Appropriate square image | VERIFIED | All assets square (16×16–180×180) |
+| Supported format | VERIFIED | SVG, PNG, ICO — all Google-supported formats |
+| Correctly declared favicon link | VERIFIED | Production HTML renders 5 unique `<link rel="icon">` / `<link rel="apple-touch-icon">` declarations |
+
+### Google Search favicon refresh — PENDING
+
 **NOT CLAIMED.** Per the task constraint, completion of this implementation does **not** imply Google Search has updated the favicon. Google controls its own recrawling and favicon refresh; the update will appear on Google's schedule after the live favicon is discovered and recrawled.
 
-This must **NOT** be reported as successful unless independently verified in Google Search. At the time of this report, no such verification has been performed and the favicon is not even live in production yet.
+This must **NOT** be reported as successful unless independently verified in Google Search. At the time of this report:
+- Implementation completed: ✅
+- Production deployment verified: ✅
+- Google Search favicon refresh: PENDING (on Google's recrawling schedule)
+
+**Recommended action:** Use Google Search Console to request indexing/recrawl of the homepage (`https://www.scholars.com.ng/`) to expedite discovery of the new favicon.
 
 ## 10. Outstanding issues and limitations
 
 | # | Issue | Status |
 |---|-------|--------|
-| 1 | Production deploy pending — PR #37 not merged; new favicon not live on scholars.com.ng | BLOCKED (awaiting review/merge/deploy) |
-| 2 | Live production HTTP 200 verification for each asset URL outstanding | NOT VERIFIED (pending deploy) |
-| 3 | Rendered favicon in browser confirmation outstanding | NOT VERIFIED (pending deploy) |
-| 4 | Google Search favicon refresh — cannot be claimed until live and independently verified | NOT VERIFIED |
-| 5 | Pre-existing `next build` prerender errors due to missing Supabase env vars (unrelated to favicon) | NOT APPLICABLE to this task |
-| 6 | Image-processing environment: no ImageMagick/GraphicsMagick/Sharp available; used Pillow for raster downscaling and manual ICO authoring | NOT APPLICABLE (worked around) |
+| 1 | Production deploy pending | RESOLVED — PR #37 merged and deployed; all assets verified HTTP 200 on production |
+| 2 | Live production HTTP 200 verification | RESOLVED — all 5 assets verified HTTP 200, byte-identical to committed assets |
+| 3 | Rendered favicon in browser confirmation | NOT VERIFIED — headless environment; visual confirmation via browser pending |
+| 4 | Google Search favicon refresh | PENDING — Google controls recrawling; not claimed as updated |
+| 5 | Pre-existing `next build` prerender errors due to missing Supabase env vars | NOT APPLICABLE to this task (unrelated to favicon) |
+| 6 | Image-processing environment: no ImageMagick/GraphicsMagick/Sharp available | NOT APPLICABLE (worked around with Pillow + manual ICO authoring) |
 
 ## 11. Recommended next steps
 
-1. Review and merge Pull Request #37 on ImperioKDB/Scholars.
-2. Deploy to production (`https://scholars.com.ng` / `https://www.scholars.com.ng`).
-3. After deploy, verify each favicon asset URL returns HTTP 200 on the production domain.
-4. After deploy, visually confirm the rendered favicon in a browser (tab/bookmark icon).
-5. Monitor Google Search Console / perform independent Google Search verification to confirm the favicon appears beside Scholars in search results (on Google's own recrawling schedule).
-6. Publish this report to ImperioKDB/Updates (see section 12).
+1. Visually confirm the rendered favicon in a browser (tab/bookmark icon) — pending in headless environment.
+2. Use Google Search Console to request indexing/recrawl of `https://www.scholars.com.ng/` to expedite Google's discovery of the new favicon.
+3. Monitor Google Search results to confirm the Scholars logo appears beside the site name (on Google's own recrawling schedule — not guaranteed immediately).
+4. Merge Updates PR #12 to publish this report.
 
 ## 12. Relevant commit and PR references
 
@@ -196,11 +237,16 @@ This must **NOT** be reported as successful unless independently verified in Goo
 |-----------|-------|
 | Scholars repository | https://github.com/ImperioKDB/Scholars |
 | Scholars branch | `feat/scholars-favicon-implementation` |
-| Scholars commit SHA | `0d90b5e` |
-| Scholars pull request | https://github.com/ImperioKDB/Scholars/pull/37 (OPEN) |
+| Scholars commit SHA | `0d90b5e` — `feat(scholars): implement official logo as website favicon` |
+| Scholars merge commit SHA | `b4d1ff91ad53e44741a15d17384bf480d2570524` (squash merge) |
+| Scholars pull request | https://github.com/ImperioKDB/Scholars/pull/37 (MERGED) |
+| Updates repository | https://github.com/ImperioKDB/Updates |
+| Updates report branch | `reports/scholars-favicon-implementation-2026-11-17` |
+| Updates report commit SHA | `0016b4a410a85bd5fa3e3d6933dadd8c6d3a28c7` |
+| Updates pull request | https://github.com/ImperioKDB/Updates/pull/12 (OPEN) |
 | Production domain | https://scholars.com.ng (served via www.scholars.com.ng) |
 | Updates report file | `SCHOLARS_FAVICON_IMPLEMENTATION_REPORT_2026-11-17.md` |
 
 ---
 
-*This report documents the favicon implementation work performed. Publication status (to ImperioKDB/Updates) is tracked separately and must be confirmed via GitHub before being considered complete.*
+**Report publication:** This report is published to ImperioKDB/Updates at branch `reports/scholars-favicon-implementation-2026-11-17` (commit `0016b4a410a85bd5fa3e3d6933dadd8c6d3a28c7`) via Pull Request #12: https://github.com/ImperioKDB/Updates/pull/12 (OPEN). File confirmed accessible on GitHub (raw.githubusercontent.com returns HTTP 200).
