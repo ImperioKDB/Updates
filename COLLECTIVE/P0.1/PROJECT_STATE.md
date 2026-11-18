@@ -23,7 +23,7 @@
 | `docs/PRODUCT_REQUIREMENTS.md` scope and semantics corrected | Remediated, awaiting approval | 142 requirements: P0 56, P1 61, P2 19, P3 6 |
 | Structural checks on the PRS | Performed before remediation; to re-run after edits | Unique IDs, valid priority/category values, five fields per requirement row, valid references |
 
-**Not performed:** technical validation of any architecture assumption; application tests; benchmarks; prototypes; free-tier feasibility validation. Repository contents were independently inspected in this session after the four documents had been published, but the initial pre-publication reconnaissance was not independently performed.
+**Not performed:** technical validation of any architecture assumption; application tests; benchmarks; prototypes; free-tier feasibility validation. The published `main` branch was inspected after the four documents had been published and contained the four P0.1 documents; no application implementation was identified. The initial pre-publication reconnaissance was not independently performed.
 
 ## 3. Decisions
 
@@ -66,9 +66,9 @@ See section 5.
 
 | ID | Item | Blocks |
 |---|---|---|
-| B-1 | **Initial reconnaissance record corrected.** The founder's Colab publishing report confirmed the repository identity and initial empty state. This session independently inspected the published repository and found only the four P0.1 documents on `main`, with a clean working tree and no application implementation. The initial pre-publication state was not independently observed. | Resolved for P0.1 review; no implementation work begins before approval |
+| B-1 | **Initial reconnaissance record corrected.** The founder's Colab publishing report confirmed the repository identity and initial empty state. This session inspected the published `main` branch and found the four P0.1 documents; no application implementation was identified. The initial pre-publication state was not independently observed. | Resolved for P0.1 review; no implementation work begins before approval |
 | B-2 | OQ-002: model-access sequencing under the ₦0 constraint remains unresolved | P0.2 credential design |
-| B-3 | ₦0 feasibility across infrastructure and model access remains technically unvalidated | P0.2 hosting and access evaluation |
+| B-3 | ₦0 feasibility of the combined infrastructure and model-access stack remains technically unvalidated, including whether two genuinely free AI providers can support the MVP | P0.2 combined-stack feasibility evaluation; founder decision if the MVP proof must change |
 | B-4 | OQ-005: durable long-running execution on low-cost hosting | P0.2 |
 | B-5 | OQ-001 and OQ-008: reference scenario; meaning of "full autonomy" | P0.2 tool and security scope |
 | B-6 | Founder review of the remediated PRS, including the retained P0 set (56 of 142) and recommendation on OQ-001/OQ-002/OQ-008 | P0.1 approval |
@@ -83,6 +83,8 @@ Full question list: `docs/PRODUCT_REQUIREMENTS.md`, section 22.
 - Reviewed all 58 former P0 requirements. Retained 56 that are essential to the minimum proof or to safe, durable operation; moved MDL-003 and MDL-007 to P1 with rationale.
 - Reconciled at-least-once delivery and idempotency language; no exactly-once execution guarantee is made.
 - Added quota-safe execution expectations: pause, report, preserve progress and resume where possible.
+- Identified MDL-002 (at least two independent AI providers) as a critical unresolved MVP feasibility dependency. BYOK is excluded from the proposed MVP, no free managed-access solution has been validated, and P0.2 must establish whether two genuinely free providers can support the proof without silently introducing paid access.
+- Required P0.2 to evaluate the complete free stack together: persistent background execution, database access, authentication, quotas, resumability and provider access. Individual free tiers are not evidence that the combined architecture works at ₦0.
 
 P0.2 has not started. No application code, architecture decision record, deployment configuration or technical validation was created.
 
@@ -97,11 +99,11 @@ P0.2 has not started. No application code, architecture decision record, deploym
 7. Using `docs/PROJECT_STATE.md` as the interim central document index (section 8). The master instructions require a central index; P0.1 specified four documents only. Approve this arrangement or approve a dedicated index file in P0.2.
 8. Names and file locations of the four documents.
 
-## 7. Next approved task
+## 7. Next task
 
-**P0.2 - Architecture evaluation and decision records. Approved subject to P0.1 review. Not started.**
+**Next task after founder approval: P0.2 — Architecture evaluation and decision records. Not yet approved or started.**
 
-Do not begin P0.2 until the founder approves P0.1.
+Do not begin P0.2 until the founder explicitly approves P0.1.
 
 ## 8. Document index (interim, authoritative)
 
@@ -112,7 +114,7 @@ Do not begin P0.2 until the founder approves P0.1.
 | DOC-STATE | `docs/PROJECT_STATE.md` | Continuity: phase, task, decisions, blockers, index | Remediated draft v0.1, pending approval |
 | DOC-PRS | `docs/PRODUCT_REQUIREMENTS.md` | Product requirements specification | Remediated draft v0.1, pending approval |
 
-No other project documents exist as of 2026-11-18, as far as this session could determine. This session inspected the published repository; it did not independently observe the pre-publication repository state described by the founder's Colab report.
+No other project documents exist as of 2026-11-18, as far as this session could determine. This session inspected the published `main` branch and found the four P0.1 documents; no application implementation was identified. It did not independently observe the pre-publication repository state described by the founder's Colab report.
 
 ## 9. Change log
 
@@ -120,3 +122,4 @@ No other project documents exist as of 2026-11-18, as far as this session could 
 |---|---|---|
 | 2026-11-18 | P0.1 | Initial drafts of the four documents. |
 | 2026-11-18 | P0.1 remediation | Incorporated founder decisions and consistency corrections; awaiting approval. |
+| 2026-11-18 | P0.1 targeted corrections | Added the MDL-002 two-provider feasibility gate, corrected reconnaissance wording, clarified P0.2 authorization, and defined combined-stack ₦0 feasibility evaluation; awaiting approval. |

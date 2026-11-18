@@ -341,6 +341,8 @@ Users who rely on AI today typically face these problems:
 
 Prove the central proposition: **one objective, handed to Collective, produces a verified outcome through coordinating agents on more than one AI provider, with no manual transfer of prompts or context by the user.**
 
+**Critical unresolved feasibility dependency [ASSUMPTION]:** MDL-002 requires at least two independent AI providers. The initial budget is ₦0, BYOK is excluded from the proposed MVP, and no genuinely free managed-access solution has been validated. P0.2 must establish whether two genuinely free providers can support the proposed MVP. If it cannot establish this, the founder must decide whether to revise the MVP proof; paid access must not be introduced silently.
+
 ### 19.2 Assessment of the proposed proof
 
 | Proof step | Maps to | Assessment |
@@ -367,7 +369,7 @@ Prove the central proposition: **one objective, handed to Collective, produces a
 - Roles: Director, at least two specialists, and Critic. Specialists use different providers where access is available; Critic uses a provider different from the deliverable's producer where available.
 - Sequential task execution; one worker; durable state; no code execution; no external side effects (EXE-003).
 - Retrieval is required only if Option A is approved; otherwise supplied or otherwise available information is sufficient for the proof.
-- Invite-only; hard run budget; model-access sequencing remains open under OQ-002 and must respect the ₦0 constraint. No paid managed access is assumed.
+- Invite-only; hard run budget; BYOK is excluded from the proposed MVP. No free managed-access solution has been validated, so P0.2 must establish whether two genuinely free providers can support the proof. No paid access is assumed or may be introduced silently.
 - Minimal UI: objective form, plan view, run timeline and message log, report view.
 - No billing, no BYOK, no local runner, no external agents, no semantic memory.
 
@@ -422,6 +424,8 @@ None of these has been validated. No implementation exists.
 
 ### 22.1 Assumptions (all unvalidated)
 
+P0.2 feasibility must be evaluated at the combined-stack level, not service by service. The evaluation must cover persistent background execution, database access, authentication, quotas, resumability and provider access together. A free individual service, temporary credit or user-paid BYOK path is not evidence that the complete MVP architecture can operate within the founder's ₦0 budget.
+
 | ID | Assumption | Impact if false | Validate in |
 |---|---|---|---|
 | ASM-001 | Next.js on Vercel supports the needed run-progress updates (streaming or polling) within free or low-cost limits. | UI delivery and hosting choice change. | P0.2 |
@@ -442,9 +446,9 @@ None of these has been validated. No implementation exists.
 | ID | Question | Why it matters | Decision required | Blocks P0.2? | Provisional direction |
 |---|---|---|---|---|---|
 | OQ-001 | Which domain and information mode is the MVP reference scenario? | Determines retrieval, attribution, tool and evaluation scope. | Choose A: sourced research requiring retrieval, or B: planning/synthesis using supplied or otherwise available information. | Partly (tool and sandbox scope) | B is recommended for ₦0 feasibility, not approved. |
-| OQ-002 | What model-access sequencing is acceptable under ₦0: genuinely free managed access, user-paid BYOK, or another approved route? | Drives credential storage, security, disclosure and feasibility scope. | Founder decision after P0.2 feasibility analysis. | Yes (credential architecture) | No sequencing approved. |
-| OQ-003 | Which two providers for the MVP? | Adapter work and budget. | Select after ASM-007 check. | No | Decide in P0.2. |
-| OQ-004 | What is the monthly infrastructure and model-spend ceiling? | NFR-003 and hosting choices depend on it. | **Resolved by founder:** initial platform infrastructure budget ₦0 and initial managed AI/API budget ₦0. | Yes (hosting ADR) | P0.2 must test feasibility without assuming paid access. |
+| OQ-002 | Can two genuinely free AI providers support the proposed MVP under ₦0, and what model-access decision follows if they cannot? | Drives credential storage, security, disclosure and MVP-proof feasibility. | P0.2 must evaluate genuinely free provider access; if infeasible, founder decides whether to revise the MVP proof. Paid access must not be introduced silently. | Yes (provider and credential architecture) | BYOK is excluded from the proposed MVP; no free managed-access solution has been validated. |
+| OQ-003 | Which two genuinely free providers, if any, can support the MVP? | Adapter work, quotas, regional access and budget feasibility. | Select only after P0.2 establishes that two providers are genuinely free and suitable; otherwise escalate to the founder's MVP-proof decision. | No | Decide in P0.2; do not assume paid access. |
+| OQ-004 | What is the monthly infrastructure and model-spend ceiling? | NFR-003 and hosting choices depend on it. | **Resolved by founder:** initial platform infrastructure budget ₦0 and initial managed AI/API budget ₦0. | Yes (hosting ADR) | P0.2 must evaluate the complete infrastructure and model-access stack together; individual free tiers do not prove the architecture works at ₦0. |
 | OQ-005 | How is durable long-running execution achieved on low-cost hosting? | NFR-001 and ASM-002. | Architecture decision. | Yes | Evaluate in P0.2. |
 | OQ-006 | Which payment provider works for the founder's jurisdiction and users? | SAAS-004. | Select and validate. | No (P1) | Research before P1. |
 | OQ-007 | Legal posture: data protection, terms, data residency. | SEC-009, SEC-010, SAAS-007. | Obtain legal review. | No (required before public launch) | None. |
@@ -477,3 +481,4 @@ Likelihood and impact are the author's judgement (L, M, H), not measured values.
 |---|---|---|
 | 0.1 | 2026-11-18 | First draft produced in P0.1. Not reviewed or approved. |
 | 0.1-remediated | 2026-11-18 | Incorporated founder's ₦0 decision, corrected reconnaissance record, kept OQ-001/OQ-002/OQ-008 open, reviewed P0 scope (56 retained; MDL-003 and MDL-007 moved to P1), and reconciled at-least-once/idempotency semantics. Pending founder approval. |
+| 0.1-targeted-corrections | 2026-11-18 | Identified MDL-002 as a critical two-provider feasibility dependency, excluded BYOK from the proposed MVP, required combined-stack ₦0 feasibility analysis, and clarified the founder approval gate for P0.2. Pending founder approval. |

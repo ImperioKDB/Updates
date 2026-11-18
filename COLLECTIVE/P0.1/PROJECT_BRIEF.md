@@ -45,7 +45,7 @@ A user states an objective. Collective plans it, assigns tasks to specialised AI
 
 ## 5. Architectural direction under consideration [ASSUMPTION - unvalidated]
 
-These are candidates. Evaluation happens in P0.2. Do not treat them as final. P0.2 must test whether genuinely free operator access exists for each required capability; user-paid BYOK, temporary promotional credits and paid services are separate categories, not equivalent to permanently free managed access.
+These are candidates. Evaluation happens in P0.2. Do not treat them as final. P0.2 must evaluate the combined feasibility of the free infrastructure and model-access stack: persistent background execution, database access, authentication, quotas, resumability and provider access. Individual free-tier availability is not proof that the complete architecture can operate at ₦0. User-paid BYOK, temporary promotional credits and paid services are separate categories, not equivalent to permanently free managed access.
 
 | Area | Candidate |
 |---|---|
@@ -78,9 +78,9 @@ These are candidates. Evaluation happens in P0.2. Do not treat them as final. P0
 
 Prove that **one objective produces a verified outcome through coordinating agents on at least two AI providers, with no manual transfer of prompts or context by the user.**
 
-Recommended smallest implementation (see PRS section 19): one reference scenario selected through OQ-001; roles Director, at least two specialists and Critic; sequential execution; durable state; no code execution; no external side effects; invite-only access; hard run budget; model access consistent with the ₦0 constraint and unresolved OQ-002; minimal UI; and a measured comparison against a single-model baseline.
+Recommended smallest implementation (see PRS section 19): one reference scenario selected through OQ-001; roles Director, at least two specialists and Critic; sequential execution; durable state; no code execution; no external side effects; invite-only access; hard run budget; BYOK excluded from the proposed MVP; and a measured comparison against a single-model baseline. A critical unresolved dependency is MDL-002: P0.2 must establish whether two genuinely free AI providers can support the proof. No free managed-access solution has been validated. If two suitable free providers cannot be established, the founder must decide whether to revise the MVP proof; paid access must not be introduced silently.
 
-The MVP is all retained P0 requirements. Two formerly P0 requirements are now P1 after remediation because they are not essential to the minimum proof and would otherwise imply budget or extensibility commitments: MDL-003 and MDL-007. Excluded features are listed in PRS section 20.
+The MVP is all retained P0 requirements. Two formerly P0 requirements are now P1 after remediation because they are not essential to the minimum proof and would otherwise imply budget or extensibility commitments: MDL-003 and MDL-007. MDL-002 remains P0 and is a critical unresolved feasibility dependency, not evidence that free access exists. Excluded features are listed in PRS section 20.
 
 ## 8. Long-term product direction
 
@@ -93,4 +93,4 @@ The MVP is all retained P0 requirements. Two formerly P0 requirements are now P1
 
 ## 9. Current status
 
-Phase 0, task P0.1. See `docs/PROJECT_STATE.md`. Nothing is implemented. No technical claim has been validated. P0.1 has been remediated and awaits founder approval; P0.2 has not started.
+Phase 0, task P0.1. See `docs/PROJECT_STATE.md`. Nothing is implemented. No technical claim has been validated. P0.1 has been remediated and awaits founder approval; the next task after explicit approval is P0.2, which is not yet approved or started.
