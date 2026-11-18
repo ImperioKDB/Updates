@@ -5,7 +5,7 @@
 | Task | P0.2.1 — Combined-stack zero-cost feasibility investigation |
 | Checked | 2026-11-19 |
 | Canonical repository | `ImperioKDB/Collective` |
-| Canonical commit | `1a3dcbd7132047478d9578c943363b6ba9cb8fc4` |
+| Canonical commit | `42eef11f2ad238d4a51acdeb9eb7789dc5638c84` |
 | Updates repository | `ImperioKDB/Updates` |
 | Archive status | Published to `main`; awaiting founder review |
 
