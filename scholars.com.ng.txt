@@ -1,0 +1,56 @@
+;;
+;; Domain:     scholars.com.ng.
+;; Exported:   2026-11-22 16:44:51
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+scholars.com.ng	3600	IN	SOA	alexis.ns.cloudflare.com. dns.cloudflare.com. 2054703249 10000 2400 604800 3600
+
+;; NS Records
+scholars.com.ng.	86400	IN	NS	alexis.ns.cloudflare.com.
+scholars.com.ng.	86400	IN	NS	sneh.ns.cloudflare.com.
+
+;; A Records
+*.scholars.com.ng.	1	IN	A	64.29.17.65 ; cf_tags=cf-proxied:true
+*.scholars.com.ng.	1	IN	A	216.198.79.65 ; cf_tags=cf-proxied:true
+scholars.com.ng.	1	IN	A	216.198.79.65 ; cf_tags=cf-proxied:true
+scholars.com.ng.	1	IN	A	64.29.17.65 ; cf_tags=cf-proxied:true
+www.scholars.com.ng.	1	IN	A	216.198.79.1 ; cf_tags=cf-proxied:true
+www.scholars.com.ng.	1	IN	A	216.198.79.65 ; cf_tags=cf-proxied:true
+
+;; CAA Records
+scholars.com.ng.	1	IN	CAA	0 issue "sectigo.com"
+scholars.com.ng.	1	IN	CAA	0 issue "pki.goog"
+scholars.com.ng.	1	IN	CAA	0 issue "letsencrypt.org"
+
+;; CNAME Records
+brevo1._domainkey.scholars.com.ng.	1	IN	CNAME	b1.scholars-com-ng.dkim.brevo.com. ; cf_tags=cf-proxied:true
+brevo2._domainkey.scholars.com.ng.	1	IN	CNAME	b2.scholars-com-ng.dkim.brevo.com. ; cf_tags=cf-proxied:true
+_domainconnect.scholars.com.ng.	1	IN	CNAME	_domainconnect.vercel-dns.com. ; cf_tags=cf-proxied:true
+mail.scholars.com.ng.	1	IN	CNAME	mail-scholars-com-ng.brand.brevosend.com. ; cf_tags=cf-proxied:true
+
+;; TXT Records
+_dmarc.scholars.com.ng.	1	IN	TXT	"v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com"
+resend._domainkey.scholars.com.ng.	1	IN	TXT	"p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDFIw9Ci8KgrLWDDIqYofnNJDr712tSSN9+bNWE2upCf4eYY73dHdlfEenjrAsiWbV0H2Dy887jV2rj4S3sgqRfwsZ+7drfomF1RFene4a1rMSvC669GKsHAde7MgyADeP9cOqWaK41dkPAGFoy0o9s2u6HL+Zr+x1YOktffAQgVwIDAQAB"
+scholars.com.ng.	1	IN	TXT	"google-site-verification=A9ZxNf-Q0oxyGilIasYyvV8BDWMoeYfEM8a47kzenQ4"
+scholars.com.ng.	1	IN	TXT	"brevo-code:927ed1c7ddfd2244758b2819614d526e"
