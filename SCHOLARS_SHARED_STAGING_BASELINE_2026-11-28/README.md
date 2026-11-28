@@ -17,6 +17,8 @@ The exact SQL from those commits is preserved under `pinned-pr-sql/`; SHA-256 va
 
 The Supabase inventory calls found the staging project active and healthy, with only the managed Auth-side inventory and one applied migration (`20261125152047 create_better_auth_private_schema`). No public application tables, deadline objects, broadcast objects, or Edge Functions were present. The staging database therefore cannot accept either PR migration by itself.
 
+Independent hosted inspection for this correction confirmed zero public application objects, zero Auth users, zero Auth identities, and an absent `cron.job` catalog. Preflight reports `absent` and a zero job count for that case. Initialization accepts an absent or empty catalog and refuses any job row, including an inactive one.
+
 Production read-only inspection found the shared application objects already present, including `profiles`, `scholarships`, `opportunities`, `applications`, `saved_scholarships`, `saved_opportunities`, `notifications`, `notification_deliveries`, `workflow_jobs`, `push_tokens`, `web_push_subscriptions`, `announcement_log`, and `broadcast_delivery_log`. It also confirmed the production deadline and broadcast function families, indexes, RLS-enabled private ledgers, service-role function grants, and the required `pgcrypto`, `uuid-ossp`, `pg_stat_statements`, and `plpgsql` extensions. No production rows or secrets are included in this packet.
 
 Production contains application records and must never be used as a staging data source. The schema-extraction repository remains on HOLD because its current workflow does not enforce a provider- or role-enforced read-only source. This packet therefore does **not** run that workflow or request a database credential. An owner-approved schema-only baseline must be supplied separately after endpoint, role, TLS, and privilege verification.
@@ -41,9 +43,9 @@ The source directory contains duplicate numeric prefixes (for example `0015`, `0
 
 ## Procedure (approval gate)
 
-1. Review this directory, the six pinned SQL/test files, and `SHA256SUMS`.
+1. Review the foundation, the two pinned migrations, the local validation evidence, and `SHA256SUMS`.
 2. Produce or approve a schema-only foundational SQL artifact from a provider-enforced read-only source. Exclude `auth`, `storage`, extension-managed schemas, all `COPY`/`INSERT`/`UPDATE`/`DELETE` statements, secrets, integration configuration, cron jobs, and external destinations. Preserve DDL for types, tables, sequences, defaults, foreign keys, checks, indexes, triggers, functions, RLS, grants, and required extensions.
-3. Run `00_preflight.sql` against staging and require: expected ref/endpoint; no public application objects; only the known managed migration; required extensions available; and zero rows from the cron/integration checks.
+3. Run `00_preflight.sql` against staging. Check the expected endpoint, zero public application objects, zero Auth users and identities, the known managed migration, available extensions, and a zero job count for an absent or empty cron catalog.
 4. Obtain explicit approval of the exact schema-only artifact hash and target. Only then run `00_initialization.sql` transactionally with `ON_ERROR_STOP=1`, passing `target_ref=aqhktriwaglvvrchxmtd` and the absolute path to the approved foundation.
 5. Run structural assertions and `tests/broadcast_staging_preflight.sql`. Do not start cron, Workers, Edge Functions, provider clients, or real notification paths.
 6. Run the deadline window and broadcast window separately, never concurrently. Capture only synthetic IDs/statuses and before/after schema fingerprints.
@@ -51,6 +53,10 @@ The source directory contains duplicate numeric prefixes (for example `0015`, `0
 The initialization wrapper refuses any non-empty public schema, non-empty Auth baseline, unexpected migration history, scheduled jobs, a missing target, a missing foundation, or any connection whose psql `HOST` is not exactly `db.aqhktriwaglvvrchxmtd.supabase.co`. It does not import records.
 
 The actual schema-only foundation is `01_foundational_schema.sql`. It was reconstructed from the read-only production catalog and verified repository inputs listed in `RECONSTRUCTION_INPUTS.md`; it excludes the two pinned PR migrations, which remain downstream and are applied exactly once.
+
+## Access model
+
+Anonymous readers can select fixed preview columns on verified scholarships and opportunities. Signed-in students can read verified opportunities and manage their own application data. Signed-in administrators can manage draft and verified opportunities. The profile policy allows owner-scoped writes to an allowlist, including the deadline preferences added by PR #50. Changes to `is_admin`, `community_role`, calculated profile fields, and reminder counters require a trusted database path. The service role has explicit DML for foundation tables and scoped access to the pinned worker functions and broadcast state.
 
 ## Separate synthetic testing windows
 
@@ -70,7 +76,7 @@ Before execution, rollback is simply to stop: nothing in staging has been change
 - `00_initialization.sql` — fail-closed transactional initializer; not executed.
 - `01_foundational_schema.sql` — executable schema-only shared foundation; locally validated, not hosted-executed.
 - `pinned-pr-sql/` — exact SQL from the two verified commits.
-- `VALIDATION.md` — disposable PostgreSQL sequence, endpoint, rollback, and safety evidence.
+- `VALIDATION.md` — native PostgreSQL test matrix, role behavior, endpoint guard, and rollback evidence.
 - `RECONSTRUCTION_INPUTS.md` — verified source DDL inventory and source hashes.
-- `tests/` — supplied compatibility, staging-preflight, and synthetic fixture SQL.
+- `tests/` — compatibility and fixture SQL plus `test-foundation.sh` for disposable local testing.
 - `SHA256SUMS` — integrity record for the packet SQL.

@@ -301,7 +301,7 @@ create table public.web_push_subscriptions (
 -- Durable ledgers are private by default. The downstream PR migrations add
 -- the broadcast-specific tables and service-role execution grants.
 do $$ declare t text; begin
-  foreach t in array array['profiles','scholarships','scholarship_rules','saved_scholarships',
+  foreach t in array array['profiles','scholarships','opportunities','scholarship_rules','saved_scholarships',
     'saved_opportunities','applications','notifications','announcement_log','broadcast_delivery_log',
     'workflow_jobs','notification_deliveries','push_tokens','web_push_subscriptions'] loop
     execute format('alter table public.%I enable row level security', t);
@@ -334,12 +334,19 @@ create index idx_notification_deliveries_lease on public.notification_deliveries
 create index idx_push_tokens_profile_enabled on public.push_tokens (profile_id) where enabled;
 create index idx_web_push_subscriptions_profile_enabled on public.web_push_subscriptions (profile_id, last_seen_at desc) where enabled;
 
--- Production-compatible helper functions required by RLS and the pinned RPCs.
+-- RLS evaluates this helper as the signed-in role. Browser callers can check
+-- only themselves. Trusted service calls can check a supplied user ID.
 create or replace function public.is_admin(p_user_id uuid)
 returns boolean language sql stable security definer set search_path = '' as $$
-  select exists (select 1 from public.profiles where id = p_user_id and is_admin is true)
+  select exists (
+    select 1 from public.profiles p
+    where p.id = p_user_id and p.is_admin is true
+      and (p_user_id = (select auth.uid()) or current_setting('role', true) = 'service_role'
+        or session_user = 'service_role')
+  );
 $$;
-revoke all on function public.is_admin(uuid) from public, anon, authenticated;
+revoke all on function public.is_admin(uuid) from public, anon, authenticated, service_role;
+grant execute on function public.is_admin(uuid) to authenticated, service_role;
 
 create or replace function public.set_updated_at()
 returns trigger language plpgsql set search_path = '' as $$
@@ -348,6 +355,7 @@ begin
   return new;
 end;
 $$;
+revoke all on function public.set_updated_at() from public, anon, authenticated, service_role;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = '' as $$
@@ -358,6 +366,7 @@ begin
   return new;
 end;
 $$;
+revoke all on function public.handle_new_user() from public, anon, authenticated, service_role;
 
 create trigger profiles_set_updated_at
 before update on public.profiles
@@ -400,12 +409,22 @@ grant execute on function public.claim_notification_delivery(uuid, timestamptz) 
 -- no browser policies; service_role and SECURITY DEFINER workers own them.
 create policy profiles_select_own on public.profiles for select to authenticated
   using (auth.uid() = id or public.is_admin(auth.uid()));
+create policy profiles_insert_own on public.profiles for insert to authenticated
+  with check (auth.uid() = id and not is_admin);
 create policy profiles_update_own on public.profiles for update to authenticated
   using (auth.uid() = id) with check (auth.uid() = id);
 create policy profiles_delete_own on public.profiles for delete to authenticated
   using (auth.uid() = id);
+create policy scholarships_select_verified on public.scholarships for select to anon
+  using (verified is true);
 create policy scholarships_select_authenticated on public.scholarships for select to authenticated
-  using (true);
+  using (verified is true or public.is_admin(auth.uid())
+    or exists (select 1 from public.saved_scholarships s where s.scholarship_id = scholarships.id and s.profile_id = auth.uid())
+    or exists (select 1 from public.applications a where a.scholarship_id = scholarships.id and a.profile_id = auth.uid()));
+create policy opportunities_select_verified on public.opportunities for select to anon, authenticated
+  using (verified is true);
+create policy opportunities_admin_all on public.opportunities for all to authenticated
+  using (public.is_admin(auth.uid())) with check (public.is_admin(auth.uid()));
 create policy scholarship_rules_select_authenticated on public.scholarship_rules for select to authenticated
   using (true);
 create policy saved_scholarships_select_own on public.saved_scholarships for select to authenticated
@@ -439,12 +458,44 @@ create policy web_push_subscriptions_update_own on public.web_push_subscriptions
 create policy web_push_subscriptions_delete_own on public.web_push_subscriptions for delete to authenticated
   using (auth.uid() = profile_id);
 
-grant select on public.scholarships, public.opportunities, public.scholarship_rules to anon, authenticated;
-grant select, insert, update, delete on public.saved_scholarships, public.saved_opportunities to authenticated;
-grant select, insert, update on public.applications, public.notifications to authenticated;
+-- Supabase projects may automatically grant broad table privileges in public.
+-- Replace them on the new foundation objects before applying the role matrix.
+revoke create on schema public from public, anon, authenticated;
+grant usage on schema public to anon, authenticated, service_role;
+revoke all on public.profiles, public.scholarships, public.opportunities, public.scholarship_rules,
+  public.saved_scholarships, public.saved_opportunities, public.applications, public.notifications,
+  public.announcement_log, public.broadcast_delivery_log, public.workflow_jobs,
+  public.notification_deliveries, public.push_tokens, public.web_push_subscriptions
+  from public, anon, authenticated, service_role;
+grant select, insert, update, delete on public.profiles, public.scholarships, public.opportunities,
+  public.scholarship_rules, public.saved_scholarships, public.saved_opportunities, public.applications,
+  public.notifications, public.announcement_log, public.broadcast_delivery_log, public.workflow_jobs,
+  public.notification_deliveries, public.push_tokens, public.web_push_subscriptions to service_role;
+
+grant select (id, slug, title, provider_name, amount, deadline, opens_at,
+  last_cycle_closed_at, level, discipline, verified, last_verified_at) on public.scholarships to anon;
+grant select (id, slug, type, title, provider_name, duration, location,
+  compensation, deadline, verified) on public.opportunities to anon;
+grant select on public.scholarships, public.scholarship_rules to authenticated;
+grant select, insert, update, delete on public.opportunities to authenticated;
+grant select, insert, delete on public.saved_scholarships, public.saved_opportunities to authenticated;
+grant select, insert, update on public.applications to authenticated;
+grant select, update (read_at) on public.notifications to authenticated;
 grant select, insert, update, delete on public.web_push_subscriptions to authenticated;
-grant insert on public.profiles to authenticated;
-grant update (full_name, discipline, gpa, nationality, gender, financial_need, career_goals,
+grant select, delete on public.profiles to authenticated;
+-- Profile upserts include id in both the INSERT and UPDATE lists. The ownership
+-- policies require the old and new id to match the authenticated user.
+grant insert (id, full_name, discipline, gpa, nationality, gender, financial_need, career_goals,
+  date_of_birth, state_of_origin, lga_of_origin, year_of_study, institution_name,
+  institution_type, jamb_score, waec_credit_count, has_english_maths_credit,
+  disability_status, has_valid_id, has_transcript, has_recommendation_letter,
+  has_personal_statement, has_lga_certificate, avatar_url, whatsapp_opt_in,
+  whatsapp_number, last_seen, last_seen_at, onboarding_step, onboarding_last_activity_at,
+  community_bio, referral_source, campaign_id, ambassador_code, utm_source, utm_medium,
+  utm_campaign, pwa_installed_at, push_enable_clicked_at, whatsapp_community_invite_opt_in,
+  whatsapp_community_invite_consented_at, whatsapp_community_invite_withdrawn_at,
+  whatsapp_community_invite_notice_version),
+update (id, full_name, discipline, gpa, nationality, gender, financial_need, career_goals,
   date_of_birth, state_of_origin, lga_of_origin, year_of_study, institution_name,
   institution_type, jamb_score, waec_credit_count, has_english_maths_credit,
   disability_status, has_valid_id, has_transcript, has_recommendation_letter,

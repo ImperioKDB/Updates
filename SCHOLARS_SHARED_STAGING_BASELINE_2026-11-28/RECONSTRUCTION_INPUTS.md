@@ -21,6 +21,8 @@ The foundation was synthesized from read-only production metadata and the follow
 
 The exact PR #50 and PR #51 SQL is not duplicated here: it remains under `pinned-pr-sql/` and is applied exactly once by the initializer after the foundation. Seed/data migrations, storage setup, resource-center tables, provider analytics, cron scheduling, webhook configuration, and external integration setup were excluded.
 
+The correction used the independently supplied staging inventory and reviewed repository definitions. `0026_harden_audited_rls.sql` provided the verified-row and administrator-management policies for opportunities. `20261111032810_global_opportunity_access_hardening.sql` provided the anonymous catalog column allowlists and authenticated scholarship visibility rules. `0023_lock_admin_flag.sql` provided the starting profile grant and ownership rules. The packet uses a local role allowlist for `is_admin` and verifies the resulting permissions under both modeled Supabase default-grant configurations.
+
 ## Source hashes
 
 The exact hashes computed from the verified local source checkout are:
@@ -40,4 +42,12 @@ cb607735b8ffaccd82c303abb67750516a1f17dfec65e14a50b59378eaec448d  /home/ubuntu/S
 7133e1688392a159bc3cd9107bc795de991adb57eab749c19b4259cb7816464c  /home/ubuntu/Scholars/supabase/migrations/0078_add_web_push_subscriptions.sql
 883eeb037a76de9ac869ddba90f5f4d1952c5194758bcc18d51222c47c60254d  /home/ubuntu/Scholars/supabase/migrations/0079_enable_push_channel_for_notification_outbox.sql
 5b3201f1ae95dcec26ce80a1339a5d196386e3b76fbb9d678eaee087883ae5d3  /home/ubuntu/Scholars/supabase/migrations/0100_support_opportunity_applications.sql
+```
+
+The three security definitions reviewed for the correction had these hashes in the Scholars checkout.
+
+```text
+76e958133f100c8e04f392ef6660aaeabb5ca979bc35fe0c7d27326a4b960649  supabase/migrations/0023_lock_admin_flag.sql
+66cd63633708d644aa40c14a548f165f8e2676287bba4dfaafb40b0f4be57f1a  supabase/migrations/0026_harden_audited_rls.sql
+15333bb3ec8ebbcc4650b501c2829cce022d3b4847514228def698b52507208e  supabase/migrations/20261111032810_global_opportunity_access_hardening.sql
 ```

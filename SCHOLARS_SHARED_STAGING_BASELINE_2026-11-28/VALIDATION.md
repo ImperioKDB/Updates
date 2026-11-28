@@ -1,67 +1,55 @@
 # Disposable validation evidence
 
-Date: 2026-11-28
+Date 2026-11-28
 
-## Scope
+## Staging inventory and scope
 
-The validation was performed against a disposable local PostgreSQL 16 database. No production or hosted staging write was performed. The local database used mocked Supabase prerequisites only: `auth.users`, `auth.identities`, `auth.uid()`, `auth.role()`, `supabase_migrations.schema_migrations`, and an empty `cron.job` catalog. The mock Auth table included `email_confirmed_at`, which is read by the pinned deadline migration.
+Independent hosted inspection supplied for this correction found zero public application objects, zero Auth users, zero Auth identities, and no `cron.job` catalog. This was sufficient for the correction. All database execution reported below used disposable local PostgreSQL. No hosted inspection was needed for this run.
 
-The exact pinned SQL files were copied unchanged into the temporary validation directory and executed only after `01_foundational_schema.sql`. The temporary validator copy of `00_initialization.sql` changed only the expected endpoint string from the real staging host to the local Unix-socket host so the local connection could exercise the complete DDL sequence. The repository initializer itself was also run once unchanged against the local socket and correctly failed closed with:
+The tests ran with native PostgreSQL 17.12 binaries on Debian, using a private Unix socket and TCP disabled. The fixture models managed Auth tables, the `auth.uid()` JWT lookup, the separate Auth owner, migration history, and optional cron metadata. Auth email is `varchar(255)`. The legacy grant fixture automatically grants table, sequence, and function access in `public` to `anon`, `authenticated`, and `service_role`. The opt-in fixture omits those automatic API-role grants.
 
-```text
-ERROR: refusing unexpected connection host: /var/run/postgresql
-```
+## Local results
 
-## Commands and results
+| Default grants | Cron catalog | Preflight | Initialization, role access and SQL smoke tests |
+| --- | --- | --- | --- |
+| Legacy Supabase defaults | Absent | `absent\|0` | Passed |
+| Legacy Supabase defaults | Present, empty | `present\|0` | Passed |
+| Opt-in grants | Absent | `absent\|0` | Passed |
+| Opt-in grants | Present, empty | `present\|0` | Passed |
 
-The validator was created with PostgreSQL 16 from the Ubuntu package repository, then the following sequence was run from the packet directory:
+- An unchanged initializer refused the local endpoint. The harness then adapted the hostname guard in a temporary initializer copy to use the private socket. The checked-in guard still requires the staging host and ref.
+- An inactive synthetic job appeared in preflight as `present\|1`. The initializer refused the database before any public relation was created.
+- Every application table created by the packet had RLS. Both pinned migrations loaded after the foundation in all four successful cases.
+- The Auth trigger created ordinary profiles, including when user-editable metadata supplied an admin flag. The role checks and synthetic deadline claims rolled back. The broadcast preflight passed on the empty state after rollback.
+
+## Access behavior
+
+| Role | Verified behavior |
+| --- | --- |
+| `anon` | Reads verified catalog rows in the preview projection. Drafts, opportunity research notes, profiles, scholarship rules, catalog writes and `is_admin` execution are denied. |
+| `authenticated` student | Reads own profile and verified opportunities. Own-profile insert and upsert work, including a pinned deadline preference. Cross-profile writes, changing the profile ID, privileged fields, opportunity writes and private worker access are denied. Inbox updates can change only the owner's `read_at`. |
+| `authenticated` administrator | `is_admin` evaluates successfully through RLS, enabling reads of other profiles and CRUD on draft opportunities. The profile column restrictions still apply. |
+| `service_role` | Has explicit foundation DML and can store a delivery outcome and call both pinned worker APIs. Broadcast administration checks still reject a non-admin UUID. Direct deadline-internal and excess broadcast privileges are absent under both grant models. |
+
+Both deadline claim paths processed synthetic due rows in the combined schema. The service role received the synthetic confirmed address for email and a null email for push. The supplied compatibility SQL confirmed the broadcast snapshot stayed unchanged during those claims.
+
+The packet models the two notification workflows and their shared dependencies. The browser grant intentionally reserves `community_role` changes for a trusted database path. The app's separate member-role administration route uses a signed-in client and is outside this qualification. The local fixture checks PostgreSQL role behavior with simulated JWT claims. Hosted Auth, PostgREST and pg_cron runtime behavior remain outside the evidence.
+
+## Reproduction and integrity
+
+Run from the packet directory as an unprivileged local OS user with native PostgreSQL server and client binaries and the bundled `pgcrypto`, `uuid-ossp`, and `pg_stat_statements` extension files.
 
 ```sh
-sudo pg_ctlcluster 16 main start
-# create disposable scholars_validation database and mocked Auth/migration/cron prerequisites
-# copy foundation and the two pinned SQL files to /tmp/scholars-validation/
-sed 's/db\.aqhktriwaglvvrchxmtd\.supabase\.co/\/var\/run\/postgresql/g' \
-  SCHOLARS_SHARED_STAGING_BASELINE_2026-11-28/00_initialization.sql \
-  > /tmp/scholars-validation/00_initialization.sql
-sudo -u postgres psql -v ON_ERROR_STOP=1 \
-  -f /tmp/scholars-validation/00_initialization.sql \
-  -v target_ref=aqhktriwaglvvrchxmtd \
-  -v schema_only_baseline=/tmp/scholars-validation/01_foundational_schema.sql \
-  scholars_validation
+PG_BIN=/path/to/postgresql/bin bash tests/test-foundation.sh
 ```
 
-Result: **PASS**. The outer transaction completed and printed `Baseline initialized transactionally.` The post-DDL checks returned:
+From the repository root:
 
-```text
-profiles | deadline | broadcast | tracked_view | private_schema
----------+----------+-----------+--------------+---------------
-t        | t        | t          | t            | t
-
-public_object_count: 24
-profile_rows: 0
+```sh
+sha256sum -c SCHOLARS_SHARED_STAGING_BASELINE_2026-11-28/SHA256SUMS
+git diff --check 19026a9f4c6e35ae4fa1f014919e219f193934a7
+git diff --exit-code 19026a9f4c6e35ae4fa1f014919e219f193934a7 -- \
+  SCHOLARS_SHARED_STAGING_BASELINE_2026-11-28/pinned-pr-sql
 ```
 
-The 24 public catalog objects include tables, indexes/sequences, the deadline view, and the broadcast-private schema objects expected after the pinned migrations. No rows were imported or seeded.
-
-The scheduled-job fail-closed check was then exercised by inserting one synthetic row into the disposable `cron.job` table before initialization. Result: **PASS**. The initializer returned exit code 3 with `ERROR: refusing database with scheduled jobs`, and the post-failure public object count was `0`, proving no partial DDL committed.
-
-## Static safety checks
-
-`git diff --check` passed. The foundational file contains no transaction-control statement, seed/data statement, cron creation, webhook destination, API key, provider allocation, or secret. The following PR-owned objects were confirmed absent from the foundation and present only in the pinned files:
-
-- `deadline_email_attempts`
-- `deadline_reminder_run`
-- `deadline_tracked_listings`
-- `broadcast_campaigns`
-- `broadcast_submissions`
-- `broadcast_targets`
-- `broadcast_provider_windows`
-- `broadcast_provider_state`
-
-The foundation contains the pre-existing `claim_notification_delivery` function because PR #50 replaces it with `CREATE OR REPLACE FUNCTION`; it does not contain the PR #50 deadline columns or the PR #51 broadcast tables.
-
-## Limitations and permission result
-
-No indispensable schema definition was blocked by the available read-only metadata connection. The foundation was reconstructed from the production catalog inventory and verified repository DDL. The local validator did not attempt to reproduce Supabase-managed Auth internals, extension-owned schemas, or production data; those remain managed prerequisites and are checked by the initializer/preflight rather than recreated.
-
-Hosted staging execution was intentionally **not performed**.
+The hashes of the two pinned migration files match both the starting packet and their original Scholars commits. The foundation remains schema-only. Hosted execution remains subject to the approval gate in the [packet runbook](README.md).

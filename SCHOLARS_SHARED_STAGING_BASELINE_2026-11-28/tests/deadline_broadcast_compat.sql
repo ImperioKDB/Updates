@@ -24,7 +24,8 @@ create temporary table deadline_before_broadcast as select pg_temp.broadcast_sna
 insert into auth.users (id, email, email_confirmed_at)
 values ('fa000000-0000-4000-8000-000000000001', 'deadline-compat@example.invalid', now());
 insert into public.profiles (id, deadline_email_enabled)
-values ('fa000000-0000-4000-8000-000000000001', true);
+values ('fa000000-0000-4000-8000-000000000001', true)
+on conflict (id) do update set deadline_email_enabled = excluded.deadline_email_enabled;
 insert into public.push_tokens (id, profile_id, expo_push_token)
 values ('fa000000-0000-4000-8000-000000000002', 'fa000000-0000-4000-8000-000000000001', 'ExpoPushToken[deadline-compat]');
 insert into public.scholarships (id, slug, title, provider_name, deadline, verified) values

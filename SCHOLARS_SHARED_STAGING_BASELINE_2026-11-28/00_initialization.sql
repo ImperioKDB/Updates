@@ -51,6 +51,8 @@ end $$;
 -- expected application-side migration at qualification time is the managed
 -- auth-private-schema migration; no public application table may exist yet.
 do $$
+declare
+  has_scheduled_jobs boolean;
 begin
   if current_database() is null then
     raise exception 'database identity unavailable';
@@ -76,8 +78,11 @@ begin
                       and name = 'create_better_auth_private_schema') then
     raise exception 'unexpected staging migration history';
   end if;
-  if to_regclass('cron.job') is not null and exists (select 1 from cron.job limit 1) then
-    raise exception 'refusing database with scheduled jobs';
+  if to_regclass('cron.job') is not null then
+    execute 'select exists (select 1 from cron.job)' into has_scheduled_jobs;
+    if has_scheduled_jobs then
+      raise exception 'refusing database with scheduled jobs';
+    end if;
   end if;
 end $$;
 
@@ -87,6 +92,20 @@ end $$;
 -- The two supplied PR migrations are applied only after the foundational schema.
 \ir pinned-pr-sql/20261127000000_complete_deadline_reminders.sql
 \ir pinned-pr-sql/20261127233336_durable_admin_broadcast.sql
+
+-- Match the worker access contract even when Supabase grants privileges on
+-- newly created objects. Deadline internals are used only by their owner RPCs.
+revoke all on public.deadline_tracked_listings, public.deadline_email_attempts,
+  public.deadline_reminder_run from service_role;
+revoke all on sequence public.deadline_email_attempts_id_seq from public, anon, authenticated, service_role;
+revoke execute on function public.deadline_stage_at(date, timestamptz, integer, integer) from service_role;
+
+revoke all on public.broadcast_campaigns, public.broadcast_submissions, public.broadcast_targets,
+  public.broadcast_provider_windows, public.broadcast_provider_state from service_role;
+grant select, insert, update on public.broadcast_campaigns, public.broadcast_submissions, public.broadcast_targets,
+  public.broadcast_provider_windows, public.broadcast_provider_state to service_role;
+revoke all on sequence public.broadcast_targets_id_seq from service_role;
+grant usage on sequence public.broadcast_targets_id_seq to service_role;
 
 -- Post-DDL structural assertions; no row data is read or imported.
 do $$

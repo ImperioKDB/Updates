@@ -2,6 +2,7 @@
 -- Expected target: aqhktriwaglvvrchxmtd (scholars-staging).
 -- This script contains SELECTs only.
 
+\set ON_ERROR_STOP on
 \if :{?HOST}
 \else
   \echo 'ERROR: psql did not expose HOST; refusing preflight without endpoint evidence'
@@ -45,12 +46,13 @@ select count(*) as public_object_count
 from pg_class c join pg_namespace n on n.oid=c.relnamespace
 where n.nspname='public' and c.relkind in ('r','p','v','m','S','f');
 
--- Must report absent (or zero rows) before initialization: no worker scheduler,
--- provider secrets/destinations, or qualification data are permitted.
-select to_regclass('cron.job') as cron_job_catalog;
-
-select count(*) as scheduled_job_count
-from cron.job;
+-- Send the catalog query to PostgreSQL only when pg_cron is present.
+select to_regclass('cron.job') is not null as has_cron_job \gset
+\if :has_cron_job
+  select 'present' as cron_job_catalog, count(*) as scheduled_job_count from cron.job;
+\else
+  select 'absent' as cron_job_catalog, 0::bigint as scheduled_job_count;
+\endif
 
 select table_schema, table_name, column_name
 from information_schema.columns
