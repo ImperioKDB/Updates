@@ -14,6 +14,11 @@
 -- reviewed for managed-schema exclusions, and hashed in the change record.
 
 \set ON_ERROR_STOP on
+\if :{?HOST}
+\else
+  \echo 'ERROR: psql did not expose HOST; refusing to initialize without a connection-level endpoint guard'
+  \quit 3
+\endif
 \if :{?target_ref}
 \else
   \echo 'ERROR: pass target_ref=aqhktriwaglvvrchxmtd'
@@ -30,9 +35,13 @@ set local lock_timeout = '5s';
 set local statement_timeout = '10min';
 set local search_path = public, extensions, pg_catalog;
 set local app.target_ref = :'target_ref';
+set local app.connection_host = :'HOST';
 
 do $$
 begin
+  if current_setting('app.connection_host', true) <> 'db.aqhktriwaglvvrchxmtd.supabase.co' then
+    raise exception 'refusing unexpected connection host: %', current_setting('app.connection_host', true);
+  end if;
   if current_setting('app.target_ref', true) <> 'aqhktriwaglvvrchxmtd' then
     raise exception 'refusing a non-staging target';
   end if;
@@ -51,6 +60,24 @@ begin
     where n.nspname = 'public' and c.relkind in ('r','p','v','m','S','f')
   ) then
     raise exception 'refusing non-empty public schema; baseline is not an in-place repair';
+  end if;
+  if to_regclass('auth.users') is null or to_regclass('auth.identities') is null then
+    raise exception 'managed Auth baseline is missing';
+  end if;
+  if exists (select 1 from auth.users limit 1) or exists (select 1 from auth.identities limit 1) then
+    raise exception 'refusing non-empty Auth baseline';
+  end if;
+  if to_regclass('supabase_migrations.schema_migrations') is null then
+    raise exception 'migration bookkeeping is missing';
+  end if;
+  if (select count(*) from supabase_migrations.schema_migrations) <> 1
+     or not exists (select 1 from supabase_migrations.schema_migrations
+                    where version = '20261125152047'
+                      and name = 'create_better_auth_private_schema') then
+    raise exception 'unexpected staging migration history';
+  end if;
+  if to_regclass('cron.job') is not null and exists (select 1 from cron.job limit 1) then
+    raise exception 'refusing database with scheduled jobs';
   end if;
 end $$;
 

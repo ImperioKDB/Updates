@@ -2,6 +2,16 @@
 -- Expected target: aqhktriwaglvvrchxmtd (scholars-staging).
 -- This script contains SELECTs only.
 
+\if :{?HOST}
+\else
+  \echo 'ERROR: psql did not expose HOST; refusing preflight without endpoint evidence'
+  \quit 3
+\endif
+
+select :'HOST' as connection_host,
+       case when :'HOST' = 'db.aqhktriwaglvvrchxmtd.supabase.co'
+            then 'PASS' else 'FAIL' end as expected_staging_host;
+
 select current_database() as database_name, current_user as login_role,
        current_setting('server_version') as server_version;
 
@@ -15,6 +25,17 @@ select version, name
 from supabase_migrations.schema_migrations
 order by version;
 
+select case when count(*) = 1
+              and bool_or(version = '20261125152047'
+                          and name = 'create_better_auth_private_schema')
+            then 'PASS' else 'FAIL' end as expected_managed_migration_history
+from supabase_migrations.schema_migrations;
+
+select to_regclass('auth.users') as auth_users_catalog,
+       to_regclass('auth.identities') as auth_identities_catalog,
+       (select count(*) from auth.users) as auth_user_count,
+       (select count(*) from auth.identities) as auth_identity_count;
+
 select extname, extversion, n.nspname as installed_schema
 from pg_extension e join pg_namespace n on n.oid=e.extnamespace
 where extname in ('pgcrypto','uuid-ossp','pg_stat_statements','plpgsql')
@@ -27,6 +48,9 @@ where n.nspname='public' and c.relkind in ('r','p','v','m','S','f');
 -- Must report absent (or zero rows) before initialization: no worker scheduler,
 -- provider secrets/destinations, or qualification data are permitted.
 select to_regclass('cron.job') as cron_job_catalog;
+
+select count(*) as scheduled_job_count
+from cron.job;
 
 select table_schema, table_name, column_name
 from information_schema.columns

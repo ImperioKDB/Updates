@@ -1,6 +1,6 @@
 # SCHOLARS shared staging baseline qualification
 
-**Status: reviewed packet — not executed; approval required before any staging DDL.**
+**Status: executable packet — locally validated, not hosted-executed; approval required before any staging DDL.**
 
 Date: 2026-11-28. Target staging ref: `aqhktriwaglvvrchxmtd` (`scholars-staging`). Production ref inspected read-only: `cmdglabohpttgfofcmqc` (`scholarship-platform`).
 
@@ -48,7 +48,9 @@ The source directory contains duplicate numeric prefixes (for example `0015`, `0
 5. Run structural assertions and `tests/broadcast_staging_preflight.sql`. Do not start cron, Workers, Edge Functions, provider clients, or real notification paths.
 6. Run the deadline window and broadcast window separately, never concurrently. Capture only synthetic IDs/statuses and before/after schema fingerprints.
 
-The initialization wrapper refuses any non-empty public schema and will not run with an omitted target or omitted foundational artifact. It does not import records.
+The initialization wrapper refuses any non-empty public schema, non-empty Auth baseline, unexpected migration history, scheduled jobs, a missing target, a missing foundation, or any connection whose psql `HOST` is not exactly `db.aqhktriwaglvvrchxmtd.supabase.co`. It does not import records.
+
+The actual schema-only foundation is `01_foundational_schema.sql`. It was reconstructed from the read-only production catalog and verified repository inputs listed in `RECONSTRUCTION_INPUTS.md`; it excludes the two pinned PR migrations, which remain downstream and are applied exactly once.
 
 ## Separate synthetic testing windows
 
@@ -66,6 +68,9 @@ Before execution, rollback is simply to stop: nothing in staging has been change
 
 - `00_preflight.sql` — read-only target and safety checks.
 - `00_initialization.sql` — fail-closed transactional initializer; not executed.
+- `01_foundational_schema.sql` — executable schema-only shared foundation; locally validated, not hosted-executed.
 - `pinned-pr-sql/` — exact SQL from the two verified commits.
+- `VALIDATION.md` — disposable PostgreSQL sequence, endpoint, rollback, and safety evidence.
+- `RECONSTRUCTION_INPUTS.md` — verified source DDL inventory and source hashes.
 - `tests/` — supplied compatibility, staging-preflight, and synthetic fixture SQL.
 - `SHA256SUMS` — integrity record for the packet SQL.
